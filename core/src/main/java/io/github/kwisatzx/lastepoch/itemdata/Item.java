@@ -4,6 +4,7 @@ import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.GlobalDataOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -30,10 +31,13 @@ public interface Item extends Selectable {
 
     static Item itemFromInventoryString(String inventoryString) {
         String[] dataStr = getSubstringBetween(inventoryString, "[", "]").split(",");
-        int[] data = new int[0];
+        int[] data;
         try {
             data = Arrays.stream(dataStr).mapToInt(Integer::parseInt).toArray();
-        } catch (NumberFormatException e) {e.printStackTrace();} //TODO Logger
+        } catch (NumberFormatException e) {
+            LoggerFactory.getLogger(Item.class).error("Couldn't convert item data from string", e);
+            return UNKNOWN_ITEM;
+        }
 
         if (data.length < 10 || data[3] > 4) return UNKNOWN_ITEM;
 
