@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="rootVBox" prefHeight="600.0" prefWidth="955.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.kwisatzx.lastepoch.gui.MainController">
+  <children>
+      <SplitPane dividerPositions="0.30535152151101785" prefHeight="99999.0" prefWidth="900.0">
+        <items>
+            <VBox prefHeight="576.0" prefWidth="248.0">
+               <children>
+                <MenuBar maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" VBox.vgrow="NEVER">
+                  <menus>
+                    <Menu mnemonicParsing="false" text="File">
+                      <items>
+                        <MenuItem mnemonicParsing="false" onAction="#loadSaveData" text="Load save data" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadBackup" text="Load backup" />
+                        <MenuItem mnemonicParsing="false" onAction="#openSaveFolder" text="Open save folder" />
+                        <MenuItem mnemonicParsing="false" onAction="#expandFiles" text="Expand files" />
+                      </items>
+                    </Menu>
+                        <Menu mnemonicParsing="false" text="Save">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#saveCharacters" text="Save characters" />
+                              <MenuItem mnemonicParsing="false" onAction="#saveStash" text="Save stash" />
+                           </items>
+                        </Menu>
+                  </menus>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets top="2.0" />
+                     </padding>
+                </MenuBar>
+                  <ScrollPane fitToWidth="true" prefHeight="548.0" prefWidth="249.0" VBox.vgrow="ALWAYS">
+                    <content>
+                      <AnchorPane prefHeight="546.0" prefWidth="222.0">
+                           <children>
+                              <TreeView fx:id="treeView" prefHeight="546.0" prefWidth="222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="20.0" tabMinHeight="20.0" tabMinWidth="100.0">
+              <tabs>
+                <Tab fx:id="tabCharacters" closable="false" text="Characters">
+                     <content>
+                        <AnchorPane fx:id="charactersTabAnchorPane" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="7.0" layoutY="16.0" prefHeight="17.0" prefWidth="50.0" text="Name:" />
+                              <TextField fx:id="nameField" layoutX="57.0" layoutY="12.0" />
+                              <Label layoutX="7.0" layoutY="50.0" prefHeight="17.0" prefWidth="50.0" text="Level:" />
+                              <TextField fx:id="levelField" layoutX="57.0" layoutY="46.0" prefHeight="25.0" prefWidth="41.0" />
+                              <Label layoutX="7.0" layoutY="84.0" prefHeight="17.0" prefWidth="50.0" text="Class:" />
+                              <Label layoutX="7.0" layoutY="117.0" prefHeight="17.0" prefWidth="50.0" text="Mastery:" />
+                              <Label alignment="CENTER_RIGHT" layoutX="222.0" layoutY="11.0" prefHeight="17.0" prefWidth="70.0" text="Hardcore:" />
+                              <Label alignment="CENTER_RIGHT" layoutX="229.0" layoutY="37.0" prefHeight="17.0" prefWidth="64.0" text="Masochist:" />
+                              <Label alignment="CENTER_RIGHT" layoutX="255.0" layoutY="62.0" prefHeight="17.0" prefWidth="36.0" text="Solo:" />
+                              <CheckBox fx:id="hardcoreBox" layoutX="300.0" layoutY="12.0" mnemonicParsing="false" />
+                              <CheckBox fx:id="masochistBox" layoutX="300.0" layoutY="37.0" mnemonicParsing="false" />
+                              <CheckBox fx:id="soloBox" layoutX="300.0" layoutY="63.0" mnemonicParsing="false" />
+                              <Button fx:id="completeQuestsButton" layoutX="359.0" layoutY="9.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Complete all quests" textFill="#1a79ff" />
+                              <Button fx:id="unlockWaypointsButton" layoutX="359.0" layoutY="42.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Unlock all waypoints" textFill="#1a79ff" />
+                              <Button fx:id="unlockTimelinesButton" layoutX="359.0" layoutY="75.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Unlock all timelines" textFill="#1a79ff" />
+                              <ChoiceBox fx:id="masteryChoice1" layoutX="498.0" layoutY="182.0" prefWidth="150.0" />
+                              <Label layoutX="498.0" layoutY="161.0" prefHeight="17.0" prefWidth="95.0" text="Mastered skills:" />
+                              <Label layoutX="486.0" layoutY="144.0" prefHeight="17.0" prefWidth="148.0" text="Restrict to class and mastery:">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font></Label>
+                              <CheckBox fx:id="restrictMasteryBox" layoutX="632.0" layoutY="144.0" mnemonicParsing="false" />
+                              <ChoiceBox fx:id="masteryChoice2" layoutX="498.0" layoutY="213.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="masteryChoice3" layoutX="498.0" layoutY="245.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="masteryChoice4" layoutX="498.0" layoutY="277.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="masteryChoice5" layoutX="498.0" layoutY="309.0" prefWidth="150.0" />
+                              <Button fx:id="maxMasteryLevelsButton" layoutX="509.0" layoutY="75.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Max mastery levels" textFill="#a41919" />
+                              <Button fx:id="maxPointsAllMasteriesButton" layoutX="509.0" layoutY="42.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Max points on mastery nodes" textAlignment="JUSTIFY" textFill="#a41919">
+                                 <font>
+                                    <Font size="9.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="maxPointsAllPassivesButton" layoutX="509.0" layoutY="9.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Max points on passive nodes" textFill="#a41919">
+                                 <font>
+                                    <Font size="9.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutX="485.0" layoutY="186.0" prefHeight="17.0" prefWidth="13.0" text="1:" />
+                              <Label layoutX="485.0" layoutY="217.0" prefHeight="17.0" prefWidth="13.0" text="2:" />
+                              <Label layoutX="485.0" layoutY="249.0" prefHeight="17.0" prefWidth="13.0" text="3:" />
+                              <Label layoutX="485.0" layoutY="281.0" prefHeight="17.0" prefWidth="13.0" text="4:" />
+                              <Label layoutX="485.0" layoutY="313.0" prefHeight="17.0" prefWidth="13.0" text="5:" />
+                              <ChoiceBox fx:id="toolbarChoiceQ" layoutX="498.0" layoutY="366.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="toolbarChoiceW" layoutX="498.0" layoutY="397.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="toolbarChoiceE" layoutX="498.0" layoutY="429.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="toolbarChoiceR" layoutX="498.0" layoutY="461.0" prefWidth="150.0" />
+                              <Label alignment="CENTER_RIGHT" layoutX="484.0" layoutY="370.0" prefHeight="17.0" prefWidth="13.0" text="Q:" />
+                              <Label alignment="CENTER_RIGHT" layoutX="479.0" layoutY="401.0" prefHeight="17.0" prefWidth="18.0" text="W:" />
+                              <Label alignment="CENTER_RIGHT" layoutX="483.0" layoutY="433.0" prefHeight="17.0" prefWidth="13.0" text="E:" />
+                              <Label alignment="CENTER_RIGHT" layoutX="483.0" layoutY="465.0" prefHeight="17.0" prefWidth="13.0" text="R:" />
+                              <Label layoutX="498.0" layoutY="343.0" prefHeight="17.0" prefWidth="96.0" text="Toolbar skills:" />
+                              <ChoiceBox fx:id="toolbarChoiceRMB" layoutX="498.0" layoutY="493.0" prefWidth="150.0" />
+                              <Label alignment="CENTER_RIGHT" layoutX="460.0" layoutY="498.0" prefHeight="17.0" prefWidth="36.0" text="RMB:" />
+                              <Button fx:id="infoToolbarButton" layoutX="611.0" layoutY="339.0" mnemonicParsing="false" prefHeight="2.0" prefWidth="37.0" text="Info">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Button>
+                              <ChoiceBox fx:id="choiceBoxClass" layoutX="57.0" layoutY="80.0" prefHeight="25.0" prefWidth="149.0" />
+                              <ChoiceBox fx:id="choiceBoxMastery" layoutX="57.0" layoutY="113.0" prefHeight="25.0" prefWidth="149.0" />
+                              <Label layoutX="7.0" layoutY="152.0" prefHeight="20.0" prefWidth="89.0" text="Equipment:" underline="true">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="editSelectedItemButton" layoutX="84.0" layoutY="150.0" mnemonicParsing="false" style="-fx-border-color: #5a833dcc;" text="Edit equipment in item editor" textFill="#5a833d">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Button>
+                              <Label layoutX="7.0" layoutY="186.0" prefHeight="17.0" prefWidth="73.0" text="Mass editing:" underline="true" />
+                              <Button fx:id="replaceAllSlotsButton" layoutX="83.0" layoutY="182.0" mnemonicParsing="false" style="-fx-border-color: #00000022;" text="Replace all slots with the following:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <ChoiceBox fx:id="helmetChoiceBox" layoutX="9.0" layoutY="225.0" prefWidth="150.0" />
+                              <Label layoutX="61.0" layoutY="210.0" prefHeight="17.0" prefWidth="64.0" text="Helmet:" />
+                              <ChoiceBox fx:id="chestplateChoiceBox" layoutX="165.0" layoutY="225.0" prefWidth="150.0" />
+                              <Label layoutX="207.0" layoutY="210.0" prefHeight="17.0" prefWidth="64.0" text="Chestplate:" />
+                              <ChoiceBox fx:id="beltChoiceBox" layoutX="9.0" layoutY="265.0" prefWidth="150.0" />
+                              <Label layoutX="69.0" layoutY="250.0" prefHeight="17.0" prefWidth="24.0" text="Belt:" />
+                              <ChoiceBox fx:id="glovesChoiceBox" layoutX="164.0" layoutY="265.0" prefWidth="150.0" />
+                              <Label layoutX="220.0" layoutY="250.0" prefHeight="17.0" prefWidth="39.0" text="Gloves:" />
+                              <ChoiceBox fx:id="bootsChoiceBox" layoutX="10.0" layoutY="304.0" prefWidth="150.0" />
+                              <Label layoutX="66.0" layoutY="289.0" prefHeight="17.0" prefWidth="37.0" text="Boots:" />
+                              <ChoiceBox fx:id="relicChoiceBox" layoutX="164.0" layoutY="304.0" prefWidth="150.0" />
+                              <Label layoutX="223.0" layoutY="290.0" prefHeight="17.0" prefWidth="32.0" text="Relic:" />
+                              <ChoiceBox fx:id="amuletChoiceBox" layoutX="85.0" layoutY="379.0" prefWidth="150.0" />
+                              <Label layoutX="138.0" layoutY="365.0" prefHeight="17.0" prefWidth="43.0" text="Amulet:" />
+                              <ChoiceBox fx:id="leftRingChoiceBox" layoutX="10.0" layoutY="342.0" prefWidth="150.0" />
+                              <Label layoutX="64.0" layoutY="328.0" prefHeight="17.0" prefWidth="38.0" text="L.Ring:" />
+                              <ChoiceBox fx:id="rightRingChoiceBox" layoutX="164.0" layoutY="342.0" prefWidth="150.0" />
+                              <Label layoutX="220.0" layoutY="328.0" prefHeight="17.0" prefWidth="39.0" text="R.Ring:" />
+                              <Label layoutX="302.0" layoutY="186.0" prefHeight="17.0" prefWidth="34.0" text="(White)">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="9.0" layoutY="394.0" prefHeight="17.0" prefWidth="29.0" text="Affix:" />
+                              <Button fx:id="removeAllFracturesButton" layoutX="337.0" layoutY="214.0" mnemonicParsing="false" text="Remove all instability" textFill="#15ab07" />
+                              <Button fx:id="addAffixButton" layoutX="8.0" layoutY="441.0" mnemonicParsing="false" text="Add affix to every equipment item" underline="true" />
+                              <Label layoutX="211.0" layoutY="445.0" text="at tier:" />
+                              <Label alignment="CENTER" layoutX="347.0" layoutY="395.0" prefHeight="17.0" prefWidth="101.0" text="(No affix restrictions)">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox fx:id="affixTierChoiceBox" layoutX="249.0" layoutY="441.0" prefHeight="25.0" prefWidth="73.0" />
+                              <Button fx:id="maximizeImplicitsButton" layoutX="322.0" layoutY="249.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Maximize implicit values" textFill="#15ab07" />
+                              <Button fx:id="maximizeAffixesButton" layoutX="322.0" layoutY="275.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Maximize affix values" textFill="#15ab07" />
+                              <Label alignment="CENTER" layoutX="323.0" layoutY="297.0" prefHeight="17.0" prefWidth="151.0" text="(Ranges from min to max)">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="maximizeAffixTiersButton" layoutX="332.0" layoutY="321.0" mnemonicParsing="false" text="Maximize all affix tiers" textFill="#15ab07" />
+                              <Label layoutX="330.0" layoutY="445.0" text="in slot:" />
+                              <ChoiceBox fx:id="affixSlotChoiceBox" layoutX="372.0" layoutY="441.0" prefHeight="25.0" prefWidth="50.0" />
+                              <Button fx:id="copyCharacterButton" layoutX="232.0" layoutY="96.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" style="-fx-border-color: #6500ffaa;" text="Copy Character" textFill="#6500ff">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutX="345.0" layoutY="381.0" prefHeight="17.0" prefWidth="101.0" text="(Preview for T7 values)">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="affixComboBox" editable="true" layoutX="9.0" layoutY="411.0" prefHeight="25.0" prefWidth="436.0" promptText="Type to search" />
+                              <ComboBox fx:id="blessingComboBox" editable="true" layoutX="9.0" layoutY="502.0" prefHeight="25.0" prefWidth="435.0" promptText="Type to search" />
+                              <Label layoutX="9.0" layoutY="482.0" text="Selected/new blessing:" />
+                              <Button fx:id="addNewBlessingButton" layoutX="249.0" layoutY="473.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Add new" />
+                              <Label layoutX="330.0" layoutY="477.0" text="in slot:" />
+                              <ChoiceBox fx:id="blessingSlotChoiceBox" layoutX="372.0" layoutY="473.0" prefHeight="25.0" prefWidth="50.0" />
+                              <Label layoutX="69.0" layoutY="527.0" text="Hide weaker blessings:" />
+                              <Label layoutX="234.0" layoutY="527.0" text="Hide drop rate blessings:" />
+                              <CheckBox fx:id="hideWeakBlessingsCheckBox" layoutX="192.0" layoutY="528.0" mnemonicParsing="false" selected="true" />
+                              <CheckBox fx:id="hideDropRateBlessingsCheckBox" layoutX="369.0" layoutY="528.0" mnemonicParsing="false" selected="true" />
+                              <Separator layoutX="-5.0" layoutY="469.0" prefHeight="3.0" prefWidth="485.0" />
+                              <Separator layoutX="458.0" layoutY="470.0" orientation="VERTICAL" prefHeight="85.0" prefWidth="6.0" />
+                              <Separator layoutX="-1.0" layoutY="145.0" prefHeight="0.0" prefWidth="481.0" />
+                              <Separator layoutX="476.0" layoutY="147.0" orientation="VERTICAL" prefHeight="323.0" prefWidth="9.0" />
+                              <Label layoutX="345.0" layoutY="196.0" text="Current equipment:" underline="true" />
+                              <Button fx:id="copySkillsToToolbar" layoutX="498.0" layoutY="525.0" mnemonicParsing="false" text="Copy mastered skills to toolbar">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="setAllStabilityButton" layoutX="359.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Set all stability" textFill="#005ee1" />
+                              <Button fx:id="setAllCorruptionButton" layoutX="509.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Set all corruption" textFill="#750707" />
+                              <ToggleButton fx:id="includeWeaponsToggleButton" layoutX="252.0" layoutY="370.0" mnemonicParsing="false" selected="true" text="Include weapons">
+                                 <font>
+                                    <Font size="9.0" />
+                                 </font>
+                              </ToggleButton>
+                              <ToggleButton fx:id="includeInvItemsToggleButton" layoutX="252.0" layoutY="390.0" mnemonicParsing="false" text="Include inv items">
+                                 <font>
+                                    <Font size="9.0" />
+                                 </font>
+                              </ToggleButton>
+                           </children></AnchorPane>
+                     </content></Tab>
+                <Tab fx:id="tabStash" closable="false" text="Global Stash">
+                     <content>
+                        <AnchorPane fx:id="stashTabAnchorPane" />
+                     </content></Tab>
+                  <Tab fx:id="tabEditor" closable="false" text="Item editor">
+                     <content>
+                        <AnchorPane fx:id="editorTabAnchorPane" />
+                     </content></Tab>
+                  <Tab fx:id="tabUniques" closable="false" text="Uniques">
+                     <content>
+                        <AnchorPane fx:id="uniquesTabAnchorPane" />
+                     </content></Tab>
+              </tabs>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TabPane>
+        </items>
+      </SplitPane>
+    <HBox id="HBox" fx:id="bottomPanelHBox" alignment="CENTER_RIGHT" fillHeight="false" prefHeight="90.0" prefWidth="900.0" spacing="5.0" VBox.vgrow="NEVER">
+      <children>
+        <Label fx:id="leftBottomLabel" maxHeight="1.7976931348623157E308" maxWidth="-1.0" HBox.hgrow="ALWAYS">
+          <font>
+            <Font size="11.0" fx:id="x3" />
+          </font>
+        </Label>
+        <Pane fx:id="bottomPane" prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+        <Label fx:id="rightBottomLabel" font="$x3" maxWidth="-1.0" HBox.hgrow="NEVER" />
+      </children>
+      <padding>
+        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+      </padding>
+    </HBox>
+  </children>
+</VBox>

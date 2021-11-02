@@ -1,0 +1,281 @@
+[ {
+  "dataId" : 0,
+  "name" : "Helmets",
+  "numberOfTiers" : 51,
+  "tierValues" : [ "+14 Armor", "+5 Armor +(10-35) Mana (5-25)% increased Spell Damage", "+40 Armor", "+50 Armor", "+40 Armor", "+40 armor", "+75 Armor", "+130 Armor", "+13 Armor", "+7 Armor (10-20)% increased Spell Damage", "+29 Armor (20-50)% increased Minion Health", "+23 Armor (25-50)% increased Spell Critical Strike Chance", "+127 Armor", "+73 Armor (30-60)% increased Minion Damage", "+89 Armor (30-60)% increased Spell Damage", "+103 Armor +(10-15) Minion Adaptive Spell Damage", "+10 Armor", "+20 Armor +(7-15) Mana", "+18 Armor (10-25)% increased Critical Strike Chance", "+32 Armor +(10-18)% Fire Resistance", "+70 Armor +(15-30)% Ward Retention", "+55 Armor +(15-35) Mana", "+70 Armor (30-60)% increased Fire Damage", "+70 Armor (40-70)% increased Critical Strike Chance", "+12 Armor", "+16 Armor +(1-3) Strength", "+44 Armor", "+54 Armor +(14-22)% Cold Resistance", "+70 Armor +(3-5) Strength", "+140 Armor", "+110 Armor (30-60)% increased Physical Damage (30-60)% increased Physical Minion Damage", "+110 Armor +(32-44)% Cold Resistance +(100-200)% Freeze Rate Multiplier", "+30 Armor", "+40 Armor", "+45 Armor +(5-10)% Fire Resistance", "+85 Armor", "+70 Armor (30-60)% increased Void Damage", "+150 Armor +(10-25)% Critical Strike Multiplier", "+300 Armor", "+210 Armor +(15-35)% Critical Strike Avoidance", "+125 Armor (5-12)% increased Mana", "+142 Armor (3-5)% of Damage Leeched as Health on Hit", "+11 Armor", "+18 Armor", "+16 Armor (10-24)% increased Damage Over Time", "+32 Armor (10-24)% increased Dodge Rating", "+26 Armor +(14-32) Mana", "+46 Armor +(18-36)% Poison Resistance", "+86 Armor (1-2)% of Damage Leeched as Health on Hit", "+94 Armor (20-50)% increased Damage Over Time", "+78 Armor +(15-25)% Critical Strike Multiplier" ],
+  "levelRequirement" : [ 1, 7, 10, 24, 30, 30, 39, 65, 1, 5, 23, 31, 46, 61, 64, 70, 1, 6, 15, 29, 42, 59, 68, 72, 1, 12, 22, 30, 42, 61, 67, 67, 1, 4, 13, 28, 42, 60, 68, 70, 71, 70, 1, 7, 24, 32, 38, 53, 57, 63, 70 ],
+  "tierNames" : [ "Refuge Helmet", "Jewelled Circlet", "Iron Casque", "Dome Cap", "Wolf something", "idk", "Bronze Casque", "Gladiator Helmet", "Outcast Cage", "Witch Cap", "Death Mask", "Coven Hood", "Heretic Cage", "Burial Mask", "Profane Mask", "Ivory Mask", "Copper Circlet", "Weathered Crown", "Shadow Crest", "Ruby Circlet", "Silver Crown", "Diadem", "Solar Crown", "Gilded Crown", "Leather Cowl", "Wolf Pelt", "Forest Cowl", "Nomad Cowl", "Lupine Helm", "Farwood Cowl", "Darkwolf Pelt", "Icewolf Pelt", "Battered Helm", "Crested Helm", "Solar Helm", "Steel Cap", "Shadow Helm", "Bronze Helm", "Dawn Helm", "Winged Helm", "Celestial Helm", "Horned Cowl", "Leather Mask", "Cloth Hood", "Verdant Hood", "Desert Mask", "Dusk Hood", "Kelthan Mask", "Blood Cowl", "Scalebane Grimace", "Umbral Visage" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 2, 1, 16, 16, 16, 16, 16, 16, 16, 16, 16 ]
+}, {
+  "dataId" : 1,
+  "name" : "Body Armours",
+  "numberOfTiers" : 52,
+  "tierValues" : [ "+20 Armor", "+25 Armor", "+50 Armor", "+32 Armor +(2-7) Adaptive Spell Damage", "+85 Armor", "+74 Armor (5-60)% Increased Healing Effectiveness", "+114 Armor +(5-14)% Lightning Resistance", "+220 Armor", "+17 Armor Requires Class: Acolyte", "+7 Armor (5-12)% increased Cast Speed Requires Class: Acolyte", "+47 Armor", "+39 Armor (15-40)% increased Spell Damage", "+109 Armor +(15-33) Mana", "+163 Armor +(30-45)% Cold Resistance", "+149 Armor (1-2)% of Spell Damage Leeched as Health", "+179 Armor +(11-15)% Endurance", "+24 Armor", "+30 Armor (5-15)% increased Spell Damage", "+35 Armor (10-25)% increased Critical Strike Chance", "+60 Armor", "+90 Armor +(10-25) Mana", "+85 Armor +(75-275)% Freeze Rate Multiplier", "+190 Armor +(15-30)% Ward Retention", "+180 Armor (20-40)% of Mana Spent Gained as Ward", "+20 Armor", "+24 Armor", "+50 Armor", "+78 Armor (10-30)% increased Physical Damage", "+120 Armor +(14-28)% Cold Resistance", "+180 Armor +(32-42)% Poison Resistance", "+164 Armor (5-10)% increased Mana Regen", "+156 Armor (5-10)% increased Movement Speed", "+45 Armor", "+60 Armor", "+100 Armor +(5-10)% Fire Resistance", "+145 Armor", "+130 Armor (30-70)% increased Void Damage", "+240 Armor (20-50)% increased Critical Strike Chance", "+280 Armor (7-11)% increased Mana Regen", "+400 Armor", "+350 Armor +(15-35)% Critical Strike Avoidance", "+170 Armor +(3-9) Adaptive Spell Damage", "+172 Armor (30-60)% increased Minion Damage", "+16 Armor", "+38 Armor", "+18 Armor +(12-22)% Cold Resistance", "+30 Armor (10-26)% increased Dodge Rating", "+72 Armor +(12-24)% Lightning Resistance", "+84 Armor (24-84)% increased Critical Strike Chance", "+110 Armor (18-36)% increased Dodge Rating", "+161 Armor +(31-43)% Poison Resistance", "+130 Armor (30-63)% increased Physical Damage" ],
+  "levelRequirement" : [ 1, 5, 15, 23, 27, 35, 41, 60, 1, 5, 14, 31, 46, 61, 64, 66, 1, 8, 19, 25, 40, 62, 65, 70, 1, 4, 16, 30, 40, 58, 67, 67, 1, 5, 13, 28, 42, 60, 65, 68, 70, 72, 64, 1, 4, 14, 24, 32, 48, 58, 66, 70 ],
+  "tierNames" : [ "Refuge Armor", "Leather Coat", "Iron Armor", "Noble Raiment", "Banded Armor", "Forest Garb", "Copper Plate", "Gladiator Armor", "Outcast Rags", "Witch Robes", "Ribbed Cuirass", "Coven Robes", "Heretic Armor", "Burial Plate", "Profane Armor", "Immortal Plate", "Traveling Coat", "Adept Robes", "Umbral Coat", "Opulent Coat", "Arcanist Robes", "Elder Raiment", "Battlemage Robes", "Archmage Robes", "Wooden Armor", "Leather Armor", "Birch Armor", "Rowan Armor", "Nomad Garb", "Oak Armor", "Heoborean Armor", "Wild Armor", "Worn Plate", "Iron Cuirass", "Solar Plate", "Steel Cuirass", "Shadow Plate", "Bronze Cuirass", "Augury Plate", "Dawn Plate", "Solarum Plate", "Celestial Robes", "Shamanic Garb", "Cloth Armour", "Leather Hauberk", "Padded Armour", "Hunting Garb", "Boiled Leather", "Mercenary Leather", "Brigandine Armour", "Scalebane Armour", "Crimson Garb" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 1, 16, 16, 16, 16, 16, 16, 16, 16, 16 ]
+}, {
+  "dataId" : 2,
+  "name" : "Belts",
+  "numberOfTiers" : 6,
+  "tierValues" : [ "+3 Potion Slots", "+4 Potion Slots", "+(50-100) Armor +3 Potion Slots", "+(5-20) Mana +3 Potion Slots", "+(50-100) Armor +4 Potion Slots", "+5 Potion Slots" ],
+  "levelRequirement" : [ 1, 14, 19, 32, 44, 60 ],
+  "tierNames" : [ "Sash", "Leather Belt", "Plated Belt", "Noble Sash", "Bronze Belt", "Ranger's Belt" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 3,
+  "name" : "Boots",
+  "numberOfTiers" : 10,
+  "tierValues" : [ "+9 Armor (4-7)% increased Movement Speed", "+5 Armor (7-9)% increased Movement Speed", "+35 Armor (4-7)% increased Movement Speed", "+20 Armor (10-13)% increased Movement Speed", "+35 Armor (10-13)% increased Movement Speed", "+30 Armor (10-13)% increased Movement Speed +(10-40)% Cold Resistance", "+90 Armor (10-13)% increased Movement Speed +(30-45)% Fire Resistance", "4% increased Movement Speed", "+8 Armor (10-13)% increased Movement Speed 20% reduced Duration of Stuns Received", "+8 Armor (10-13)% increased Movement Speed +(10-15)% Ward Retention" ],
+  "levelRequirement" : [ 1, 8, 16, 23, 30, 45, 58, 54, 60, 67 ],
+  "tierNames" : [ "Refuge Boots", "Leather Boots", "Iron Greaves", "Fur Boots", "Brigandine Boots", "Heoborean Boots", "Solarum Greaves", "Worn Boots", "Shrine Boots", "Arcane Boots" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 4,
+  "name" : "Gloves",
+  "numberOfTiers" : 8,
+  "tierValues" : [ "+15 Armor", "+7 Armor +(5-10) Mana", "+36 Armor", "+21 Armor +(13-28)% Necrotic Resistance", "+32 Armor (3-10)% increased Cast Speed", "+75 Armor +(5-15)% Endurance", "+30 Armor (15-40)% increased Critical Strike Chance", "+80 Armor +(30-45)% Void Resistance" ],
+  "levelRequirement" : [ 1, 8, 15, 25, 31, 45, 62, 64 ],
+  "tierNames" : [ "Refuge Gloves", "Leather Gloves", "Iron Gauntlets", "Outcast Gloves", "Noble Gloves", "Engraved Gauntlets", "Solarum Bracers", "Crusader Gauntlets" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 5,
+  "name" : "1H Axes",
+  "numberOfTiers" : 7,
+  "tierValues" : [ "Range 1.8m Base attack rate 1.02 +12 Melee Physical Damage", "Range 1.8m Base attack rate 1.05 +13 Melee Physical Damage +(10-13)% Chance to Bleed on Hit", "Range 1.9m Base attack rate 1.05 +14 Melee Physical Damage +(5-14) Melee Cold Damage", "Range 1.9m Base attack rate 1.05 +23 Melee Physical Damage +(12-20)% Chance to Bleed on Hit", "Range 1.9m Base attack rate 1.05 +31 Melee Physical Damage +(12-20)% Chance to Bleed on Hit", "Range 1.9m Base attack rate 1.12 +48 Melee Physical Damage +(2-5)% Critical Strike Chance", "Range 1.9m Base attack rate 1.05 +52 Melee Physical Damage +(12-30)% Chance to Bleed on Hit" ],
+  "levelRequirement" : [ 1, 7, 13, 20, 33, 55, 64 ],
+  "tierNames" : [ "Hatchet", "Hand Axe", "Northern Axe", "Battle Axe", "Bronze Axe", "Raider Axe", "Welryn Axe" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 6,
+  "name" : "Daggers",
+  "numberOfTiers" : 11,
+  "tierValues" : [ "Range 1.8m Base attack rate 1.14 +9 Melee Physical Damage +2% Critical Strike Chance", "Range 1.9m Base attack rate 1.14 +13 Melee Physical Damage +2% Critical Strike Chance", "Range 1.9m Base attack rate 1.14 +14 Melee Physical Damage +(20-35)% Chance to Bleed on Hit +2% Critical Strike Chance", "Range 1.9m Base attack rate 1.1 +25 Melee Physical Damage +(40-80)% Critical Strike Multiplier", "Range 1.9m Base attack rate 1.14 +33 Melee Physical Damage +3% Critical Strike Chance", "Range 1.9m Base attack rate 1.14 +28 Melee Physical Damage +(2-3)% Critical Strike Chance +(14-21) Melee Lightning Damage", "Range 1.9m Base attack rate 1.14 +44 Melee Physical Damage +4% Critical Strike Chance", "Range 1.9m Base attack rate 1.14 +36 Melee Physical Damage +(3-4)% Critical Strike Chance +(30-40) Adaptive Spell Damage", "Range 1.9m Base attack rate 1.18 +37 Melee Physical Damage +(2-4)% Critical Strike Chance (20-50)% increased Dodge Rating", "Range 1.9m Base attack rate 1.14 +41 Melee Physical Damage +4% Critical Strike Chance +(20-60)% Chance to Poison on Hit", "Range 1.9m Base attack rate 1.1 +43 Melee Physical Damage +4% Critical Strike Chance (20-80)% increased Physical Damage" ],
+  "levelRequirement" : [ 1, 12, 25, 27, 44, 52, 59, 61, 65, 68, 71 ],
+  "tierNames" : [ "Poignard", "Sacrificial Knife", "Bone Dagger", "Kris", "Hunting Knife", "Moon Dagger", "Majasan Dagger", "Rune Dagger", "Sai", "Chitin Dagger", "Obsidian Dagger" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 7,
+  "name" : "1H Blunt Weapons",
+  "numberOfTiers" : 7,
+  "tierValues" : [ "Range 1.8m Base attack rate 0.98 +13 Melee Physical Damage (10-16)% Increased Stun Chance", "Range 1.9m Base attack rate 0.98 +17 Melee Physical Damage (17-30)% Increased Melee Stun Chance", "Range 1.8m Base attack rate 0.98 +23 Melee Physical Damage (13-35)% Increased Stun Chance", "Range 1.9m Base attack rate 0.98 +28 Melee Physical Damage (20-45)% Increased Melee Stun Chance", "Range 1.8m Base attack rate 0.98 +38 Melee Physical Damage (18-55)% Increased Stun Chance", "Range 1.9m Base attack rate 0.98 +50 Melee Physical Damage (10-75)% increased Physical Damage", "Range 1.9m Base attack rate 0.98 +60 Melee Physical Damage (25-60)% Increased Melee Stun Chance" ],
+  "levelRequirement" : [ 1, 8, 14, 25, 36, 50, 62 ],
+  "tierNames" : [ "Club", "Mace", "Spiked Club", "Iron Mace", "Morning Star", "Bladed Mace", "Flanged Mace" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 8,
+  "name" : "Sceptres",
+  "numberOfTiers" : 9,
+  "tierValues" : [ "Range 1.9m Base attack rate 0.98 +10 Melee Physical Damage +3 Adaptive Spell Damage", "Range 1.9m Base attack rate 0.98 +16 Melee Physical Damage +(6-10) Adaptive Spell Damage", "Range 1.9m Base attack rate 0.98 +21 Melee Physical Damage +(10-17) Adaptive Spell Damage (15-35)% increased Minion Damage", "Range 1.9m Base attack rate 0.98 +25 Melee Physical Damage +(25-30) Adaptive Spell Damage (25-60)% increased Elemental Damage", "Range 1.9m Base attack rate 0.98 +43 Melee Cold Damage +43 Spell Cold Damage +(43-143)% Freeze Rate Multiplier", "Range 1.9m Base attack rate 0.98 +38 Melee Physical Damage +(38-48) Adaptive Spell Damage", "Range 1.9m Base attack rate 0.98 +50 Melee Physical Damage +(48-58) Adaptive Spell Damage (50-80)% increased Damage Over Time", "Range 1.9m Base attack rate 0.98 +47 Melee Physical Damage +(53-59) Adaptive Spell Damage (25-65)% increased Minion Damage", "Range 1.9m Base attack rate 0.98 +55 Melee Physical Damage +(55-65) Adaptive Spell Damage" ],
+  "levelRequirement" : [ 1, 11, 21, 35, 43, 52, 63, 67, 75 ],
+  "tierNames" : [ "Brass Sceptre", "Cultist Sceptre", "Oak Sceptre", "Ornate Sceptre", "Ice Sceptre", "Auric Sceptre", "Argent Sceptre", "Skeletal Sceptre", "Obsidian Sceptre" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 9,
+  "name" : "1H Swords",
+  "numberOfTiers" : 11,
+  "tierValues" : [ "Range 1.9m Base attack rate 1.12 +10 Melee Physical Damage", "Range 1.9m Base attack rate 1.1 +14 Melee Physical Damage", "Range 1.9m Base attack rate 1.2 +11 Melee Physical Damage +(3-9) Melee Void Damage", "Range 1.9m Base attack rate 1.16 +22 Melee Physical Damage", "Range 1.9m Base attack rate 1.2 +27 Melee Physical Damage", "Range 1.9m Base attack rate 1.2 +31 Melee Physical Damage +(15-35)% Chance to Poison on Hit", "Range 2.2m Base attack rate 1.08 +50 Melee Physical Damage", "Range 1.9m Base attack rate 1.24 +36 Melee Physical Damage (26-56)% increased Damage Over Time", "Range 1.9m Base attack rate 1.16 +40 Melee Physical Damage (100-200)% increased Melee Elemental Damage (10-20)% increased Melee Elemental Attack Speed", "Range 2m Base attack rate 1.2 +38 Melee Physical Damage +(50-75)% Critical Strike Multiplier", "Range 1.9m Base attack rate 1.2 +48 Melee Physical Damage" ],
+  "levelRequirement" : [ 1, 5, 15, 20, 30, 39, 50, 55, 64, 70, 75 ],
+  "tierNames" : [ "Gladius", "Broken Sword", "Cultist Blade", "Broadsword", "Falchion", "Rust Blade", "Longsword", "Nagasa Scymitar", "Crystal Sword", "Katana", "Dawn Blade" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 10,
+  "name" : "Wands",
+  "numberOfTiers" : 11,
+  "tierValues" : [ "Range 1.7m Base attack rate 1.02 +3 Adaptive Spell Damage -3 Spell Mana Cost", "Range 1.7m Base attack rate 1.02 +(4-6) Spell Necrotic Damage -3 Spell Mana Cost", "Range 1.7m Base attack rate 1.02 +(6-9) Adaptive Spell Damage -3 Spell Mana Cost", "Range 1.7m Base attack rate 1.02 +(7-12) Adaptive Spell Damage +(2-5) Intelligence -3 Spell Mana Cost", "Range 1.7m Base attack rate 1.02 +(10-14) Adaptive Spell Damage (5-10)% increased Cast Speed -3 Spell Mana Cost", "Range 1.7m Base attack rate 1.02 +(12-16) Spell Fire Damage +(10-20)% Chance to Ignite on Spell Hit -3 Spell Mana Cost", "Range 1.7m Base attack rate 1.02 +(17-22) Adaptive Spell Damage -3 Spell Mana Cost", "Range 1.7m Base attack rate 1.02 +(20-24) Adaptive Spell Damage +(5-12) Spell Lightning Damage -3 Spell Mana Cost", "Range 1.7m Base attack rate 1.02 +(33-40) Adaptive Spell Damage (30-70)% increased Necrotic Damage -3 Spell Mana Cost", "Range 1.7m Base attack rate 1.02 +(41-49) Adaptive Spell Damage (5-15)% increased Cast Speed -3 Spell Mana Cost", "Range 1.7m Base attack rate 1.02 +(50-62) Adaptive Spell Damage -3 Spell Mana Cost" ],
+  "levelRequirement" : [ 1, 6, 10, 17, 23, 27, 31, 37, 47, 60, 73 ],
+  "tierNames" : [ "Silver Wand", "Profane Wand", "Ruby Wand", "Obsidian Wand", "Golem Eye Wand", "Burning Branch", "Arcane Wand", "Storm Priest Wand", "Imperial Wand", "Infernal Wand", "Prophecy Wand" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 11,
+  "name" : "Fists",
+  "numberOfTiers" : 1,
+  "tierValues" : [ "Nothing yet" ],
+  "levelRequirement" : [ 101 ],
+  "tierNames" : [ "Nothing yet" ],
+  "itemAffiliation" : [ 31 ]
+}, {
+  "dataId" : 12,
+  "name" : "2H Axes",
+  "numberOfTiers" : 12,
+  "tierValues" : [ "Range 2.4m Base attack rate 0.95 +19 Melee Physical Damage +(8-20)% Chance to Bleed on Hit", "Range 2.4m Base attack rate 0.95 +23 Melee Physical Damage (10-30)% increased Minion Damage", "Range 2.4m Base attack rate 0.95 +27 Melee Physical Damage +(10-15) Health", "Range 2.4m Base attack rate 0.95 +23 Melee Physical Damage +(3-13) Melee Cold Damage", "Range 2.4m Base attack rate 0.95 +50 Melee Physical Damage", "Range 2.4m Base attack rate 0.95 +28 Melee Physical Damage +(10-30) Melee Lightning Damage", "Range 2.4m Base attack rate 0.95 +56 Melee Physical Damage +(10-30)% Chance to Bleed on Hit", "Range 2.4m Base attack rate 0.95 +(17-37) Melee Fire Damage +(17-37) Melee Cold Damage", "Range 2.4m Base attack rate 0.95 +66 Melee Physical Damage", "Range 2.4m Base attack rate 1.02 +70 Melee Physical Damage +(1-7) Dexterity", "Range 2.4m Base attack rate 0.95 +81 Melee Physical Damage +(20-45)% Chance to Bleed on Hit", "Range 2.4m Base attack rate 0.92 +90 Melee Physical Damage +(10-25) Melee Cold Damage" ],
+  "levelRequirement" : [ 1, 4, 10, 14, 23, 25, 30, 38, 44, 52, 63, 71 ],
+  "tierNames" : [ "Iron Axe", "Primal Axe", "Bearded Axe", "Tundra Axe", "Executioner Axe", "Lagonian Axe", "Nagasa Axe", "Mountain Axe", "Cloven Axe", "Silver Axe", "Steel Axe", "Kraken Beak" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 13,
+  "name" : "2H Blunt Weapons",
+  "numberOfTiers" : 10,
+  "tierValues" : [ "Range 2.4m Base attack rate 0.9 +24 Melee Physical Damage", "Range 2.4m Base attack rate 0.9 +29 Melee Physical Damage +(19-39)% Chance to Bleed on Melee Hit", "Range 2.4m Base attack rate 0.9 +38 Melee Physical Damage (20-60)% Increased Melee Stun Chance", "Range 2.4m Base attack rate 0.9 +46 Melee Physical Damage (20-60)% increased Physical Damage", "Range 2.5m Base attack rate 0.86 +64 Melee Physical Damage (24-64)% Increased Melee Stun Chance", "Range 2.4m Base attack rate 0.9 +82 Melee Physical Damage (82-160)% Increased Stun Chance", "Range 2.4m Base attack rate 0.88 +96 Melee Physical Damage +(16-32) Strength", "Range 2.4m Base attack rate 0.9 +106 Melee Physical Damage (60-166)% Increased Melee Stun Chance (16-36)% Increased Melee Stun Duration", "Range 2.8m Base attack rate 0.86 +114 Melee Physical Damage (40-60)% increased Increased Melee Stun Chance +(6-14)% Melee Critical Strike Chance", "Range 2.4m Base attack rate 0.86 +140 Melee Physical Damage (40-140)% Increased Melee Stun Chance" ],
+  "levelRequirement" : [ 1, 7, 19, 28, 39, 52, 58, 66, 74, 78 ],
+  "tierNames" : [ "Great Mace", "Spiked Great Club", "Maul", "Spiked Maul", "Giant Club", "Great Hammer", "Titan Femur", "Terror Mace", "Lucerne", "Eber Head" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 14,
+  "name" : "Polearms",
+  "numberOfTiers" : 12,
+  "tierValues" : [ "Range 3m Base attack rate 0.97 +19 Melee Physical Damage +(2-4)% Melee Critical Strike Chance", "Range 3m Base attack rate 0.97 +23 Melee Physical Damage +(2-4)% Melee Critical Strike Chance", "Range 3m Base attack rate 0.97 +30 Melee Physical Damage +(2-5)% Melee Critical Strike Chance", "Range 3m Base attack rate 0.97 +35 Melee Physical Damage (25-35)% Chance to gain Haste for 1 second on Hit", "Range 3m Base attack rate 0.97 +38 Melee Physical Damage +(3-5)% Melee Critical Strike Chance", "Range 3m Base attack rate 0.97 +46 Melee Physical Damage (20-100)% increased Melee Elemental Damage", "Range 3m Base attack rate 0.97 +55 Melee Physical Damage +(3-5)% Melee Critical Strike Chance", "Range 3m Base attack rate 0.97 +58 Melee Physical Damage +(3-5)% Melee Critical Strike Chance", "Range 3m Base attack rate 0.97 +60 Melee Physical Damage +(3-6)% Critical Strike Chance", "Range 3m Base attack rate 1.05 +71 Melee Physical Damage +(3-6)% Melee Critical Strike Chance", "Range 3m Base attack rate 0.97 +80 Melee Physical Damage +(3-8)% Melee Critical Strike Chance", "Range 3m Base attack rate 0.97 +88 Melee Physical Damage +(3-7)% Melee Critical Strike Chance" ],
+  "levelRequirement" : [ 1, 8, 12, 18, 21, 28, 32, 36, 42, 54, 60, 74 ],
+  "tierNames" : [ "Iron Spear", "Glaive", "Pike", "Talon Spear", "Imperial Spear", "Axyon", "Halberd", "Ancient Spear", "Bronze Glaive", "Naginata", "Ranseur", "Sovnya" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 15,
+  "name" : "Staffs",
+  "numberOfTiers" : 11,
+  "tierValues" : [ "Range 2.6m Base attack rate 0.92 +14 Melee Physical Damage +(3-5) Adaptive Spell Damage -3 Spell Mana Cost", "Range 2.6m Base attack rate 0.92 +19 Melee Physical Damage +(6-8) Adaptive Spell Damage -3 Spell Mana Cost", "Range 2.6m Base attack rate 0.92 +24 Melee Physical Damage +(9-13) Adaptive Spell Damage -3 Spell Mana Cost", "Range 2.6m Base attack rate 0.92 +33 Melee Physical Damage +(14-20) Adaptive Spell Damage -3 Spell Mana Cost", "Range 2.6m Base attack rate 0.92 +41 Melee Physical Damage +(21-32) Adaptive Spell Damage -3 Spell Mana Cost", "Range 2.6m Base attack rate 0.92 +45 Melee Physical Damage +(33-45) Adaptive Spell Damage -3 Spell Mana Cost", "Range 2.6m Base attack rate 0.92 +45 Melee Physical Damage +(30-40) Adaptive Spell Damage (15-150)% increased Damage Over Time", "Range 2.6m Base attack rate 0.92 +61 Melee Physical Damage +(46-62) Adaptive Spell Damage -3 Spell Mana Cost", "Range 2.6m Base attack rate 0.92 +70 Melee Physical Damage +(63-80) Adaptive Spell Damage -3 Spell Mana Cost", "Range 2.6m Base attack rate 0.92 +64 Melee Physical Damage (20-50)% increased Spell Mana Cost +(81-120) Adaptive Spell Damage", "Range 2.6m Base attack rate 0.92 +75 Melee Physical Damage +(81-100) Adaptive Spell Damage -3 Spell Mana Cost" ],
+  "levelRequirement" : [ 1, 5, 12, 18, 26, 35, 40, 50, 62, 70, 76 ],
+  "tierNames" : [ "Hermit Staff", "Ash Staff", "Oak Staff", "Adept Staff", "Meruna Staff", "Gate Staff", "Composite Staff", "Woodland Staff", "Mirage Staff", "Sorcery Staff", "Oracle Staff" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 16,
+  "name" : "2H Swords",
+  "numberOfTiers" : 10,
+  "tierValues" : [ "Range 2.4m Base attack rate 1.06 +20 Melee Physical Damage", "Range 2.2m Base attack rate 1.02 +30 Melee Physical Damage", "Range 2.4m Base attack rate 1.06 +40 Melee Physical Damage +(10-25)% Chance to Shred Armour on Melee Hit", "Range 2.4m Base attack rate 1.1 +50 Melee Physical Damage", "Range 2.4m Base attack rate 1.06 +60 Melee Physical Damage +(35-45)% Cold Resistance", "Range 2.4m Base attack rate 1.02 +70 Melee Physical Damage +(100-170)% Melee Critical Strike Multiplier", "Range 2.4m Base attack rate 1.06 +80 Melee Physical Damage (5-15)% of Melee Damage Leeched as Health", "Range 2.4m Base attack rate 1.1 +90 Melee Physical Damage", "Range 2.4m Base attack rate 1.06 +66 Melee Physical Damage +(22-42) Melee Void Damage +(6-12)% Void Penetration", "Range 2.4m Base attack rate 1.02 +100 Melee Physical Damage +(5-15)% Physical Penetration" ],
+  "levelRequirement" : [ 1, 10, 24, 36, 46, 56, 61, 70, 77, 80 ],
+  "tierNames" : [ "Bastard Sword", "Split Greatsword", "Imperial Warblade", "Khopesh", "Claymore", "Odachi", "Winged Blade", "Flamberge", "Hollow Blade", "Zweihander" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 17,
+  "name" : "Quivers",
+  "numberOfTiers" : 8,
+  "tierValues" : [ "(5-10)% increased Bow Attack Speed", "(15-30)% increased Bow Damage", "+(10-20)% Physical Resistance +(10-20)% Necrotic Resistance", "+(25-40)% Chance to Bleed on Bow Hit", "+(5-8) Bow Cold Damage", "+(15-30)% Bow Critical Strike Multiplier", "+(30-60)% Chance to Poison on Bow Hit", "+(25-40)% Chance to Slow on Bow Hit (25-40)% increased Damage Over Time" ],
+  "levelRequirement" : [ 1, 7, 23, 44, 48, 52, 65, 68 ],
+  "tierNames" : [ "Light Quiver", "Heavy Quiver", "Ivory Quiver", "Nomad Quiver", "Farwood Quiver", "Svalnir Quiver", "Nagasa Quiver", "Spidersilk Quiver" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 18,
+  "name" : "Shields",
+  "numberOfTiers" : 14,
+  "tierValues" : [ "+18% Block Chance +(80-120) Block Effectiveness", "+16% Block Chance +(80-140) Block Effectiveness +(6-12)% Elemental Resistance", "+20% Block Chance +(150-180) Block Effectiveness +80 Armor", "+22% Block Chance +(350-500) Block Effectiveness", "+28% Block Chance +(200-300) Block Effectiveness", "+19% Block Chance +(215-275) Block Effectiveness (25-60)% increased Physical Damage", "+21% Block Chance +(240-320) Block Effectiveness +(45-70) Endurance Threshold", "+17% Block Chance +(400-460) Block Effectiveness +(75-150)% Freeze Rate Multiplier", "+25% Block Chance +(600-800) Block Effectiveness", "+23% Block Chance +(325-425) Block Effectiveness (45-75)% increased Melee Physical Damage", "+26% Block Chance +(440-520) Block Effectiveness +(11-15)% Endurance", "+27% Block Chance +(500-585) Block Effectiveness +75% Poison Resistance", "+33% Block Chance +(430-630) Block Effectiveness", "+28% Block Chance +(750-1000) Block Effectiveness" ],
+  "levelRequirement" : [ 1, 3, 15, 24, 30, 36, 41, 45, 50, 52, 59, 64, 72, 76 ],
+  "tierNames" : [ "Wooden Shield", "Targe", "Heater Shield", "Cavalier Shield", "Tower Shield", "Bandit Shield", "Root Shield", "Frostbound Shield", "Kite Shield", "Meruna Shell", "Mountain Shield", "Carapace Shield", "Ironglass Shield", "Dawn Shield" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 19,
+  "name" : "Catalysts",
+  "numberOfTiers" : 7,
+  "tierValues" : [ "+(2-6) Intelligence", "+(3-6) Intelligence +(2-3)% Spell Critical Strike Chance", "+(4-8) Intelligence +(5-10) Ward per Second", "+(6-10) Intelligence +(2-4)% Spell Critical Strike Chance", "+(7-12) Intelligence +(11-20) Ward per Second", "+(8-14) Intelligence +(2-6)% Spell Critical Strike Chance", "+(9-15) Intelligence +(21-40) Ward per Second" ],
+  "levelRequirement" : [ 1, 11, 25, 37, 46, 62, 74 ],
+  "tierNames" : [ "Tattered Scroll", "Skull Lantern", "Copper Aegis", "Ashen Skull", "Brass Aegis", "Unread Scroll", "Bloodrust Aegis" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 20,
+  "name" : "Amulets",
+  "numberOfTiers" : 10,
+  "tierValues" : [ "+(5-25) Health", "(5-15)% increased Cast Speed", "(5-15)% increased Melee Attack Speed (5-15)% increased Throwing Attack Speed", "+(6-20)% Lightning Resistance +(2-3) Spell Lightning Damage", "(5-35)% increased Critical Strike Chance", "(5-35)% increased Minion Damage (5-35)% increased Minion Critical Strike Chance", "+(10-100)% Freeze Rate Multiplier +(15-20)% Cold Resistance", "+(13-40)% Physical Resistance +(13-40)% Necrotic Resistance", "+(18-42)% Fire Resistance +(18-42)% Lightning Resistance", "6% less Damage Over Time Taken" ],
+  "levelRequirement" : [ 1, 4, 4, 18, 24, 36, 44, 58, 71, 76 ],
+  "tierNames" : [ "Ruby Amulet", "Brass Amulet", "Jade Amulet", "Copper Amulet", "Silver Amulet", "Turquoise Amulet", "Sapphire Amulet", "Bone Amulet", "Gold Amulet", "Oracle Amulet" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 21,
+  "name" : "Rings",
+  "numberOfTiers" : 10,
+  "tierValues" : [ "(25-50)% increased Critical Strike Chance", "+(28-45)% Fire Resistance (28-45)% increased Fire Damage", "+(10-20) Mana (6-12)% increased Mana Regen", "(3-8)% increased Movement Speed", "+(5-18)% Elemental Resistance", "+(40-95) Stun Avoidance", "+(10-25) Dodge Rating", "(5-35)% increased Minion Damage (5-35)% increased Minion Health +(5-35)% Minion Critical Strike Multiplier", "+(33-46)% Necrotic Resistance +(13-26)% Ward Retention", "+(3-6) Vitality +(3-6) Health Regen" ],
+  "levelRequirement" : [ 1, 1, 14, 25, 31, 40, 48, 62, 66, 54 ],
+  "tierNames" : [ "Copper Ring", "Ruby Ring", "Sapphire Ring", "Silver Ring", "Gold Ring", "Captain's Ring", "Jade Ring", "Turquoise Ring", "Ivory Ring", "Coral Ring" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31 ]
+}, {
+  "dataId" : 22,
+  "name" : "Relics",
+  "numberOfTiers" : 57,
+  "tierValues" : [ "+(6-10) Mana", "+(4-6)% Cold Resistance +(4-6)% Fire Resistance", "+(30-40) Health (12-2)% reduced Health Regen", "+(2-3) Health Regen", "+(10-25) Mana", "+(4-6) Health Regen", "+(10-30)% Chance to Ignite on Hit", "+3 Attunement +5% to All Resistances", "(20-40)% increased Cold Damage (20-40)% increased Lightning Damage", "(5-7)% increased Melee Attack Speed", "+(3-4) Health Regen", "(13-19)% increased Spell Damage", "(9-29) Ward Gained on Potion Use +(9-29)% Ward Retention", "+(13-31)% Chance to Poison on Hit", "+(13-45)% Fire Resistance (13-63)% increased Curse Damage", "(6-36)% increased Minion Damage (6-16)% increased Minion Movement Speed (6-66)% increased Minion Health", "(31-61)% increased Necrotic Damage (31-61)% increased Necrotic Minion Damage", "(13-91)% increased Fire Damage (13-91)% increased Fire Minion Damage", "+(13-41)% Chance to Bleed on Hit +(13-41)% Chance to Bleed on Minion Hit", "+(31-45)% Poison Resistance +(13-31) Ward per Second", "+(2-3) Adaptive Spell Damage", "(3-5) Ward Gain on Kill", "+(3-9)% Physical Resistance +(3-9)% Fire Resistance +(3-9)% Poison Resistance", "+(8-21) Ward per Second", "(6-12)% Increased Chill Duration (6-12)% Increased Shock Duration (6-12)% Increased Ignite Duration", "+(12-24)% Elemental Critical Strike Multiplier", "+(14-40) Mana (14-40)% of Mana Spent Gained as Ward", "(40-84)% increased Elemental Damage Over Time", "(24-48)% increased Cold Damage +(12-24)% Chance to Chill on Hit +(120-240)% Freeze Rate Multiplier", "+(7-14) Health (7-14)% increased Minion Health", "(8-19)% increased Physical Damage (8-19)% increased Physical Minion Damage", "(1-2.4)% of Damage Leeched as Health on Hit (1-2.4)% of Minion Damage Leeched as Health on Hit", "+(11-15)% Endurance", "(16-32)% increased Minion Damage (12-24)% Increased Companion Revive Range (12-24)% Increased Companion Revive Speed", "+(24-40)% Chance to Bleed on Hit (7-21)% Increased Aspect of the Shark Effect", "+(4-8) Spell Cold Damage +(10-24)% Chance to cast Maelstrom every 5 seconds This will use your Maelstrom tree and does cost you mana.", "+(27-44)% Cold Resistance +(27-44)% Necrotic Resistance", "+(4-10) Melee Cold Damage +(4-10) Melee Cold Minion Damage", "+(8-16)% Chance to Ignite on Hit", "(5-12)% increased Armor +(5-12)% Void Resistance", "+(15-25) Health (3-5) Health Gain on Melee Hit", "+(10-30) Mana -3 Melee Mana Cost", "+(2-5)% Block Chance (2-5) Health Gain on Block", "(25-60)% increased Fire Damage (25-60)% Increased Healing Effectiveness", "+(30-45)% Cold Resistance +(30-45)% Lightning Resistance", "(43-73)% increased Void Damage +(15-30)% Chance to apply Future Strike on Melee Hit", "+(5-10) Melee Void Damage +(5-10) Spell Void Damage", "(16-28)% increased Critical Strike Chance", "+(10-22)% Chance to Poison on Hit", "+(16-40)% Chance to Shred Armour on Hit", "(1-2)% of Damage Leeched as Health on Hit (10-20)% increased Damage Leeched as Health", "(26-44)% increased Fire Damage +(14-26)% Chance to Ignite on Hit", "(6-24)% increased Dodge Rating", "+(36-42)% Fire Resistance +(6-36)% Chance to Bleed on Hit", "+(30-45)% Poison Resistance (30-60)% Increased Leech Rate", "(10-100)% increased Critical Strike Chance (3-6) Health Gain on Crit", "(15-25)% increased Armor" ],
+  "levelRequirement" : [ 1, 1, 1, 1, 15, 37, 34, 35, 61, 46, 65, 1, 5, 13, 33, 51, 59, 63, 65, 71, 1, 6, 12, 41, 52, 58, 64, 72, 76, 1, 4, 11, 18, 45, 53, 67, 70, 75, 1, 5, 12, 29, 44, 50, 58, 63, 77, 1, 4, 16, 44, 51, 55, 62, 68, 74, 80 ],
+  "tierNames" : [ "Leatherbound Tome", "Lost Journal", "Stained Tome", "Copper Chalice", "Silver Grail", "Golden Chalice", "Grave Lantern", "Overgrowth Bloom", "Navigation Orb", "Broken Hilt", "Splintered Haft", "Defiled Bones", "Caged Souls", "Homunculus Bile", "Cursed Bones", "Runed Bones", "Decaying Homunculus", "Damned Souls", "Homunculus Blood", "Putrid Souls", "Runic Tome", "Arcane Quill", "Third Eye", "Scrivening Quill", "Ancient Tome", "Scrying Eye", "Warding Tome", "Rune Quill", "Elder Eye", "Dream Catcher", "Sage Antler", "Living Seed", "Ochre Antler", "Spriggan Seed", "Blood Catcher", "Frostborn Seed", "Spirit Catcher", "Woad Antler", "Sunrise Emblem", "Heretical Script", "Mournful Pennant", "Inscribed Tablet", "Solarum Banner", "Solar Commandment", "Argent Crest", "Dread Banner", "Tainted Effigy", "Ivory Dice", "Venom Phial", "Weathered Coins", "Stolen Tithe", "Oil Vial", "Jade Dice", "Ruby Dice", "Antidote Vial", "Ancient Coins", "Lost Anchor" ],
+  "itemAffiliation" : [ 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 16, 16, 16, 16, 16, 16, 16, 16, 16, 31 ]
+}, {
+  "dataId" : 23,
+  "name" : "Bows",
+  "numberOfTiers" : 11,
+  "tierValues" : [ "Range 1.9m Base attack rate 1.05 +12 Physical Damage", "Range 1.9m Base attack rate 0.98 +18 Physical Damage +(2-3)% Critical Strike Chance", "Range 1.9m Base attack rate 1.05 +19 Physical Damage (15-30)% increased Damage Over Time", "Range 1.9m Base attack rate 0.95 +24 Physical Damage (0.2-0.3)% of Damage Leeched as Health", "Range 1.9m Base attack rate 1.05 +33 Physical Damage +(2-4)% Critical Strike Chance", "Range 1.9m Base attack rate 0.98 +38 Physical Damage +(25-45)% Chance to Bleed on Hit", "Range 1.9m Base attack rate 0.92 +60 Physical Damage", "Range 1.9m Base attack rate 0.98 +48 Physical Damage +(3-4)% Critical Strike Chance +(31-61)% Critical Strike Multiplier", "Range 1.9m Base attack rate 1.05 +42 Physical Damage +(24-60)% Chance to Poison on Hit (10-20)% Increased Poison Duration", "Range 1.9m Base attack rate 0.98 +30 Physical Damage +(16-26) Fire Damage (60-90)% increased Elemental Damage", "Range 1.9m Base attack rate 1.1 +45 Physical Damage +(3-4)% Critical Strike Chance (40-100)% increased Physical Damage" ],
+  "levelRequirement" : [ 1, 6, 13, 23, 30, 43, 50, 58, 60, 62, 72 ],
+  "tierNames" : [ "Shortbow", "Birch Bow", "Salvaged Bow", "Imperial Bow", "Recurve Bow", "Northern Bow", "Longbow", "Dreadthorn Bow", "Serpent Bow", "Osprix Bow", "Obsidian Bow" ],
+  "itemAffiliation" : [ 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16 ]
+}, {
+  "dataId" : 24,
+  "name" : "Crossbows",
+  "numberOfTiers" : 1,
+  "tierValues" : [ "Nothing yet" ],
+  "levelRequirement" : [ 101 ],
+  "tierNames" : [ "Nothing yet" ],
+  "itemAffiliation" : [ 31 ]
+}, {
+  "dataId" : 25,
+  "name" : "Small Eterran Idols",
+  "numberOfTiers" : 1,
+  "tierValues" : [ "1x1" ],
+  "levelRequirement" : [ 1 ],
+  "tierNames" : [ "Small Eterran Idol" ],
+  "itemAffiliation" : [ 31 ]
+}, {
+  "dataId" : 26,
+  "name" : "Small Lagonian Idols",
+  "numberOfTiers" : 1,
+  "tierValues" : [ "1x1" ],
+  "levelRequirement" : [ 1 ],
+  "tierNames" : [ "Small Lagonian Idol" ],
+  "itemAffiliation" : [ 31 ]
+}, {
+  "dataId" : 27,
+  "name" : "Humble Eterran Idols",
+  "numberOfTiers" : 1,
+  "tierValues" : [ "2 wide" ],
+  "levelRequirement" : [ 1 ],
+  "tierNames" : [ "Humble Eterran Idol" ],
+  "itemAffiliation" : [ 31 ]
+}, {
+  "dataId" : 28,
+  "name" : "Stout Lagonian Idols",
+  "numberOfTiers" : 1,
+  "tierValues" : [ "2 high" ],
+  "levelRequirement" : [ 1 ],
+  "tierNames" : [ "Stout Lagonian Idol" ],
+  "itemAffiliation" : [ 31 ]
+}, {
+  "dataId" : 29,
+  "name" : "Grand Idols",
+  "numberOfTiers" : 5,
+  "tierValues" : [ "Size: 3×1", "Size: 3×1", "Size: 3×1", "Size: 3×1", "Size: 3×1" ],
+  "levelRequirement" : [ 1, 1, 1, 1, 1 ],
+  "tierNames" : [ "Grand Heorot Idol", "Grand Glass Idol", "Grand Solar Idol", "Grand Bone Idol", "Grand Majasan Idol" ],
+  "itemAffiliation" : [ 1, 2, 4, 8, 16 ]
+}, {
+  "dataId" : 30,
+  "name" : "Large Idols",
+  "numberOfTiers" : 5,
+  "tierValues" : [ "Size: 1×3", "Size: 1×3", "Size: 1×3", "Size: 1×3", "Size: 1×3" ],
+  "levelRequirement" : [ 1, 1, 1, 1, 1 ],
+  "tierNames" : [ "Large Nomad Idol", "Large Arcane Idol", "Large Rahyeh Idol", "Large Immortal Idol", "Large Shadow Idol" ],
+  "itemAffiliation" : [ 1, 2, 4, 8, 16 ]
+}, {
+  "dataId" : 31,
+  "name" : "Ornate Idols",
+  "numberOfTiers" : 5,
+  "tierValues" : [ "Size: 4×1", "Size: 4×1", "Size: 4×1", "Size: 4×1", "Size: 4×1" ],
+  "levelRequirement" : [ 1, 1, 1, 1, 1 ],
+  "tierNames" : [ "Ornate Heorot Idol", "Ornate Glass Idol", "Ornate Solar Idol", "Ornate Bone Idol", "Ornate Majasan Idol" ],
+  "itemAffiliation" : [ 1, 2, 4, 8, 16 ]
+}, {
+  "dataId" : 32,
+  "name" : "Huge Idols",
+  "numberOfTiers" : 5,
+  "tierValues" : [ "Size: 1×4", "Size: 1×4", "Size: 1×4", "Size: 1×4", "Size: 1×4" ],
+  "levelRequirement" : [ 1, 1, 1, 1, 1 ],
+  "tierNames" : [ "Huge Nomad Idol", "Huge Arcane Idol", "Huge Rahyeh Idol", "Huge Immortal Idol", "Huge Shadow Idol" ],
+  "itemAffiliation" : [ 1, 2, 4, 8, 16 ]
+}, {
+  "dataId" : 33,
+  "name" : "Adorned Idols",
+  "numberOfTiers" : 5,
+  "tierValues" : [ "Size: 2×2", "Size: 2×2", "Size: 2×2", "Size: 2×2", "Size: 2×2" ],
+  "levelRequirement" : [ 1, 1, 1, 1, 1 ],
+  "tierNames" : [ "Adorned Heorot Idol", "Adorned Arcane Idol", "Adorned Rahyeh Idol", "Adorned Immortal Idol", "Adorned Majasan Idol" ],
+  "itemAffiliation" : [ 1, 2, 4, 8, 16 ]
+}, {
+  "dataId" : 34,
+  "name" : "Blessings",
+  "numberOfTiers" : 224,
+  "tierValues" : [ "50% INCREASED GRAND IDOL DROP RATE", "80% INCREASED GRAND IDOL DROP RATE", "50% INCREASED LARGE IDOL DROP RATE", "80% INCREASED LARGE IDOL DROP RATE", "50% INCREASED HUGE IDOL DROP RATE", "80% INCREASED HUGE IDOL DROP RATE", "50% INCREASED ORNATE IDOL DROP RATE", "80% INCREASED ORNATE IDOL DROP RATE", "50% INCREASED ADORNED IDOL DROP RATE", "80% INCREASED ADORNED IDOL DROP RATE", "15% INCREASED GLYPH DROP RATE", "25% INCREASED GLYPH DROP RATE", "15% INCREASED RUNE DROP RATE", "25% INCREASED RUNE DROP RATE", "25% INCREASED SCEPTRE DROP RATE", "45% INCREASED SCEPTRE DROP RATE", "25% INCREASED ONE-HANDED SWORD DROP RATE", "45% INCREASED ONE-HANDED SWORD DROP RATE", "25% INCREASED ONE-HANDED ARE DROP RATE", "45% INCREASED ONE-HANDED ARE DROP RATE", "25% INCREASED ONE-HANDED BLUNT WEAPON DROP RATE", "45% INCREASED ONE-HANDED BLUNT WEAPON DROP RATE", "25% INCREASED TWO-HANDED POLEARM DROP RATE", "45% INCREASED TWO-HANDED POLEARM DROP RATE", "35 HEALTH", "+60 HEALTH", "45% VOID RESISTANCE", "+75% VOID RESISTANCE", "60 DODGE RATING", "+100 DODGE RATING", "3% OF THROWING DAMAGE LEECHED AS HEALTH", "5% OF THROWING DAMAGE LEECHED AS HEALTH", "60% INCREASED VOID DAMAGE", "100% INCREASED VOID DAMAGE", "60% CHANCE TO IGNITE ON HIT", "+100% CHANCE TO IGNITE ON HIT", "3% OF SPELL DAMAGE LEECHED AS HEALTH", "5% OF SPELL DAMAGE LEECHED AS HEALTH", "10 HEALTH GAIN ON BLOCK", "22 HEALTH GAIN ON BLOCK", "50% INCREASED CRITICAL STRIKE CHANCE", "80% INCREASED CRITICAL STRIKE CHANCE", "30% CHANCE TO SHRED VOID RESISTANCE ON HIT", "+50% CHANCE TO SHRED VOID RESISTANCE ON HIT", "10 HEALTH GAIN ON KILL", "22 HEALTH GAIN ON KILL", "25% CRITICAL STRIKE MULTIPLIER", "+40% CRITICAL STRIKE MULTIPLIER", "30% INCREASED LEECH RATE", "50% INCREASED LEECH RATE", "10% INCREASED AMULET SHARD DROP RATE", "20% INCREASED AMULET SHARD DROP RATE", "20% INCREASED TWO-HANDED POLEARM SHARD DROP RATE", "35% INCREASED TWO-HANDED POLEARM SHARD DROP RATE", "20% INCREASED WAND SHARD DROP RATE", "35% INCREASED WAND SHARD DROP RATE", "10% INCREASED RELIC SHARD DROP RATE", "20% INCREASED RELIC SHARD DROP RATE", "25% INCREASED BOW DROP RATE", "45% INCREASED BOW DROP RATE", "15% INCREASED QUIVER DROP RATE", "30% INCREASED QUIVER DROP RATE", "10% INCREASED BODY ARMOUR DROP RATE", "20% INCREASED BODY ARMOUR DROP RATE", "15% INCREASED BOOTS DROP RATE", "30% INCREASED BOOTS DROP RATE", "15% INCREASED SHIELD DROP RATE", "30% INCREASED SHIELD DROP RATE", "15% INCREASED RING DROP RATE", "30% INCREASED RING DROP RATE", "15% INCREASED BELT DROP RATE", "30% INCREASED BELT DROP RATE", "45% LIGHTNING RESISTANCE", "+75% LIGHTNING RESISTANCE", "50 MANA", "+80 MANA", "125% INCREASED HEALTH REGEN", "200% INCREASED HEALTH REGEN", "60% INCREASED LIGHTNING DAMAGE", "100% INCREASED LIGHTNING DAMAGE", "60% INCREASED COLD DAMAGE", "100% INCREASED COLD DAMAGE", "15 WARD PER SECOND", "+30 WARD PER SECOND", "30% CHANCE TO SHRED LIGHTNING RESISTANCE ON HIT", "+50% CHANCE TO SHRED LIGHTNING RESISTANCE ON HIT", "60% CHANCE TO SHOCK ON HIT", "+100% CHANCE TO SHOCK ON HIT", "187% FREEZE RATE MULTIPLIER", "+300% FREEZE RATE MULTIPLIER", "100% INCREASED STUN CHANCE", "160% INCREASED STUN CHANCE", "10% INCREASED SHOOK EFFECT", "16% INCREASED SHOOK EFFECT", "30% CHANCE TO GAIN 30 WARD WHEN HIT", "50% CHANCE TO GAIN 30 WARD WHEN HIT", "80 WARD GAINED ON POTION USE", "130 WARD GAINED ON POTION USE", "25% CRITICAL STRIKE AVOIDANCE", "+45% CRITICAL STRIKE AVOIDANCE", "35% INCREASED POISON DAMAGE", "60% INCREASED POISON DAMAGE", "35% INCREASED PHYSICAL DAMAGE", "60% INCREASED PHYSICAL DAMAGE", "30% CHANCE TO POISON ON HIT", "+50% CHANCE TO POISON ON HIT", "7% TO MINION ALL RESISTANCES", "+12% TO MINION ALL RESISTANCES", "55% CHANCE TO SHRED POISON RESISTANCE ON HIT", "+90% CHANCE TO SHRED POISON RESISTANCE ON HIT", "9% INCREASED UNIQUE DROP RATE", "15% INCREASED UNIQUE DROP RATE", "3% INCREASED EXPERIENCE", "6% INCREASED EXPERIENCE", "25% INCREASED GOLD DROP RATE", "40% INCREASED GOLD DROP RATE", "25% INCREASED HELMET DROP RATE", "40% INCREASED HELMET DROP RATE", "35% INCREASED GLOVES DROP RATE", "60% INCREASED GLOVES DROP RATE", "35% INCREASED OFF-HAND CATALYST DROP RATE", "60% INCREASED OFF-HAND CATALYST DROP RATE", "30% INCREASED RELIC DROP RATE", "50% INCREASED RELIC DROP RATE", "35% INCREASED AMULET DROP RATE", "60% INCREASED AMULET DROP RATE", "45% INCREASED WAND DROP RATE", "75% INCREASED WAND DROP RATE", "45% INCREASED Two-HANDED STAFF DROP RATE", "75% INCREASED Two-HANDED STAFF DROP RATE", "45% INCREASED Two-HANDED SWORD DROP RATE", "75% INCREASED Two-HANDED SWORD DROP RATE", "45% INCREASED Two-HANDED AXE DROP RATE", "75% INCREASED Two-HANDED AXE DROP RATE", "45% INCREASED Two-HANDED BLUNT WEAPON DROP RATE", "75% INCREASED Two-HANDED BLUNT WEAPON DROP RATE", "15% INCREASED PREFIX SHARD DROP RATE", "25% INCREASED PREFIX SHARD DROP RATE", "30% INCREASED RING SHARD DROP RATE", "50% INCREASED RING SHARD DROP RATE", "25% INCREASED TWO-HANDED STAFF SHARD DROP RATE", "45% INCREASED TWO-HANDED STAFF SHARD DROP RATE", "35% INCREASED BOW SHARD DROP RATE", "60% INCREASED BOW SHARD DROP RATE", "40% INCREASED AILMENT SHARD DROP RATE", "70% INCREASED AILMENT SHARD DROP RATE", "45% INCREASED DAGGER DROP RATE", "75% INCREASED DAGGER DROP RATE", "10% TO ALL RESISTANCES", "+20% TO ALL RESISTANCES", "45% NECROTIC RESISTANCE", "+75% NECROTIC RESISTANCE", "60% INCREASED NECROTIC DAMAGE", "100% INCREASED NECROTIC DAMAGE", "60% CHANCE TO BLEED ON HIT", "+100% CHANCE TO BLEED ON HIT", "4% OF MELEE DAMAGE LEECHED AS HEALTH", "7% OF MELEE DAMAGE LEECHED AS HEALTH", "45% POISON RESISTANCE", "+75% POISON RESISTANCE", "60% CHANCE TO SLOW ON HIT", "+100% CHANCE TO SLOW ON HIT", "20% INCREASED HELMET SHARD DROP RATE", "35% INCREASED HELMET SHARD DROP RATE", "20% INCREASED BODY ARMOUR SHARD DROP RATE", "35% INCREASED BODY ARMOUR SHARD DROP RATE", "30% INCREASED BELT SHARD DROP RATE", "50% INCREASED BELT SHARD DROP RATE", "30% INCREASED SHIELD SHARD DROP RATE", "50% INCREASED SHIELD SHARD DROP RATE", "20% INCREASED SUFFIX SHARD DROP RATE", "35% INCREASED SUFFIX SHARD DROP RATE", "15% INCREASED CLASS SPECIFIC SHARD DROP RATE", "30% INCREASED CLASS SPECIFIC SHARD DROP RATE", "30% INCREASED GLOVES SHARD DROP RATE", "50% INCREASED GLOVES SHARD DROP RATE", "30% INCREASED OFF-HAND CATALYST SHARD DROP RATE", "50% INCREASED OFF-HAND CATALYST SHARD DROP RATE", "20% INCREASED SKILL SHARD DROP RATE", "35% INCREASED SKILL SHARD DROP RATE", "45% PHYSICAL RESISTANCE", "+75% PHYSICAL RESISTANCE", "45% COLD RESISTANCE", "+75% COLD RESISTANCE", "90 ENDURANCE THRESHOLD", "+150 ENDURANCE THRESHOLD", "60% CHANGE TO APPLY FROSTBITE ON HIT", "+100% CHANGE TO APPLY FROSTBITE ON HIT", "50% FREEZE RATE PER STACK OF CHILL", "+80% FREEZE RATE PER STACK OF CHILL", "30% CHANCE TO SHRED COLD RESISTANCE ON HIT", "+50% CHANCE TO SHRED COLD RESISTANCE ON HIT", "30% CHANGE TO SHRED PHYSICAL RESISTANCE ON HIT", "+50% CHANGE TO SHRED PHYSICAL RESISTANCE ON HIT", "35% CHANCE TO CHILL ON HIT", "+60% CHANCE TO CHILL ON HIT", "500 BLOCK EFFECTIVENESS", "+800 BLOCK EFFECTIVENESS", "40% INCREASED ARMOR", "70% INCREASED ARMOR", "10 SPELL COLD DAMAGE WHILE CHANNELLING", "+20 SPELL COLD DAMAGE WHILE CHANNELLING", "45% FIRE RESISTANCE", "+75% FIRE RESISTANCE", "200 ARMOR", "+320 ARMOR", "35% CHANCE TO APPLY FRAILTY ON HIT", "+60% CHANCE TO APPLY FRAILTY ON HIT", "15% ENDURANCE", "+27% ENDURANCE", "40% INCREASED DODGE RATING", "70% INCREASED DODGE RATING", "30% CHANCE TO SHRED FIRE RESISTANCE ON HIT", "+50% CHANCE TO SHRED FIRE RESISTANCE ON HIT", "30% CHANCE TO SHRED NECROTIC RESISTANCE ON HIT", "+50% CHANCE TO SHRED NECROTIC RESISTANCE ON HIT", "60% INCREASED MINION DAMAGE", "100% INCREASED MINION DAMAGE", "30% INCREASED STUN DURATION", "50% INCREASED STUN DURATION", "60% INCREASED FIRE DAMAGE", "100% INCREASED FIRE DAMAGE", "400 ARMOR WHILE CHANNELLING", "+750 ARMOR WHILE CHANNELLING" ],
+  "levelRequirement" : [ 0 ],
+  "tierNames" : [ "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing", "Blessing", "Grand Blessing" ],
+  "itemAffiliation" : [ 31 ]
+} ]

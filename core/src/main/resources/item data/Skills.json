@@ -1,0 +1,341 @@
+{
+  "Nothing" : {
+    "na28" : "ALL"
+  },
+  "Basic Attack" : {
+    "ba1" : "ALL"
+  },
+  "Spriggan Form" : {
+    "sf5rd" : "DRUID"
+  },
+  "Static Orb" : {
+    "so35a" : "SORCERER"
+  },
+  "Cinder Strike" : {
+    "cstri" : "ROGUE"
+  },
+  "Volcanic Orb" : {
+    "vo54" : "MAGE"
+  },
+  "Ballista" : {
+    "ba1574" : "ROGUE"
+  },
+  "Hungering Souls" : {
+    "hs18gu" : "ACOLYTE"
+  },
+  "Fireball" : {
+    "fi9" : "MAGE"
+  },
+  "Flurry" : {
+    "flur3" : "ROGUE"
+  },
+  "Flame Ward" : {
+    "fw3d" : "MAGE"
+  },
+  "Sacrifice" : {
+    "sf31rc" : "NECROMANCER"
+  },
+  "Summon Storm Totem" : {
+    "st38ml" : "SHAMAN"
+  },
+  "Multishot" : {
+    "mush9" : "MARKSMAN"
+  },
+  "Summon Wolf" : {
+    "wo42" : "PRIMALIST"
+  },
+  "Summon Skeletan Mage" : {
+    "sm4g" : "NECROMANCER"
+  },
+  "Warcry" : {
+    "wc57" : "BEASTMASTER"
+  },
+  "Glacier" : {
+    "gl14" : "MAGE"
+  },
+  "Smite" : {
+    "sm87r4" : "SENTINEL"
+  },
+  "Black Hole" : {
+    "bh2" : "SORCERER"
+  },
+  "Flame Reave" : {
+    "fr11mv" : "SPELLBLADE"
+  },
+  "Forge Strike" : {
+    "fs3e3" : "FORGE_GUARD"
+  },
+  "Summon Thorn Totem" : {
+    "th39" : "PRIMALIST"
+  },
+  "Assemble Abomination" : {
+    "aa710" : "NECROMANCER"
+  },
+  "Ice Barrage" : {
+    "ib5g3" : "SORCERER"
+  },
+  "Smelter's Wrath" : {
+    "st4th" : "FORGE_GUARD"
+  },
+  "Avalanche" : {
+    "av75ch" : "SHAMAN"
+  },
+  "Drain Life" : {
+    "Dl73" : "LICH"
+  },
+  "Dancing Strikes" : {
+    "dacn33" : "BLADEDANCER"
+  },
+  "Aura Of Decay" : {
+    "ad0ry" : "LICH"
+  },
+  "Summon Skeleton" : {
+    "ss37kl" : "ACOLYTE"
+  },
+  "Tempest Strike" : {
+    "ts85i" : "PRIMALIST"
+  },
+  "Summon Raptor" : {
+    "srtor" : "BEASTMASTER"
+  },
+  "Summon Frenzy Totem" : {
+    "sf37" : "BEASTMASTER"
+  },
+  "Ring Of Shields" : {
+    "rs31hi" : "FORGE_GUARD"
+  },
+  "Shadow Cascade" : {
+    "dagg3" : "BLADEDANCER"
+  },
+  "Dread Shade" : {
+    "ds4d3" : "NECROMANCER"
+  },
+  "Synchronized Strike" : {
+    "sync5" : "BLADEDANCER"
+  },
+  "Tornado" : {
+    "to50" : "SHAMAN"
+  },
+  "Hail Of Arrows" : {
+    "exvol8" : "MARKSMAN"
+  },
+  "Ravaging Stance" : {
+    "ra31gn" : "VOID_KNIGHT"
+  },
+  "Warpath" : {
+    "va53st" : "SENTINEL"
+  },
+  "Dark Quiver" : {
+    "dqv5" : "MARKSMAN"
+  },
+  "Juggernaut Stance" : {
+    "js21gc" : "SENTINEL"
+  },
+  "Volatile Reversal" : {
+    "vr53sl" : "VOID_KNIGHT"
+  },
+  "Werebear Form" : {
+    "wb8fo" : "DRUID"
+  },
+  "Holy Aura" : {
+    "ah443" : "PALADIN"
+  },
+  "Summon Bone Golem" : {
+    "bg36nl" : "ACOLYTE"
+  },
+  "Fury Leap" : {
+    "fl13" : "PRIMALIST"
+  },
+  "Shield Bash" : {
+    "sb4h" : "SENTINEL"
+  },
+  "Spirit Plague" : {
+    "sp5g2" : "ACOLYTE"
+  },
+  "Summon Wraith" : {
+    "sw42ih" : "NECROMANCER"
+  },
+  "Firebrand" : {
+    "f1b4d" : "SPELLBLADE"
+  },
+  "Snap Freeze" : {
+    "sw31a" : "MAGE"
+  },
+  "Erasing Strike" : {
+    "es6ai" : "VOID_KNIGHT"
+  },
+  "Bone Curse" : {
+    "bc53" : "ACOLYTE"
+  },
+  "Rip Blood" : {
+    "rb31pl" : "ACOLYTE"
+  },
+  "Eterra's Blessing" : {
+    "eb5656" : "PRIMALIST"
+  },
+  "Summon Scorpion" : {
+    "sc36pi" : "BEASTMASTER"
+  },
+  "Teleport" : {
+    "te44" : "MAGE"
+  },
+  "Harvest" : {
+    "ha84" : "ACOLYTE"
+  },
+  "Transplant" : {
+    "ts50pl" : "ACOLYTE"
+  },
+  "Shurikens" : {
+    "srk21" : "ROGUE"
+  },
+  "Shield Throw" : {
+    "st31io" : "SENTINEL"
+  },
+  "Lunge" : {
+    "lu25ng" : "SENTINEL"
+  },
+  "Arcane Ascendance" : {
+    "arcas" : "SORCERER"
+  },
+  "Ice Thorns" : {
+    "tb47" : "PRIMALIST"
+  },
+  "Anomaly" : {
+    "an0my" : "VOID_KNIGHT"
+  },
+  "Elemental Nova" : {
+    "en6" : "MAGE"
+  },
+  "Reaper Form" : {
+    "rf1azz" : "LICH"
+  },
+  "Rive" : {
+    "sndr1" : "SENTINEL"
+  },
+  "Shift" : {
+    "shiif" : "ROGUE"
+  },
+  "Decoy" : {
+    "deeco" : "ROGUE"
+  },
+  "Infernal Shade" : {
+    "is40" : "ACOLYTE"
+  },
+  "Ephemeral Stance" : {
+    "of28ur" : "SENTINEL"
+  },
+  "Entangling Roots" : {
+    "er6no" : "DRUID"
+  },
+  "Summon Spriggan" : {
+    "sp38" : "DRUID"
+  },
+  "Summon Bear" : {
+    "be36ar" : "BEASTMASTER"
+  },
+  "Focus" : {
+    "vm53dx" : "MAGE"
+  },
+  "Rebuke" : {
+    "re82ke" : "SENTINEL"
+  },
+  "Detonating Arrow" : {
+    "detar" : "MARKSMAN"
+  },
+  "Shatter Strike" : {
+    "ss3tre" : "SPELLBLADE"
+  },
+  "Static" : {
+    "st47ic" : "MAGE"
+  },
+  "Shield Rush" : {
+    "sr31hu" : "SENTINEL"
+  },
+  "Summon Sabertooth" : {
+    "sa36oh" : "PRIMALIST"
+  },
+  "Vengeance" : {
+    "gs15de" : "SENTINEL"
+  },
+  "Healing Hand" : {
+    "hh7pa3" : "PALADIN"
+  },
+  "Summon Volatile Zombie" : {
+    "svz81" : "ACOLYTE"
+  },
+  "Surge" : {
+    "su5g3" : "SPELLBLADE"
+  },
+  "Maelstrom" : {
+    "mas54" : "PRIMALIST"
+  },
+  "Abyssal Echoes" : {
+    "ab0lh" : "VOID_KNIGHT"
+  },
+  "Swipe" : {
+    "sw43" : "PRIMALIST"
+  },
+  "Earthquake" : {
+    "eq5s" : "SHAMAN"
+  },
+  "Marrow Shards" : {
+    "bp2nk" : "ACOLYTE"
+  },
+  "Wandering Spirits" : {
+    "ws54hm" : "ACOLYTE"
+  },
+  "Hammer Throw" : {
+    "ht16aw" : "SENTINEL"
+  },
+  "Disintegrate" : {
+    "dig5" : "MAGE"
+  },
+  "Soul Feast" : {
+    "fe8at" : "LICH"
+  },
+  "Acid Flask" : {
+    "aacfl" : "ROGUE"
+  },
+  "Death Seal" : {
+    "ds34l" : "LICH"
+  },
+  "Manifest Armor" : {
+    "ma6hdr" : "FORGE_GUARD"
+  },
+  "Meteor" : {
+    "me27" : "SORCERER"
+  },
+  "Sigils Of Hope" : {
+    "si4lgl" : "PALADIN"
+  },
+  "Enchant Weapon" : {
+    "sb44eq" : "SPELLBLADE"
+  },
+  "Summon Storm Crows" : {
+    "ssc50" : "PRIMALIST"
+  },
+  "Lightning Blast" : {
+    "lb23il" : "MAGE"
+  },
+  "Mana Strike" : {
+    "ms26" : "MAGE"
+  },
+  "Judgement" : {
+    "pa67ju" : "PALADIN"
+  },
+  "Serpent Strike" : {
+    "st31et" : "PRIMALIST"
+  },
+  "Lethal Mirage" : {
+    "mira59" : "BLADEDANCER"
+  },
+  "Devouring Orb" : {
+    "do5vr" : "VOID_KNIGHT"
+  },
+  "Puncture" : {
+    "pun22" : "ROGUE"
+  },
+  "Smoke Bomb" : {
+    "smbmb" : "ROGUE"
+  }
+}
