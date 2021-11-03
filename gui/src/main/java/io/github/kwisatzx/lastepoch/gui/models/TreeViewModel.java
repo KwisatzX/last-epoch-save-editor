@@ -1,9 +1,12 @@
-package io.github.kwisatzx.lastepoch.gui.tabcontrollers;
+package io.github.kwisatzx.lastepoch.gui.models;
 
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.GlobalDataOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
+import io.github.kwisatzx.lastepoch.gui.controllers.CharactersTabController;
+import io.github.kwisatzx.lastepoch.gui.controllers.EditorTabController;
+import io.github.kwisatzx.lastepoch.gui.controllers.StashTabController;
 import io.github.kwisatzx.lastepoch.itemdata.Item;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TabPane;
@@ -14,14 +17,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class TreeViewHandler {
+public class TreeViewModel {
     private final TreeView<Selectable> treeView;
     private TreeItem<Selectable> characterListRoot;
     private TreeItem<Selectable> stashListRoot;
     private final TreeItem<Selectable> customItems;
     private final TabPane tabPane;
 
-    public TreeViewHandler(TreeView<Selectable> treeView, TabPane tabPane) {
+    public TreeViewModel(TreeView<Selectable> treeView, TabPane tabPane) {
         this.treeView = treeView;
         this.tabPane = tabPane;
         customItems = new TreeItem<>(new Selectable() {
@@ -40,7 +43,7 @@ public class TreeViewHandler {
             if (selection == null) return;
             if (selection.equals(customItems) || customItems.getChildren().contains(selection)) {
                 if (!guiTabName.equals("tabEditor")) tabPane.getSelectionModel().select(2);
-                GuiEditorTab.getInstance().receiveSelection(selection);
+                EditorTabController.getInstance().receiveSelection(selection);
                 return;
             }
 
@@ -50,12 +53,12 @@ public class TreeViewHandler {
                     (selection.getValue().getItemObj() != null &&
                             selection.getValue().getItemObj().getItemType().getDataId() == 34)) {
                 if (guiTabName.equals("tabEditor")) tabPane.getSelectionModel().selectFirst();
-                GuiCharactersTab.getInstance().receiveSelection(selection);
+                CharactersTabController.getInstance().receiveSelection(selection);
             } else {
                 switch (guiTabName) {
-                    case "tabCharacters" -> GuiCharactersTab.getInstance().receiveSelection(selection);
-                    case "tabStash" -> GuiStashTab.getInstance().receiveSelection(selection);
-                    case "tabEditor" -> GuiEditorTab.getInstance().receiveSelection(selection);
+                    case "tabCharacters" -> CharactersTabController.getInstance().receiveSelection(selection);
+                    case "tabStash" -> StashTabController.getInstance().receiveSelection(selection);
+                    case "tabEditor" -> EditorTabController.getInstance().receiveSelection(selection);
                     //TODO Uniques tab
                 }
             }
@@ -67,7 +70,7 @@ public class TreeViewHandler {
 
         tabPane.getTabs().get(2).setOnSelectionChanged(event -> {
             if (!treeView.getSelectionModel().isEmpty()) {
-                GuiEditorTab.getInstance().receiveSelection(treeView.getSelectionModel().getSelectedItem());
+                EditorTabController.getInstance().receiveSelection(treeView.getSelectionModel().getSelectedItem());
             }
         });
     }
@@ -149,7 +152,7 @@ public class TreeViewHandler {
                         .toList());
         characterListRoot.getChildren().add(charaItem);
         refresh();
-        GuiCharactersTab.getInstance().receiveSelection(charaItem);
+        CharactersTabController.getInstance().receiveSelection(charaItem);
     }
 
     private void setModifiedStatus(TreeItem<Selectable> selection) {

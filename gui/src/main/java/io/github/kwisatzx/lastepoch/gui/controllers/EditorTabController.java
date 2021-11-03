@@ -1,9 +1,8 @@
-package io.github.kwisatzx.lastepoch.gui.tabcontrollers;
+package io.github.kwisatzx.lastepoch.gui.controllers;
 
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.GlobalDataOperations;
-import io.github.kwisatzx.lastepoch.gui.MainController;
 import io.github.kwisatzx.lastepoch.itemdata.AbstractItem;
 import io.github.kwisatzx.lastepoch.itemdata.AffixTier;
 import io.github.kwisatzx.lastepoch.itemdata.Item;
@@ -25,8 +24,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class GuiEditorTab extends GuiItemTab {
-    private static GuiEditorTab INSTANCE;
+public class EditorTabController extends GuiItemTab {
+    private static EditorTabController INSTANCE;
     @FXML
     private RadioButton replaceSlotRadio;
     @FXML
@@ -42,7 +41,7 @@ public class GuiEditorTab extends GuiItemTab {
         initInvXYChoiceBoxes();
     }
 
-    public static GuiEditorTab getInstance() {
+    public static EditorTabController getInstance() {
         return INSTANCE;
     }
 
@@ -107,8 +106,8 @@ public class GuiEditorTab extends GuiItemTab {
 
         stashOp.getStashItems().add(item);
         stashOp.setStashItemsInFileString();
-        MainController.getInstance().getTreeViewHandlerReference().refreshStashItems();
-        MainController.getInstance().setBottomRightText("Item added to stash.");
+        RootController.getInstance().getTreeViewModelReference().refreshStashItems();
+        RootController.getInstance().setBottomRightText("Item added to stash.");
     }
 
     private void addItemToCharacter() {
@@ -131,7 +130,7 @@ public class GuiEditorTab extends GuiItemTab {
             setEquipment();
             reloadTreeView();
         }
-        MainController.getInstance().setBottomRightText("Item added to character.");
+        RootController.getInstance().setBottomRightText("Item added to character.");
     }
 
     private void resetProperties() {
@@ -158,7 +157,7 @@ public class GuiEditorTab extends GuiItemTab {
         Item item = new AbstractItem(ItemAttributeList.getById(0), 0, 0, new ArrayList<>());
         selectedItem = new TreeItem<>(item);
         fillDataFields();
-        MainController.getInstance().getTreeViewHandlerReference().addCustomItem(item);
+        RootController.getInstance().getTreeViewModelReference().addCustomItem(item);
         reloadTreeView();
     }
 
@@ -167,7 +166,7 @@ public class GuiEditorTab extends GuiItemTab {
             Item copy = getItemCopy(original);
             selectedItem = new TreeItem<>(copy);
             fillDataFields();
-            MainController.getInstance().getTreeViewHandlerReference().addCustomItem(copy);
+            RootController.getInstance().getTreeViewModelReference().addCustomItem(copy);
             reloadTreeView();
         });
     }
@@ -202,6 +201,6 @@ public class GuiEditorTab extends GuiItemTab {
     }
 
     public void bottomLeft(MouseEvent mouseEvent) {
-        MainController.getInstance().setBottomLeftText("Kikkeriki!");
+        RootController.getInstance().setBottomLeftText("Kikkeriki!");
     }
 }

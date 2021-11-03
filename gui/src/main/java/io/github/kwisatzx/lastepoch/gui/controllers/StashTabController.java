@@ -1,9 +1,8 @@
-package io.github.kwisatzx.lastepoch.gui.tabcontrollers;
+package io.github.kwisatzx.lastepoch.gui.controllers;
 
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.GlobalDataOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
-import io.github.kwisatzx.lastepoch.gui.MainController;
 import io.github.kwisatzx.lastepoch.itemdata.AbstractItem;
 import io.github.kwisatzx.lastepoch.itemdata.AffixTier;
 import io.github.kwisatzx.lastepoch.itemdata.Item;
@@ -15,8 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.AnchorPane;
 
-public class GuiStashTab extends GuiItemTab {
-    private static GuiStashTab INSTANCE;
+public class StashTabController extends GuiItemTab {
+    private static StashTabController INSTANCE;
     private GlobalDataOperations stashOp;
     @FXML
     private AnchorPane stashAnchorPane;
@@ -30,7 +29,7 @@ public class GuiStashTab extends GuiItemTab {
         fillGlobalStashDataFields();
     }
 
-    public static GuiStashTab getInstance() {
+    public static StashTabController getInstance() {
         return INSTANCE;
     }
 
@@ -64,7 +63,7 @@ public class GuiStashTab extends GuiItemTab {
 
     @Override
     public void reloadTreeView() {
-        MainController.getInstance().getTreeViewHandlerReference().refreshStashItems();
+        RootController.getInstance().getTreeViewModelReference().refreshStashItems();
     }
 
     private void installEventHandlers(Node parentNode) {
@@ -116,9 +115,9 @@ public class GuiStashTab extends GuiItemTab {
         getSelectedItem().ifPresent(original -> {
             Item copy = getItemCopy(original);
             selectedItem = new TreeItem<>(copy);
-            MainController.getInstance().getTreeViewHandlerReference().addCustomItem(copy);
-            GuiEditorTab.getInstance().receiveSelection(selectedItem);
-            MainController.getInstance().getTabPane().getSelectionModel().select(2);
+            RootController.getInstance().getTreeViewModelReference().addCustomItem(copy);
+            EditorTabController.getInstance().receiveSelection(selectedItem);
+            RootController.getInstance().getTabPane().getSelectionModel().select(2);
             super.reloadTreeView();
         });
     }
@@ -130,7 +129,7 @@ public class GuiStashTab extends GuiItemTab {
 
     private void addAffixShardsUseable() {
         if (!FileHandler.getStashFile().addUseableAffixShards()) {
-            MainController.getInstance().setBottomRightText("Error: Failed to open array data file. See log.");
+            RootController.getInstance().setBottomRightText("Error: Failed to open array data file. See log.");
         }
     }
 

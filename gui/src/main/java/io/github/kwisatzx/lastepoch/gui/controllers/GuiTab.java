@@ -1,8 +1,7 @@
-package io.github.kwisatzx.lastepoch.gui.tabcontrollers;
+package io.github.kwisatzx.lastepoch.gui.controllers;
 
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
-import io.github.kwisatzx.lastepoch.gui.MainController;
 import io.github.kwisatzx.lastepoch.itemdata.Affix;
 import io.github.kwisatzx.lastepoch.itemdata.AffixList;
 import io.github.kwisatzx.lastepoch.itemdata.Item;
@@ -38,7 +37,7 @@ public abstract class GuiTab {
         initAffixComboBoxes();
     }
 
-    protected void receiveSelection(TreeItem<Selectable> treeItem) {
+    public void receiveSelection(TreeItem<Selectable> treeItem) {
         this.selectedItem = treeItem;
         fillDataFields();
     }
@@ -100,18 +99,20 @@ public abstract class GuiTab {
     }
 
     public void refreshTreeView() {
-        MainController.getInstance().getTreeViewHandlerReference().refresh();
+        RootController.getInstance().getTreeViewModelReference().refresh();
     }
 
     public void reloadTreeView() {
-        MainController.getInstance().getTreeViewHandlerReference().refreshCharaItems();
+        RootController.getInstance().getTreeViewModelReference().refreshCharaItems();
     }
 
     static final class AffixDisplayer {
         private static String previewChoice = "For Tier 7";
         private final Affix affix;
 
-        AffixDisplayer(Affix affix) {this.affix = affix;}
+        AffixDisplayer(Affix affix) {
+            this.affix = affix;
+        }
 
         public static List<GuiItemTab.AffixDisplayer> getList() {
             return AffixList.getList().stream()
@@ -142,7 +143,9 @@ public abstract class GuiTab {
             return null;
         }
 
-        public Affix getAffix() {return affix;}
+        public Affix getAffix() {
+            return affix;
+        }
 
         @Override
         public String toString() {

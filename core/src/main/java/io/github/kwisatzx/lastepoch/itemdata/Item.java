@@ -31,12 +31,11 @@ public interface Item extends Selectable {
 
     static Item itemFromInventoryString(String inventoryString) {
         String[] dataStr = getSubstringBetween(inventoryString, "[", "]").split(",");
-        int[] data;
+        int[] data = new int[0];
         try {
             data = Arrays.stream(dataStr).mapToInt(Integer::parseInt).toArray();
         } catch (NumberFormatException e) {
             LoggerFactory.getLogger(Item.class).error("Couldn't convert item data from string", e);
-            return UNKNOWN_ITEM;
         }
 
         if (data.length < 10 || data[3] > 4) return UNKNOWN_ITEM;

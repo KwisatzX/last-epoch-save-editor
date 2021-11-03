@@ -1,4 +1,4 @@
-package io.github.kwisatzx.lastepoch.gui.tabcontrollers;
+package io.github.kwisatzx.lastepoch.gui.controllers;
 
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.itemdata.*;

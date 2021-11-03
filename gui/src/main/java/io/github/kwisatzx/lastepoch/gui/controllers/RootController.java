@@ -1,24 +1,24 @@
-package io.github.kwisatzx.lastepoch.gui;
+package io.github.kwisatzx.lastepoch.gui.controllers;
 
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
-import io.github.kwisatzx.lastepoch.gui.tabcontrollers.GuiCharactersTab;
-import io.github.kwisatzx.lastepoch.gui.tabcontrollers.TreeViewHandler;
+import io.github.kwisatzx.lastepoch.gui.Launcher;
+import io.github.kwisatzx.lastepoch.gui.models.TreeViewModel;
+import io.github.kwisatzx.lastepoch.gui.views.RootView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Paint;
 
 import java.io.IOException;
-import java.util.Locale;
 
-public class MainController {
-    private static MainController INSTANCE;
-    private TreeViewHandler treeViewHandlerReference;
+public class RootController {
+    private static RootController INSTANCE;
+    private RootView rootView;
+    private TreeViewModel treeViewModelReference;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -36,33 +36,32 @@ public class MainController {
     @FXML
     private Label rightBottomLabel;
 
-    public static MainController getInstance() {
+    public static RootController getInstance() {
         return INSTANCE;
     }
 
     @FXML
     private void initialize() throws IOException {
         INSTANCE = this;
-        new GuiCharactersTab(charactersTabAnchorPane);
+        rootView = new RootView(leftBottomLabel, rightBottomLabel);
+        new CharactersTabController(charactersTabAnchorPane);
         if (FileHandler.getCharacterFileList().isEmpty())
             leftBottomLabel.setText("Error: Failed to load or locate character files. Load data manually.");
-        treeViewHandlerReference = new TreeViewHandler(treeView, tabPane);
+        treeViewModelReference = new TreeViewModel(treeView, tabPane);
         stashTabAnchorPane.getChildren().addAll(Launcher.loadFXML("crafting_pane_stash"));
         editorTabAnchorPane.getChildren().addAll(Launcher.loadFXML("crafting_pane_editor"));
     }
 
     public void setBottomRightText(String text) {
-        if (text.toLowerCase(Locale.ROOT).contains("error")) rightBottomLabel.setTextFill(Paint.valueOf("#ff3333"));
-        else rightBottomLabel.setTextFill(Paint.valueOf("#000000"));
-        rightBottomLabel.setText(text);
+        rootView.setBottomRightText(text);
     }
 
     public void setBottomLeftText(String text) {
-        leftBottomLabel.setText(text);
+        rootView.setBottomLeftText(text);
     }
 
-    public TreeViewHandler getTreeViewHandlerReference() {
-        return treeViewHandlerReference;
+    public TreeViewModel getTreeViewModelReference() {
+        return treeViewModelReference;
     }
 
     public TabPane getTabPane() {
@@ -76,7 +75,7 @@ public class MainController {
     }
 
     public void openSaveFolder(ActionEvent actionEvent) {
-        setBottomRightText("Error: test");
+        setBottomLeftText("Error: test");
     }
 
     public void expandFiles(ActionEvent actionEvent) {
@@ -95,7 +94,7 @@ public class MainController {
             }
         }
         if (success) setBottomLeftText("Character changes saved to file!");
-        else setBottomRightText("Error: could not save character changes to file. See log.");
+        else setBottomLeftText("Error: could not save character changes to file. See log.");
     }
 
     public void saveStash(ActionEvent actionEvent) {

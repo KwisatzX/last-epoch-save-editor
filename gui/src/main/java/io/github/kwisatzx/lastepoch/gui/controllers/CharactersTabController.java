@@ -1,4 +1,4 @@
-package io.github.kwisatzx.lastepoch.gui.tabcontrollers;
+package io.github.kwisatzx.lastepoch.gui.controllers;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -6,7 +6,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
-import io.github.kwisatzx.lastepoch.gui.MainController;
 import io.github.kwisatzx.lastepoch.itemdata.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,14 +20,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
-public class GuiCharactersTab extends GuiTab {
-    private static GuiCharactersTab INSTANCE;
+public class CharactersTabController extends GuiTab {
+    private static CharactersTabController INSTANCE;
     private final HashMap<String, CheckBox> checkBoxes;
     private ComboBox<String> blessingsComboBox;
     private ToggleButton includeWeapons;
     private ToggleButton includeInventory;
 
-    public GuiCharactersTab(Pane charactersTabPane) {
+    public CharactersTabController(Pane charactersTabPane) {
         INSTANCE = this;
         checkBoxes = new HashMap<>();
         tabInit(charactersTabPane);
@@ -38,14 +37,13 @@ public class GuiCharactersTab extends GuiTab {
         initChoiceBoxes();
     }
 
-    //TODO: 1. refactor everything into subclasses, maybe a package
-    //TODO: Extract init into GuiCharactersTabInit for every tab controller? or maybe just this one
+    //TODO: Extract init into CharactersTabModel
     //TODO 2. replace manual I/O from fileString with json mapping and copied object structure
 
     //--- UTILITY ---//
     //---------------//
 
-    public static GuiCharactersTab getInstance() {
+    public static CharactersTabController getInstance() {
         return INSTANCE;
     }
 
@@ -148,7 +146,7 @@ public class GuiCharactersTab extends GuiTab {
             getCharaOp().ifPresent(charaOp -> charaOp.setProperty(
                     "characterName", "\"" + textFields.get("nameField").getText() + "\""));
             refreshTreeView();
-            GuiEditorTab.getInstance().initCharactersChoiceBox();
+            EditorTabController.getInstance().initCharactersChoiceBox();
         });
 
         textFields.get("levelField").setOnKeyTyped(event -> getCharaOp().ifPresent(
@@ -472,7 +470,7 @@ public class GuiCharactersTab extends GuiTab {
 
         CharacterOperations newCharaOp = getCharaOp().get().copyCharacter();
         if (newCharaOp == null) {
-            MainController.getInstance().setBottomRightText("Error: Failed to copy character. See log file.");
+            RootController.getInstance().setBottomRightText("Error: Failed to copy character. See log file.");
             return;
         }
 
@@ -494,36 +492,36 @@ public class GuiCharactersTab extends GuiTab {
         newCharaOp.setProperty("characterName", newCharacterName);
         newCharaOp.saveToFile();
 
-        MainController.getInstance().getTreeViewHandlerReference().addNewCharacter(newCharaOp);
-        GuiEditorTab.getInstance().initCharactersChoiceBox();
-        MainController.getInstance().setBottomRightText("Character copied and saved to file.");
+        RootController.getInstance().getTreeViewModelReference().addNewCharacter(newCharaOp);
+        EditorTabController.getInstance().initCharactersChoiceBox();
+        RootController.getInstance().setBottomRightText("Character copied and saved to file.");
     }
 
     private void unlockTimelines() {
         getCharaOp().ifPresent(charaOp -> {
-            if (charaOp.setTimelinesUnlocked()) MainController.getInstance().setBottomRightText("Timelines unlocked.");
-            else MainController.getInstance().setBottomRightText("Error: Failed to open array data file. See log.");
+            if (charaOp.setTimelinesUnlocked()) RootController.getInstance().setBottomRightText("Timelines unlocked.");
+            else RootController.getInstance().setBottomRightText("Error: Failed to open array data file. See log.");
         });
     }
 
     private void unlockWaypoints() {
         getCharaOp().ifPresent(charaOp -> {
-            if (charaOp.setWaypointsUnlocked()) MainController.getInstance().setBottomRightText("Waypoints unlocked.");
-            else MainController.getInstance().setBottomRightText("Error: Failed to open array data file. See log.");
+            if (charaOp.setWaypointsUnlocked()) RootController.getInstance().setBottomRightText("Waypoints unlocked.");
+            else RootController.getInstance().setBottomRightText("Error: Failed to open array data file. See log.");
         });
     }
 
     private void completeQuests() {
         getCharaOp().ifPresent(charaOp -> {
-            if (charaOp.setQuestsCompleted()) MainController.getInstance().setBottomRightText("Quests completed.");
-            else MainController.getInstance().setBottomRightText("Error: Failed to open array data file. See log.");
+            if (charaOp.setQuestsCompleted()) RootController.getInstance().setBottomRightText("Quests completed.");
+            else RootController.getInstance().setBottomRightText("Error: Failed to open array data file. See log.");
         });
     }
 
     private void maxMasteryLevels() {
         getCharaOp().ifPresent(charaOp -> {
             charaOp.getCharacter().maxMasteryLevels();
-            MainController.getInstance().setBottomRightText("All selected masteries leveled to 20.");
+            RootController.getInstance().setBottomRightText("All selected masteries leveled to 20.");
         });
     }
 
@@ -531,8 +529,8 @@ public class GuiCharactersTab extends GuiTab {
     private void maxMasteryNodes() {
         getCharaOp().ifPresent(charaOp -> {
             charaOp.getCharacter().maxMasteryNodes();
-            MainController.getInstance()
-                    .setBottomRightText("Picked nodes on all mastery trees have been given max points.");
+            RootController.getInstance().setBottomRightText(
+                    "Picked nodes on all mastery trees have been given max points.");
         });
     }
 
@@ -540,8 +538,8 @@ public class GuiCharactersTab extends GuiTab {
     private void maxPassiveNodes() {
         getCharaOp().ifPresent(charaOp -> {
             charaOp.getCharacter().maxPassiveNodes();
-            MainController.getInstance()
-                    .setBottomRightText("Picked nodes on the passive trees have been given max points.");
+            RootController.getInstance().setBottomRightText(
+                    "Picked nodes on the passive trees have been given max points.");
         });
     }
 
@@ -555,8 +553,8 @@ public class GuiCharactersTab extends GuiTab {
 
     private void moveToItemEditor() {
         if (selectedItem != null) {
-            GuiEditorTab.getInstance().receiveSelection(selectedItem);
-            MainController.getInstance().getTabPane().getSelectionModel().select(2);
+            EditorTabController.getInstance().receiveSelection(selectedItem);
+            RootController.getInstance().getTabPane().getSelectionModel().select(2);
         }
     }
 
@@ -585,7 +583,7 @@ public class GuiCharactersTab extends GuiTab {
             if (!itemReplaced) equipment.add(item);
         }
 
-        MainController.getInstance().setBottomRightText("Equipment items replaced.");
+        RootController.getInstance().setBottomRightText("Equipment items replaced.");
         setEquipment();
         reloadTreeView();
     }
@@ -634,7 +632,7 @@ public class GuiCharactersTab extends GuiTab {
             }
         }
         setEquipment();
-        MainController.getInstance().setBottomRightText("Affix added to all equipment.");
+        RootController.getInstance().setBottomRightText("Affix added to all equipment.");
         reloadTreeView();
     }
 
@@ -645,7 +643,7 @@ public class GuiCharactersTab extends GuiTab {
             }
 
             setEquipment();
-            MainController.getInstance().setBottomRightText("All equipment instability (and fractures) removed.");
+            RootController.getInstance().setBottomRightText("All equipment instability (and fractures) removed.");
         });
     }
 
@@ -659,7 +657,7 @@ public class GuiCharactersTab extends GuiTab {
             }
 
             setEquipment();
-            MainController.getInstance().setBottomRightText("All equipment implicits maximized.");
+            RootController.getInstance().setBottomRightText("All equipment implicits maximized.");
         });
     }
 
@@ -672,7 +670,7 @@ public class GuiCharactersTab extends GuiTab {
             }
 
             setEquipment();
-            MainController.getInstance().setBottomRightText("All equipment affix ranges maximized.");
+            RootController.getInstance().setBottomRightText("All equipment affix ranges maximized.");
         });
     }
 
@@ -685,7 +683,7 @@ public class GuiCharactersTab extends GuiTab {
             }
 
             setEquipment();
-            MainController.getInstance().setBottomRightText("All equipment affix tiers maximized.");
+            RootController.getInstance().setBottomRightText("All equipment affix tiers maximized.");
         });
     }
 
@@ -767,7 +765,7 @@ public class GuiCharactersTab extends GuiTab {
 
         private static void readFromFile() {
 //            Path file = Paths.get("item data/Skills.json");
-            InputStream fileStream = GuiCharactersTab.class.getResourceAsStream("/item data/Skills.json");
+            InputStream fileStream = CharactersTabController.class.getResourceAsStream("/item data/Skills.json");
             if (fileStream != null) {
                 ObjectMapper objectMapper = new ObjectMapper()
                         .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);

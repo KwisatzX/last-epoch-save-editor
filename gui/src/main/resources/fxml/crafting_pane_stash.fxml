@@ -1,181 +1,204 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane fx:id="stashAnchorPane" minHeight="549.0" minWidth="668.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.kwisatzx.lastepoch.gui.tabcontrollers.GuiStashTab">
-   <children>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="59.0" text="Item type:" />
-      <ChoiceBox fx:id="itemTypeChoiceBox" layoutX="73.0" layoutY="10.0" prefWidth="150.0" />
-      <Label layoutX="230.0" layoutY="14.0" prefHeight="17.0" prefWidth="77.0" text="Item type tier:" />
-      <ChoiceBox fx:id="itemTierChoiceBox" layoutX="307.0" layoutY="10.0" prefWidth="150.0" />
-      <TextField fx:id="affixVisualField" layoutX="94.0" layoutY="42.0" prefHeight="25.0" prefWidth="26.0" />
-      <Button fx:id="affixInfoButton" layoutX="12.0" layoutY="44.0" mnemonicParsing="false" text="Affix # (visual):">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <TextField fx:id="implicit1Field" layoutX="198.0" layoutY="42.0" prefHeight="25.0" prefWidth="37.0" text="100" />
-      <Button fx:id="implicit1InfoButton" layoutX="130.0" layoutY="44.0" mnemonicParsing="false" text="Implicit #1:">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Label layoutX="236.0" layoutY="46.0" prefHeight="17.0" prefWidth="12.0" text="\%" />
-      <TextField fx:id="implicit2Field" layoutX="327.0" layoutY="42.0" prefHeight="25.0" prefWidth="37.0" text="100" />
-      <Button fx:id="implicit2InfoButton" layoutX="259.0" layoutY="44.0" mnemonicParsing="false" text="Implicit #2:">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Label layoutX="365.0" layoutY="46.0" prefHeight="17.0" prefWidth="12.0" text="\%" />
-      <TextField fx:id="implicit3Field" layoutX="457.0" layoutY="42.0" prefHeight="25.0" prefWidth="37.0" text="100" />
-      <Button fx:id="implicit3InfoButton" layoutX="389.0" layoutY="44.0" mnemonicParsing="false" text="Implicit #3:">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Label layoutX="495.0" layoutY="46.0" prefHeight="17.0" prefWidth="12.0" text="\%" />
-      <Label layoutX="14.0" layoutY="78.0" prefHeight="17.0" prefWidth="59.0" text="Instability:" />
-      <TextField fx:id="instabilityField" layoutX="72.0" layoutY="74.0" prefHeight="25.0" prefWidth="37.0" />
-      <TextField fx:id="affixField" editable="false" layoutX="180.0" layoutY="74.0" prefHeight="25.0" prefWidth="26.0" />
-      <Button fx:id="affixInfoButton2" layoutX="130.0" layoutY="76.0" mnemonicParsing="false" text="Affix #:">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Label layoutX="467.0" layoutY="14.0" prefHeight="17.0" prefWidth="37.0" text="Class:" />
-      <ChoiceBox fx:id="classChoiceBox" layoutX="499.0" layoutY="10.0" prefHeight="25.0" prefWidth="150.0" />
-      <Label layoutX="14.0" layoutY="133.0" prefHeight="20.0" prefWidth="45.0" text="Affixes:" underline="true">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <CheckBox fx:id="restrictAffixesCheckBox" disable="true" layoutX="638.0" layoutY="135.0" mnemonicParsing="false" />
-      <Button fx:id="restrictAffixesInfoButton" layoutX="551.0" layoutY="133.0" mnemonicParsing="false" text="Restrict to legal:">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Label layoutX="12.0" layoutY="164.0" prefHeight="17.0" prefWidth="16.0" text="1:" />
-      <ChoiceBox fx:id="affixPreviewValuesChoiceBox" layoutX="278.0" layoutY="131.0" prefWidth="150.0" />
-      <Label layoutX="193.0" layoutY="135.0" prefHeight="17.0" prefWidth="85.0" text="Preview values:" />
-      <Label layoutX="348.0" layoutY="196.0" prefHeight="17.0" prefWidth="103.0" text="Value within range:" />
-      <TextField fx:id="affix1ValueField" layoutX="454.0" layoutY="192.0" prefHeight="25.0" prefWidth="37.0" text="100" />
-      <Label layoutX="492.0" layoutY="196.0" prefHeight="17.0" prefWidth="12.0" text="\%" />
-      <ChoiceBox fx:id="affix1TierChoiceBox" layoutX="150.0" layoutY="192.0" prefHeight="25.0" prefWidth="109.0" />
-      <Label layoutX="99.0" layoutY="196.0" prefHeight="17.0" prefWidth="53.0" text="Affix tier:" />
-      <Label layoutX="12.0" layoutY="234.0" prefHeight="17.0" prefWidth="16.0" text="2:" />
-      <Label layoutX="349.0" layoutY="266.0" prefHeight="17.0" prefWidth="103.0" text="Value within range:" />
-      <TextField fx:id="affix2ValueField" layoutX="454.0" layoutY="262.0" prefHeight="25.0" prefWidth="37.0" text="100" />
-      <Label layoutX="492.0" layoutY="266.0" prefHeight="17.0" prefWidth="12.0" text="\%" />
-      <ChoiceBox fx:id="affix2TierChoiceBox" layoutX="150.0" layoutY="262.0" prefHeight="25.0" prefWidth="109.0" />
-      <Label layoutX="99.0" layoutY="266.0" prefHeight="17.0" prefWidth="53.0" text="Affix tier:" />
-      <Label layoutX="12.0" layoutY="303.0" prefHeight="17.0" prefWidth="16.0" text="3:" />
-      <Label layoutX="349.0" layoutY="335.0" prefHeight="17.0" prefWidth="103.0" text="Value within range:" />
-      <TextField fx:id="affix3ValueField" layoutX="454.0" layoutY="331.0" prefHeight="25.0" prefWidth="37.0" text="100" />
-      <Label layoutX="492.0" layoutY="335.0" prefHeight="17.0" prefWidth="12.0" text="\%" />
-      <ChoiceBox fx:id="affix3TierChoiceBox" layoutX="150.0" layoutY="331.0" prefHeight="25.0" prefWidth="109.0" />
-      <Label layoutX="99.0" layoutY="335.0" prefHeight="17.0" prefWidth="53.0" text="Affix tier:" />
-      <Label layoutX="12.0" layoutY="371.0" prefHeight="17.0" prefWidth="16.0" text="4:" />
-      <Label layoutX="349.0" layoutY="403.0" prefHeight="17.0" prefWidth="103.0" text="Value within range:" />
-      <TextField fx:id="affix4ValueField" layoutX="454.0" layoutY="399.0" prefHeight="25.0" prefWidth="37.0" text="100" />
-      <Label layoutX="492.0" layoutY="403.0" prefHeight="17.0" prefWidth="12.0" text="\%" />
-      <ChoiceBox fx:id="affix4TierChoiceBox" layoutX="150.0" layoutY="399.0" prefHeight="25.0" prefWidth="109.0" />
-      <Label layoutX="99.0" layoutY="403.0" prefHeight="17.0" prefWidth="53.0" text="Affix tier:" />
-      <Label layoutX="18.0" layoutY="451.0" prefHeight="17.0" prefWidth="37.0" text="Gold:" />
-      <TextField fx:id="goldField" layoutX="49.0" layoutY="447.0" prefHeight="25.0" prefWidth="103.0" />
-      <Label layoutX="170.0" layoutY="451.0" prefHeight="17.0" prefWidth="59.0" text="Stash tabs:" />
-      <TextField fx:id="stashTabsField" editable="false" layoutX="232.0" layoutY="447.0" prefHeight="25.0" prefWidth="63.0" />
-      <Button fx:id="copyItemToEditorButton" layoutX="490.0" layoutY="103.0" mnemonicParsing="false" style="-fx-border-color: #5a833dcc;" text="Copy item to item editor" textFill="#5b8d32">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
-      <Label layoutX="18.0" layoutY="482.0" prefHeight="17.0" prefWidth="70.0" text="Total glyphs:" />
-      <TextField fx:id="glyphsField" editable="false" layoutX="90.0" layoutY="478.0" prefHeight="25.0" prefWidth="45.0" />
-      <Label layoutX="18.0" layoutY="513.0" prefHeight="17.0" prefWidth="70.0" text="Total runes:" />
-      <TextField fx:id="runesField" editable="false" layoutX="90.0" layoutY="509.0" prefHeight="25.0" prefWidth="45.0" />
-      <Button fx:id="getGlyphsRunesButton" layoutX="141.0" layoutY="492.0" mnemonicParsing="false" text="Get 999 of all">
-         <effect>
-            <ColorAdjust hue="-0.52" saturation="0.05" />
-         </effect></Button>
-      <Label layoutX="290.0" layoutY="482.0" prefHeight="17.0" prefWidth="93.0" text="Total affix shards:" />
-      <TextField fx:id="affixShardsField" editable="false" layoutX="390.0" layoutY="478.0" prefHeight="25.0" prefWidth="70.0" />
-      <Button fx:id="affixShardsUseableButton" layoutX="248.0" layoutY="509.0" mnemonicParsing="false" text="Get 999 of useable shards">
-         <effect>
-            <ColorAdjust hue="-0.52" saturation="0.05" />
-         </effect></Button>
-      <Button fx:id="affixShardsAllButton" layoutX="410.0" layoutY="509.0" mnemonicParsing="false" text="Get 999 of all shards">
-         <effect>
-            <ColorAdjust hue="-0.52" saturation="0.03" />
-         </effect></Button>
-      <ChoiceBox fx:id="stashXChoiceBox" layoutX="536.0" layoutY="74.0" prefHeight="25.0" prefWidth="45.0" />
-      <Label layoutX="524.0" layoutY="78.0" prefHeight="17.0" prefWidth="12.0" text="x:" />
-      <ChoiceBox fx:id="stashYChoiceBox" layoutX="602.0" layoutY="74.0" prefHeight="25.0" prefWidth="45.0" />
-      <Label layoutX="590.0" layoutY="78.0" prefHeight="17.0" prefWidth="12.0" text="y:" />
-      <Label layoutX="234.0" layoutY="78.0" prefHeight="17.0" prefWidth="70.0" text="Item in stash:" underline="true" />
-      <Button fx:id="affixesInfoButton" layoutX="72.0" layoutY="133.0" mnemonicParsing="false" prefHeight="2.0" prefWidth="37.0" text="Info" textFill="#ff4e4e">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Button fx:id="unfractureItemsButton" layoutX="540.0" layoutY="483.0" mnemonicParsing="false" text="Unfracture all items">
-         <effect>
-            <ColorAdjust hue="0.15" saturation="0.1" />
-         </effect>
-      </Button>
-      <Button fx:id="maximizeItemValuesButton" layoutX="515.0" layoutY="427.0" mnemonicParsing="false" text="Maximize all item values">
-         <effect>
-            <ColorAdjust hue="0.15" saturation="0.1" />
-         </effect>
-      </Button>
-      <Button fx:id="maximizeItemAffixTiersButton" layoutX="500.0" layoutY="455.0" mnemonicParsing="false" text="Maximize all item affix tiers">
-         <effect>
-            <ColorAdjust hue="0.15" saturation="0.1" />
-         </effect>
-      </Button>
-      <Label layoutX="546.0" layoutY="409.0" text="All items in stash:" underline="true" />
-      <Button fx:id="deleteAllButton" alignment="CENTER" focusTraversable="false" layoutX="551.0" layoutY="511.0" mnemonicParsing="false" text="DELETE ALL" textFill="#d70202" underline="true">
-         <font>
-            <Font name="Copperplate Gothic Bold" size="12.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="CROSSHAIR" />
-         </cursor>
-         <effect>
-            <ColorAdjust saturation="0.23">
-               <input>
-                  <InnerShadow choke="0.31" height="34.3125" radius="17.775624999999998" width="38.79">
-                     <input>
-                        <DropShadow height="3.2" radius="5.55" />
-                     </input>
-                  </InnerShadow>
-               </input>
-            </ColorAdjust>
-         </effect>
-      </Button>
-      <ComboBox fx:id="affix1ComboBox" editable="true" layoutX="28.0" layoutY="160.0" prefHeight="25.0" prefWidth="628.0" promptText="Type to search for affixes" visibleRowCount="25" />
-      <ComboBox fx:id="affix2ComboBox" editable="true" layoutX="28.0" layoutY="230.0" prefHeight="25.0" prefWidth="628.0" promptText="Type to search for affixes" />
-      <ComboBox fx:id="affix3ComboBox" editable="true" layoutX="28.0" layoutY="299.0" prefHeight="25.0" prefWidth="628.0" promptText="Type to search for affixes" />
-      <ComboBox fx:id="affix4ComboBox" editable="true" layoutX="28.0" layoutY="367.0" prefHeight="25.0" prefWidth="628.0" promptText="Type to search for affixes" />
-      <Button fx:id="maxImplicitsButton" layoutX="535.0" layoutY="42.0" mnemonicParsing="false" text="Max implicits" />
-      <Button fx:id="arenaKeysButton" layoutX="364.0" layoutY="447.0" mnemonicParsing="false" text="Get Arena keys">
-         <effect>
-            <ColorAdjust hue="-0.02" saturation="0.12" />
-         </effect>
-      </Button>
-      <Label layoutX="308.0" layoutY="78.0" prefHeight="17.0" prefWidth="59.0" text="Tab name:" />
-      <ChoiceBox fx:id="stashTabNamesChoiceBox" layoutX="367.0" layoutY="74.0" prefHeight="25.0" prefWidth="153.0" />
-      <Button fx:id="addTenStashTabsButton" layoutX="303.0" layoutY="447.0" mnemonicParsing="false" text="Add 10" />
-   </children>
+<?import javafx.scene.text.*?>
+<AnchorPane fx:id="stashAnchorPane" minHeight="549.0" minWidth="668.0" xmlns="http://javafx.com/javafx/16"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="io.github.kwisatzx.lastepoch.gui.controllers.StashTabController">
+    <children>
+        <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="59.0" text="Item type:"/>
+        <ChoiceBox fx:id="itemTypeChoiceBox" layoutX="73.0" layoutY="10.0" prefWidth="150.0"/>
+        <Label layoutX="230.0" layoutY="14.0" prefHeight="17.0" prefWidth="77.0" text="Item type tier:"/>
+        <ChoiceBox fx:id="itemTierChoiceBox" layoutX="307.0" layoutY="10.0" prefWidth="150.0"/>
+        <TextField fx:id="affixVisualField" layoutX="94.0" layoutY="42.0" prefHeight="25.0" prefWidth="26.0"/>
+        <Button fx:id="affixInfoButton" layoutX="12.0" layoutY="44.0" mnemonicParsing="false" text="Affix # (visual):">
+            <font>
+                <Font size="10.0"/>
+            </font>
+        </Button>
+        <TextField fx:id="implicit1Field" layoutX="198.0" layoutY="42.0" prefHeight="25.0" prefWidth="37.0" text="100"/>
+        <Button fx:id="implicit1InfoButton" layoutX="130.0" layoutY="44.0" mnemonicParsing="false" text="Implicit #1:">
+            <font>
+                <Font size="10.0"/>
+            </font>
+        </Button>
+        <Label layoutX="236.0" layoutY="46.0" prefHeight="17.0" prefWidth="12.0" text="\%"/>
+        <TextField fx:id="implicit2Field" layoutX="327.0" layoutY="42.0" prefHeight="25.0" prefWidth="37.0" text="100"/>
+        <Button fx:id="implicit2InfoButton" layoutX="259.0" layoutY="44.0" mnemonicParsing="false" text="Implicit #2:">
+            <font>
+                <Font size="10.0"/>
+            </font>
+        </Button>
+        <Label layoutX="365.0" layoutY="46.0" prefHeight="17.0" prefWidth="12.0" text="\%"/>
+        <TextField fx:id="implicit3Field" layoutX="457.0" layoutY="42.0" prefHeight="25.0" prefWidth="37.0" text="100"/>
+        <Button fx:id="implicit3InfoButton" layoutX="389.0" layoutY="44.0" mnemonicParsing="false" text="Implicit #3:">
+            <font>
+                <Font size="10.0"/>
+            </font>
+        </Button>
+        <Label layoutX="495.0" layoutY="46.0" prefHeight="17.0" prefWidth="12.0" text="\%"/>
+        <Label layoutX="14.0" layoutY="78.0" prefHeight="17.0" prefWidth="59.0" text="Instability:"/>
+        <TextField fx:id="instabilityField" layoutX="72.0" layoutY="74.0" prefHeight="25.0" prefWidth="37.0"/>
+        <TextField fx:id="affixField" editable="false" layoutX="180.0" layoutY="74.0" prefHeight="25.0"
+                   prefWidth="26.0"/>
+        <Button fx:id="affixInfoButton2" layoutX="130.0" layoutY="76.0" mnemonicParsing="false" text="Affix #:">
+            <font>
+                <Font size="10.0"/>
+            </font>
+        </Button>
+        <Label layoutX="467.0" layoutY="14.0" prefHeight="17.0" prefWidth="37.0" text="Class:"/>
+        <ChoiceBox fx:id="classChoiceBox" layoutX="499.0" layoutY="10.0" prefHeight="25.0" prefWidth="150.0"/>
+        <Label layoutX="14.0" layoutY="133.0" prefHeight="20.0" prefWidth="45.0" text="Affixes:" underline="true">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <CheckBox fx:id="restrictAffixesCheckBox" disable="true" layoutX="638.0" layoutY="135.0"
+                  mnemonicParsing="false"/>
+        <Button fx:id="restrictAffixesInfoButton" layoutX="551.0" layoutY="133.0" mnemonicParsing="false"
+                text="Restrict to legal:">
+            <font>
+                <Font size="10.0"/>
+            </font>
+        </Button>
+        <Label layoutX="12.0" layoutY="164.0" prefHeight="17.0" prefWidth="16.0" text="1:"/>
+        <ChoiceBox fx:id="affixPreviewValuesChoiceBox" layoutX="278.0" layoutY="131.0" prefWidth="150.0"/>
+        <Label layoutX="193.0" layoutY="135.0" prefHeight="17.0" prefWidth="85.0" text="Preview values:"/>
+        <Label layoutX="348.0" layoutY="196.0" prefHeight="17.0" prefWidth="103.0" text="Value within range:"/>
+        <TextField fx:id="affix1ValueField" layoutX="454.0" layoutY="192.0" prefHeight="25.0" prefWidth="37.0"
+                   text="100"/>
+        <Label layoutX="492.0" layoutY="196.0" prefHeight="17.0" prefWidth="12.0" text="\%"/>
+        <ChoiceBox fx:id="affix1TierChoiceBox" layoutX="150.0" layoutY="192.0" prefHeight="25.0" prefWidth="109.0"/>
+        <Label layoutX="99.0" layoutY="196.0" prefHeight="17.0" prefWidth="53.0" text="Affix tier:"/>
+        <Label layoutX="12.0" layoutY="234.0" prefHeight="17.0" prefWidth="16.0" text="2:"/>
+        <Label layoutX="349.0" layoutY="266.0" prefHeight="17.0" prefWidth="103.0" text="Value within range:"/>
+        <TextField fx:id="affix2ValueField" layoutX="454.0" layoutY="262.0" prefHeight="25.0" prefWidth="37.0"
+                   text="100"/>
+        <Label layoutX="492.0" layoutY="266.0" prefHeight="17.0" prefWidth="12.0" text="\%"/>
+        <ChoiceBox fx:id="affix2TierChoiceBox" layoutX="150.0" layoutY="262.0" prefHeight="25.0" prefWidth="109.0"/>
+        <Label layoutX="99.0" layoutY="266.0" prefHeight="17.0" prefWidth="53.0" text="Affix tier:"/>
+        <Label layoutX="12.0" layoutY="303.0" prefHeight="17.0" prefWidth="16.0" text="3:"/>
+        <Label layoutX="349.0" layoutY="335.0" prefHeight="17.0" prefWidth="103.0" text="Value within range:"/>
+        <TextField fx:id="affix3ValueField" layoutX="454.0" layoutY="331.0" prefHeight="25.0" prefWidth="37.0"
+                   text="100"/>
+        <Label layoutX="492.0" layoutY="335.0" prefHeight="17.0" prefWidth="12.0" text="\%"/>
+        <ChoiceBox fx:id="affix3TierChoiceBox" layoutX="150.0" layoutY="331.0" prefHeight="25.0" prefWidth="109.0"/>
+        <Label layoutX="99.0" layoutY="335.0" prefHeight="17.0" prefWidth="53.0" text="Affix tier:"/>
+        <Label layoutX="12.0" layoutY="371.0" prefHeight="17.0" prefWidth="16.0" text="4:"/>
+        <Label layoutX="349.0" layoutY="403.0" prefHeight="17.0" prefWidth="103.0" text="Value within range:"/>
+        <TextField fx:id="affix4ValueField" layoutX="454.0" layoutY="399.0" prefHeight="25.0" prefWidth="37.0"
+                   text="100"/>
+        <Label layoutX="492.0" layoutY="403.0" prefHeight="17.0" prefWidth="12.0" text="\%"/>
+        <ChoiceBox fx:id="affix4TierChoiceBox" layoutX="150.0" layoutY="399.0" prefHeight="25.0" prefWidth="109.0"/>
+        <Label layoutX="99.0" layoutY="403.0" prefHeight="17.0" prefWidth="53.0" text="Affix tier:"/>
+        <Label layoutX="18.0" layoutY="451.0" prefHeight="17.0" prefWidth="37.0" text="Gold:"/>
+        <TextField fx:id="goldField" layoutX="49.0" layoutY="447.0" prefHeight="25.0" prefWidth="103.0"/>
+        <Label layoutX="170.0" layoutY="451.0" prefHeight="17.0" prefWidth="59.0" text="Stash tabs:"/>
+        <TextField fx:id="stashTabsField" editable="false" layoutX="232.0" layoutY="447.0" prefHeight="25.0"
+                   prefWidth="63.0"/>
+        <Button fx:id="copyItemToEditorButton" layoutX="490.0" layoutY="103.0" mnemonicParsing="false"
+                style="-fx-border-color: #5a833dcc;" text="Copy item to item editor" textFill="#5b8d32">
+            <font>
+                <Font name="System Bold" size="12.0"/>
+            </font>
+        </Button>
+        <Label layoutX="18.0" layoutY="482.0" prefHeight="17.0" prefWidth="70.0" text="Total glyphs:"/>
+        <TextField fx:id="glyphsField" editable="false" layoutX="90.0" layoutY="478.0" prefHeight="25.0"
+                   prefWidth="45.0"/>
+        <Label layoutX="18.0" layoutY="513.0" prefHeight="17.0" prefWidth="70.0" text="Total runes:"/>
+        <TextField fx:id="runesField" editable="false" layoutX="90.0" layoutY="509.0" prefHeight="25.0"
+                   prefWidth="45.0"/>
+        <Button fx:id="getGlyphsRunesButton" layoutX="141.0" layoutY="492.0" mnemonicParsing="false"
+                text="Get 999 of all">
+            <effect>
+                <ColorAdjust hue="-0.52" saturation="0.05"/>
+            </effect>
+        </Button>
+        <Label layoutX="290.0" layoutY="482.0" prefHeight="17.0" prefWidth="93.0" text="Total affix shards:"/>
+        <TextField fx:id="affixShardsField" editable="false" layoutX="390.0" layoutY="478.0" prefHeight="25.0"
+                   prefWidth="70.0"/>
+        <Button fx:id="affixShardsUseableButton" layoutX="248.0" layoutY="509.0" mnemonicParsing="false"
+                text="Get 999 of useable shards">
+            <effect>
+                <ColorAdjust hue="-0.52" saturation="0.05"/>
+            </effect>
+        </Button>
+        <Button fx:id="affixShardsAllButton" layoutX="410.0" layoutY="509.0" mnemonicParsing="false"
+                text="Get 999 of all shards">
+            <effect>
+                <ColorAdjust hue="-0.52" saturation="0.03"/>
+            </effect>
+        </Button>
+        <ChoiceBox fx:id="stashXChoiceBox" layoutX="536.0" layoutY="74.0" prefHeight="25.0" prefWidth="45.0"/>
+        <Label layoutX="524.0" layoutY="78.0" prefHeight="17.0" prefWidth="12.0" text="x:"/>
+        <ChoiceBox fx:id="stashYChoiceBox" layoutX="602.0" layoutY="74.0" prefHeight="25.0" prefWidth="45.0"/>
+        <Label layoutX="590.0" layoutY="78.0" prefHeight="17.0" prefWidth="12.0" text="y:"/>
+        <Label layoutX="234.0" layoutY="78.0" prefHeight="17.0" prefWidth="70.0" text="Item in stash:"
+               underline="true"/>
+        <Button fx:id="affixesInfoButton" layoutX="72.0" layoutY="133.0" mnemonicParsing="false" prefHeight="2.0"
+                prefWidth="37.0" text="Info" textFill="#ff4e4e">
+            <font>
+                <Font size="10.0"/>
+            </font>
+        </Button>
+        <Button fx:id="unfractureItemsButton" layoutX="540.0" layoutY="483.0" mnemonicParsing="false"
+                text="Unfracture all items">
+            <effect>
+                <ColorAdjust hue="0.15" saturation="0.1"/>
+            </effect>
+        </Button>
+        <Button fx:id="maximizeItemValuesButton" layoutX="515.0" layoutY="427.0" mnemonicParsing="false"
+                text="Maximize all item values">
+            <effect>
+                <ColorAdjust hue="0.15" saturation="0.1"/>
+            </effect>
+        </Button>
+        <Button fx:id="maximizeItemAffixTiersButton" layoutX="500.0" layoutY="455.0" mnemonicParsing="false"
+                text="Maximize all item affix tiers">
+            <effect>
+                <ColorAdjust hue="0.15" saturation="0.1"/>
+            </effect>
+        </Button>
+        <Label layoutX="546.0" layoutY="409.0" text="All items in stash:" underline="true"/>
+        <Button fx:id="deleteAllButton" alignment="CENTER" focusTraversable="false" layoutX="551.0" layoutY="511.0"
+                mnemonicParsing="false" text="DELETE ALL" textFill="#d70202" underline="true">
+            <font>
+                <Font name="Copperplate Gothic Bold" size="12.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="CROSSHAIR"/>
+            </cursor>
+            <effect>
+                <ColorAdjust saturation="0.23">
+                    <input>
+                        <InnerShadow choke="0.31" height="34.3125" radius="17.775624999999998" width="38.79">
+                            <input>
+                                <DropShadow height="3.2" radius="5.55"/>
+                            </input>
+                        </InnerShadow>
+                    </input>
+                </ColorAdjust>
+            </effect>
+        </Button>
+        <ComboBox fx:id="affix1ComboBox" editable="true" layoutX="28.0" layoutY="160.0" prefHeight="25.0"
+                  prefWidth="628.0" promptText="Type to search for affixes" visibleRowCount="25"/>
+        <ComboBox fx:id="affix2ComboBox" editable="true" layoutX="28.0" layoutY="230.0" prefHeight="25.0"
+                  prefWidth="628.0" promptText="Type to search for affixes"/>
+        <ComboBox fx:id="affix3ComboBox" editable="true" layoutX="28.0" layoutY="299.0" prefHeight="25.0"
+                  prefWidth="628.0" promptText="Type to search for affixes"/>
+        <ComboBox fx:id="affix4ComboBox" editable="true" layoutX="28.0" layoutY="367.0" prefHeight="25.0"
+                  prefWidth="628.0" promptText="Type to search for affixes"/>
+        <Button fx:id="maxImplicitsButton" layoutX="535.0" layoutY="42.0" mnemonicParsing="false" text="Max implicits"/>
+        <Button fx:id="arenaKeysButton" layoutX="364.0" layoutY="447.0" mnemonicParsing="false" text="Get Arena keys">
+            <effect>
+                <ColorAdjust hue="-0.02" saturation="0.12"/>
+            </effect>
+        </Button>
+        <Label layoutX="308.0" layoutY="78.0" prefHeight="17.0" prefWidth="59.0" text="Tab name:"/>
+        <ChoiceBox fx:id="stashTabNamesChoiceBox" layoutX="367.0" layoutY="74.0" prefHeight="25.0" prefWidth="153.0"/>
+        <Button fx:id="addTenStashTabsButton" layoutX="303.0" layoutY="447.0" mnemonicParsing="false" text="Add 10"/>
+    </children>
 </AnchorPane>
