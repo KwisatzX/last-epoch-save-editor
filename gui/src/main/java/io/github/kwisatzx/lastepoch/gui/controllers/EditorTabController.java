@@ -106,7 +106,7 @@ public class EditorTabController extends GuiItemTab {
 
         stashOp.getStashItems().add(item);
         stashOp.setStashItemsInFileString();
-        RootController.getInstance().getTreeViewModelReference().refreshStashItems();
+        TreeViewController.getInstance().refreshStashItems();
         RootController.getInstance().setBottomRightText("Item added to stash.");
     }
 
@@ -157,7 +157,7 @@ public class EditorTabController extends GuiItemTab {
         Item item = new AbstractItem(ItemAttributeList.getById(0), 0, 0, new ArrayList<>());
         selectedItem = new TreeItem<>(item);
         fillDataFields();
-        RootController.getInstance().getTreeViewModelReference().addCustomItem(item);
+        TreeViewController.getInstance().addCustomItem(item);
         reloadTreeView();
     }
 
@@ -166,7 +166,7 @@ public class EditorTabController extends GuiItemTab {
             Item copy = getItemCopy(original);
             selectedItem = new TreeItem<>(copy);
             fillDataFields();
-            RootController.getInstance().getTreeViewModelReference().addCustomItem(copy);
+            TreeViewController.getInstance().addCustomItem(copy);
             reloadTreeView();
         });
     }

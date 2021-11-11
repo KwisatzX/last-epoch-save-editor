@@ -4,7 +4,6 @@ import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
 import io.github.kwisatzx.lastepoch.gui.Launcher;
 import io.github.kwisatzx.lastepoch.gui.models.RootModel;
-import io.github.kwisatzx.lastepoch.gui.models.TreeViewModel;
 import io.github.kwisatzx.lastepoch.gui.views.RootView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,10 +15,9 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class RootController {
-    private static RootController INSTANCE;
+    private static RootController instance;
     private RootView rootView;
     private RootModel rootModel;
-    private TreeViewModel treeViewModelReference;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -38,18 +36,18 @@ public class RootController {
     private Label rightBottomLabel;
 
     public static RootController getInstance() {
-        return INSTANCE;
+        return instance;
     }
 
     @FXML
     private void initialize() throws IOException {
-        INSTANCE = this;
+        instance = this;
         rootView = new RootView(leftBottomLabel, rightBottomLabel);
         rootModel = new RootModel();
         new CharactersTabController(charactersTabAnchorPane);
         if (FileHandler.getCharacterFileList().isEmpty())
             leftBottomLabel.setText("Error: Failed to load or locate character files. Load data manually.");
-        treeViewModelReference = new TreeViewModel(treeView, tabPane);
+        new TreeViewController(treeView, tabPane);
         stashTabAnchorPane.getChildren().addAll(Launcher.loadFXML("crafting_pane_stash"));
         editorTabAnchorPane.getChildren().addAll(Launcher.loadFXML("crafting_pane_editor"));
     }
@@ -60,10 +58,6 @@ public class RootController {
 
     public void setBottomLeftText(String text) {
         rootView.setBottomLeftText(text);
-    }
-
-    public TreeViewModel getTreeViewModelReference() {
-        return treeViewModelReference;
     }
 
     public TabPane getTabPane() {
