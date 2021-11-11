@@ -1,9 +1,9 @@
 package io.github.kwisatzx.lastepoch.gui.controllers;
 
-import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
 import io.github.kwisatzx.lastepoch.gui.Launcher;
+import io.github.kwisatzx.lastepoch.gui.models.RootModel;
 import io.github.kwisatzx.lastepoch.gui.models.TreeViewModel;
 import io.github.kwisatzx.lastepoch.gui.views.RootView;
 import javafx.event.ActionEvent;
@@ -18,6 +18,7 @@ import java.io.IOException;
 public class RootController {
     private static RootController INSTANCE;
     private RootView rootView;
+    private RootModel rootModel;
     private TreeViewModel treeViewModelReference;
     @FXML
     private TabPane tabPane;
@@ -44,6 +45,7 @@ public class RootController {
     private void initialize() throws IOException {
         INSTANCE = this;
         rootView = new RootView(leftBottomLabel, rightBottomLabel);
+        rootModel = new RootModel();
         new CharactersTabController(charactersTabAnchorPane);
         if (FileHandler.getCharacterFileList().isEmpty())
             leftBottomLabel.setText("Error: Failed to load or locate character files. Load data manually.");
@@ -75,30 +77,21 @@ public class RootController {
     }
 
     public void openSaveFolder(ActionEvent actionEvent) {
-        setBottomLeftText("Error: test");
     }
 
     public void expandFiles(ActionEvent actionEvent) {
-        for (CharacterOperations chara : FileHandler.getCharacterFileList()) {
-            chara.expandFile();
-        }
-        FileHandler.getStashFile().expandFile();
+        rootModel.expandFiles();
         setBottomLeftText("Files expanded and saved.");
     }
 
     public void saveCharacters(ActionEvent actionEvent) {
-        boolean success = true;
-        for (CharacterOperations chara : FileHandler.getCharacterFileList()) {
-            if (chara.isModified()) {
-                if (!chara.saveToFile()) success = false;
-            }
-        }
+        boolean success = rootModel.saveCharacters();
         if (success) setBottomLeftText("Character changes saved to file!");
         else setBottomLeftText("Error: could not save character changes to file. See log.");
     }
 
     public void saveStash(ActionEvent actionEvent) {
-        if (FileHandler.getStashFile().isModified()) FileHandler.getStashFile().saveToFile();
+        rootModel.saveStash();
         setBottomLeftText("Stash changes saved to file!");
     }
 }
