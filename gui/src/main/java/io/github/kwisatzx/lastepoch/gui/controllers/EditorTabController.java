@@ -106,7 +106,7 @@ public class EditorTabController extends GuiItemTab {
 
         stashOp.getStashItems().add(item);
         stashOp.setStashItemsInFileString();
-        TreeViewController.getInstance().refreshStashItems();
+        TreeViewController.getInstance().renewStashItems();
         RootController.getInstance().setBottomRightText("Item added to stash.");
     }
 

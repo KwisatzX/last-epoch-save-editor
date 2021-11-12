@@ -2,7 +2,6 @@ package io.github.kwisatzx.lastepoch.gui.views;
 
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
-import io.github.kwisatzx.lastepoch.fileoperations.GlobalDataOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
 import io.github.kwisatzx.lastepoch.gui.controllers.CharactersTabController;
 import io.github.kwisatzx.lastepoch.gui.controllers.EditorTabController;
@@ -26,15 +25,14 @@ public class TreeViewView {
 
     public TreeViewView(TreeView<Selectable> treeView, TabPane tabPane) {
         this.treeView = treeView;
+        treeView.setShowRoot(false);
         this.tabPane = tabPane;
-        customItems = new TreeItem<>(new Selectable() {
+        this.customItems = new TreeItem<>(new Selectable() {
             @Override
             public String toString() {
                 return "Custom Items";
             }
         });
-        initCharacterList();
-        initStashList();
 
         treeView.setOnMouseClicked(event -> {
             TreeItem<Selectable> selection = treeView.getSelectionModel().getSelectedItem();
@@ -65,7 +63,7 @@ public class TreeViewView {
         });
 
         for (javafx.scene.control.Tab tab : tabPane.getTabs()) {
-            tab.setOnSelectionChanged(changeEvent -> setRoot());
+            tab.setOnSelectionChanged(changeEvent -> setRootByTab());
         }
 
         tabPane.getTabs().get(2).setOnSelectionChanged(event -> {
@@ -75,36 +73,32 @@ public class TreeViewView {
         });
     }
 
-    private void setRoot() {
+    public void setRootByTab() {
         String tabId = tabPane.getSelectionModel().getSelectedItem().getId();
         switch (tabId) {
             case "tabCharacters", "tabEditor" -> treeView.setRoot(characterListRoot);
             case "tabStash" -> treeView.setRoot(stashListRoot);
             //TODO Uniques tab
+            default -> treeView.setRoot(characterListRoot);
         }
         refresh();
     }
 
-    public void refreshCharaItems() { //TODO merge with initCharacterList like stash Items
-        for (TreeItem<Selectable> charaOpItem : characterListRoot.getChildren()) {
-            if (charaOpItem.equals(customItems)) continue;
-            CharacterOperations charaOp = charaOpItem.getValue().getCharaOp();
-            charaOpItem.getChildren().setAll(charaOp.getCharacter().getEquipment().stream()
-                                                     .map(item -> new TreeItem<Selectable>(item))
-                                                     .toList());
-        }
+    public void renewCharacterList(TreeItem<Selectable> root) {
+        characterListRoot.getChildren().clear();
+        characterListRoot.getChildren().addAll(root.getChildren());
         if (!customItems.getChildren().isEmpty()) {
             characterListRoot.getChildren().remove(customItems);
             characterListRoot.getChildren().add(customItems);
         }
     }
 
-    public void refreshStashItems() {
+    public void renewStashItems(TreeItem<Selectable> root) {
         HashMap<Integer, Boolean> categoryExpandedStatus = new HashMap<>();
         List<HashMap<Integer, Boolean>> tabsExpandedStatus = new ArrayList<>();
         saveTreeItemExpandedStatus(categoryExpandedStatus, tabsExpandedStatus);
         stashListRoot.getChildren().clear();
-        fillStashListRoot();
+        stashListRoot.getChildren().addAll(root.getChildren());
         loadTreeItemExpandedStatus(categoryExpandedStatus, tabsExpandedStatus);
     }
 
@@ -166,61 +160,11 @@ public class TreeViewView {
         }
     }
 
-    private void initCharacterList() {
-        characterListRoot = new TreeItem<>(new Selectable() {
-            @Override
-            public String toString() {
-                return "Characters";
-            }
-        });
-        characterListRoot.setExpanded(true);
-        treeView.setShowRoot(false);
-        treeView.setRoot(characterListRoot);
-
-        for (CharacterOperations chara : FileHandler.getCharacterFileList()) {
-            TreeItem<Selectable> charaItem = new TreeItem<>(chara);
-            charaItem.getChildren().addAll(
-                    chara.getCharacter().getEquipment().stream()
-                            .map(item -> new TreeItem<Selectable>(item))
-                            .toList());
-
-            characterListRoot.getChildren().add(charaItem);
-        }
+    public void setCharacterListRoot(TreeItem<Selectable> root) {
+        characterListRoot = root;
     }
 
-    private void initStashList() {
-        stashListRoot = new TreeItem<>(new Selectable() {
-            @Override
-            public String toString() {
-                return "Stash Tabs";
-            }
-        });
-        stashListRoot.setExpanded(true);
-        fillStashListRoot();
-    }
-
-    private void fillStashListRoot() {
-        GlobalDataOperations globalOp = FileHandler.getStashFile();
-
-        for (GlobalDataOperations.StashTabCategory stashTabCategory : globalOp.getStashTabCategories()) {
-            TreeItem<Selectable> categoryTreeItem = new TreeItem<>(stashTabCategory);
-            int categoryID = stashTabCategory.getCategoryID();
-            stashListRoot.getChildren().add(categoryTreeItem);
-
-            for (GlobalDataOperations.StashTab stashTab : globalOp.getStashTabs()) {
-                if (stashTab.getCategoryID() == categoryID) {
-                    TreeItem<Selectable> stashTabTreeItem = new TreeItem<>(stashTab);
-                    int tabID = stashTab.getTabID();
-                    categoryTreeItem.getChildren().add(stashTabTreeItem);
-
-                    for (Item stashItem : globalOp.getStashItems()) {
-                        if (stashItem.getItemStashInfo().id == tabID) {
-                            TreeItem<Selectable> itemTreeItem = new TreeItem<>(stashItem);
-                            stashTabTreeItem.getChildren().add(itemTreeItem);
-                        }
-                    }
-                }
-            }
-        }
+    public void setStashListRoot(TreeItem<Selectable> root) {
+        stashListRoot = root;
     }
 }

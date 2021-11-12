@@ -99,11 +99,11 @@ public abstract class GuiTab {
     }
 
     public void refreshTreeView() {
-        TreeViewController.getInstance().refresh();
+        TreeViewController.getInstance().refreshTree();
     }
 
     public void reloadTreeView() {
-        TreeViewController.getInstance().refreshCharaItems();
+        TreeViewController.getInstance().renewCharacterList();
     }
 
     static final class AffixDisplayer {

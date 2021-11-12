@@ -63,7 +63,7 @@ public class StashTabController extends GuiItemTab {
 
     @Override
     public void reloadTreeView() {
-        TreeViewController.getInstance().refreshStashItems();
+        TreeViewController.getInstance().renewStashItems();
     }
 
     private void installEventHandlers(Node parentNode) {
