@@ -47,7 +47,7 @@ public class RootController {
         new CharactersTabController(charactersTabAnchorPane);
         if (FileHandler.getCharacterFileList().isEmpty())
             leftBottomLabel.setText("Error: Failed to load or locate character files. Load data manually.");
-        new TreeViewController(treeView, tabPane);
+        new TreeController(treeView, tabPane);
         stashTabAnchorPane.getChildren().addAll(Launcher.loadFXML("crafting_pane_stash"));
         editorTabAnchorPane.getChildren().addAll(Launcher.loadFXML("crafting_pane_editor"));
     }

@@ -492,7 +492,7 @@ public class CharactersTabController extends GuiTab {
         newCharaOp.setProperty("characterName", newCharacterName);
         newCharaOp.saveToFile();
 
-        TreeViewController.getInstance().addNewCharacter(newCharaOp);
+        TreeController.getInstance().addNewCharacter(newCharaOp);
         EditorTabController.getInstance().initCharactersChoiceBox();
         RootController.getInstance().setBottomRightText("Character copied and saved to file.");
     }

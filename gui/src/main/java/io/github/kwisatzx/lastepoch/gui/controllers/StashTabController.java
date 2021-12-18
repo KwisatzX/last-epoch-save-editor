@@ -63,7 +63,7 @@ public class StashTabController extends GuiItemTab {
 
     @Override
     public void reloadTreeView() {
-        TreeViewController.getInstance().renewStashItems();
+        TreeController.getInstance().renewStashItems();
     }
 
     private void installEventHandlers(Node parentNode) {
@@ -115,7 +115,7 @@ public class StashTabController extends GuiItemTab {
         getSelectedItem().ifPresent(original -> {
             Item copy = getItemCopy(original);
             selectedItem = new TreeItem<>(copy);
-            TreeViewController.getInstance().addCustomItem(copy);
+            TreeController.getInstance().addCustomItem(copy);
             EditorTabController.getInstance().receiveSelection(selectedItem);
             RootController.getInstance().getTabPane().getSelectionModel().select(2);
             super.reloadTreeView();
