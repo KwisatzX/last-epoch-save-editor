@@ -26,7 +26,7 @@ public class AffixList extends DataList<Affix> {
     }
 
     public static Affix getById(int id, int affixTypeMod) {
-        for (Affix affix : INSTANCE.list) {
+        for (Affix affix : INSTANCE.getDataList()) {
             if (affix.getDataId() == id && affix.getAffixTypeMod() == affixTypeMod) return affix;
         }
         return null;
@@ -42,7 +42,7 @@ public class AffixList extends DataList<Affix> {
 
     public static List<Affix> getListFromPartialName(String partialName) {
         ArrayList<Affix> list = new ArrayList<>();
-        for (Affix affix : INSTANCE.list) {
+        for (Affix affix : INSTANCE.getDataList()) {
             if (affix.getName().contains(partialName.toUpperCase())) list.add(affix);
         }
         return list;

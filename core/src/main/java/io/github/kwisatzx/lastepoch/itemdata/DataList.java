@@ -13,9 +13,9 @@ import java.util.Collections;
 import java.util.List;
 
 abstract class DataList<E extends Attribute> {
-    protected ArrayList<E> list;
+    private ArrayList<E> list;
 
-    public DataList() {
+    protected DataList() {
         list = new ArrayList<>();
     }
 
