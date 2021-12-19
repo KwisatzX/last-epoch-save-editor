@@ -12,22 +12,13 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class CharacterOperations extends FileStringOperations
-        implements Selectable {
+public class CharacterOperations extends FileStringOperations {
     private final Character character;
-    private boolean modified = false;
-
-    {
-        character = new Character();
-    }
-
-    public CharacterOperations(String saveDirectory, String fileName) throws IOException {
-        super(saveDirectory, fileName);
-    }
 
     public CharacterOperations(Path completeFilePath) throws IOException {
         super(completeFilePath.getParent().toString(),
               completeFilePath.getFileName().toString());
+        character = new Character();
     }
 
     public CharacterOperations copyCharacter() {
@@ -107,14 +98,6 @@ public class CharacterOperations extends FileStringOperations
 
     public Character getCharacter() {
         return character;
-    }
-
-    public boolean isModified() {
-        return modified;
-    }
-
-    public void setModified(boolean modified) {
-        this.modified = modified;
     }
 
     @Override
