@@ -3,8 +3,8 @@ package io.github.kwisatzx.lastepoch.gui.models;
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.GlobalDataOperations;
-import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
 import io.github.kwisatzx.lastepoch.itemdata.Item;
+import io.github.kwisatzx.lastepoch.itemdata.Selectable;
 import javafx.scene.control.TreeItem;
 
 import java.util.ArrayList;
@@ -34,17 +34,6 @@ public class TreeModel {
                         .map(item -> new TreeItem<Selectable>(item))
                         .toList());
         return charaItem;
-    }
-
-    public void setModifiedStatus(TreeItem<Selectable> selection) {
-        if (selection.getValue().getCharaOp() != null) {
-            selection.getValue().getCharaOp().setModified(true);
-        } else if (selection.getValue().getItemObj() != null) {
-            CharacterOperations charaOp = Item.getItemOwner(selection.getValue().getItemObj());
-            if (charaOp != null) {
-                charaOp.setModified(true);
-            } else FileHandler.getStashFile().setModified(true);
-        }
     }
 
     public TreeItem<Selectable> createCharacterListRoot() {

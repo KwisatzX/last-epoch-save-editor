@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
+import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapper;
 import io.github.kwisatzx.lastepoch.itemdata.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,10 +28,19 @@ public class CharactersTabController extends GuiTab {
     private ToggleButton includeWeapons;
     private ToggleButton includeInventory;
 
+    private final SelectionWrapper selection;
+    private final HashMap<String, TextField> textFields;
+    private final HashMap<String, ChoiceBox<String>> choiceBoxes;
+    private final HashMap<String, ComboBox<AffixDisplayer>> comboBoxes;
+
     public CharactersTabController(Pane charactersTabPane) {
         INSTANCE = this;
         checkBoxes = new HashMap<>();
         tabInit(charactersTabPane);
+        selection = super.getSelection();
+        textFields = super.getTextFields();
+        choiceBoxes = super.getChoiceBoxes();
+        comboBoxes = super.getComboBoxes();
         assignChildrenFromParentNode(charactersTabPane);
         installEventHandlers(charactersTabPane);
         initBlessingsComboBox();
@@ -118,8 +128,7 @@ public class CharactersTabController extends GuiTab {
 
         final EventHandler<ActionEvent> checkBoxHandler = event -> {
             if (event.getTarget() != null && event.getTarget() instanceof CheckBox checkBox) {
-                CharacterOperations charaOp;
-                if (selectedItem != null && (charaOp = selectedItem.getValue().getCharaOp()) != null) {
+                selection.ifCharacterPresent(charaOp -> {
                     switch (checkBox.getId()) {
                         case "hardcoreBox" -> {
                             if (charaOp.getCharacter().isHardcore()) charaOp.setProperty("hardcore", "false");
@@ -134,7 +143,7 @@ public class CharactersTabController extends GuiTab {
                             else charaOp.setProperty("soloChallenge", "true");
                         }
                     }
-                }
+                });
                 switch (checkBox.getId()) {
                     case "restrictMasteryBox" -> initSkillChoiceBoxes();
                     case "hideWeakBlessingsCheckBox", "hideDropRateBlessingsCheckBox" -> fillBlessingsComboBox();
@@ -181,8 +190,7 @@ public class CharactersTabController extends GuiTab {
         blessingsComboBox.setSkin(eventSkin);
 
         blessingsComboBox.setOnAction(event -> {
-            if (selectedItem != null && !characterSelected) {
-                Item item = selectedItem.getValue().getItemObj();
+            selection.ifItemPresent(item -> {
                 if (item.getItemType().getDataId() == 34) {
                     if (blessingsComboBox.getValue() == null || blessingsComboBox.getValue().equals("")) {
                         getCharaOp().ifPresent(charaOp -> {
@@ -199,7 +207,7 @@ public class CharactersTabController extends GuiTab {
                                 refreshTreeView();
                             });
                 }
-            }
+            });
         });
         fillBlessingsComboBox();
     }
@@ -231,15 +239,16 @@ public class CharactersTabController extends GuiTab {
 
     private void initMasteryChoiceBox() {
         ChoiceBox<String> masteryBox = choiceBoxes.get("choiceBoxMastery");
+
         masteryBox.getItems().setAll(
                 ChrClass.fromString(choiceBoxes.get("choiceBoxClass").getValue()).getMasteryStringList());
-        if (characterSelected) {
-            CharacterOperations charaOp = selectedItem.getValue().getCharaOp();
+
+        selection.getCharacterOp().ifPresentOrElse(charaOp -> {
             if (charaOp.getCharacter().getChrClass() == getChoiceBoxClass()) {
                 masteryBox.getSelectionModel()
                         .select(charaOp.getCharacter().getMastery().name());
             } else masteryBox.getSelectionModel().selectFirst();
-        } else masteryBox.getSelectionModel().selectFirst();
+        }, () -> masteryBox.getSelectionModel().selectFirst());
 
         masteryBox.setOnAction(event -> {
             if (checkBoxes.get("restrictMasteryBox").isSelected()) initSkillChoiceBoxes();
@@ -367,11 +376,9 @@ public class CharactersTabController extends GuiTab {
         Item item;
         //TODO prevent exception with custom item list
 
-        if ((charaOp = selectedItem.getValue().getCharaOp()) != null) {
-            characterSelected = true;
-        } else {
-            characterSelected = false;
-            item = selectedItem.getValue().getItemObj();
+        if (selection.isCharacterOp()) charaOp = selection.getCharacterOp().get();
+        else {
+            item = selection.getItem().get();
             charaOp = Item.getItemOwner(item);
 
             if (item.getItemType().getDataId() == 34) {
@@ -552,10 +559,7 @@ public class CharactersTabController extends GuiTab {
     }
 
     private void moveToItemEditor() {
-        if (selectedItem != null) {
-            EditorTabController.getInstance().receiveSelection(selectedItem);
-            RootController.getInstance().getTabPane().getSelectionModel().select(2);
-        }
+        if (selection.isItem()) RootController.getInstance().switchToTab(RootController.GuiTabs.EDITOR_TAB);
     }
 
     private void replaceEqWithNewItems() {

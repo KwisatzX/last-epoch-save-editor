@@ -1,7 +1,7 @@
 package io.github.kwisatzx.lastepoch.gui.controllers;
 
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
-import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
+import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapper;
 import io.github.kwisatzx.lastepoch.itemdata.Affix;
 import io.github.kwisatzx.lastepoch.itemdata.AffixList;
 import io.github.kwisatzx.lastepoch.itemdata.Item;
@@ -10,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.skin.ComboBoxListViewSkin;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -21,11 +20,10 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class GuiTab {
-    protected HashMap<String, TextField> textFields;
-    protected HashMap<String, ChoiceBox<String>> choiceBoxes;
-    protected HashMap<String, ComboBox<AffixDisplayer>> comboBoxes;
-    protected TreeItem<Selectable> selectedItem;
-    protected boolean characterSelected = false;
+    private HashMap<String, TextField> textFields;
+    private HashMap<String, ChoiceBox<String>> choiceBoxes;
+    private HashMap<String, ComboBox<AffixDisplayer>> comboBoxes;
+    private SelectionWrapper selection;
     protected CharacterOperations lastSelectedChr;
     protected boolean eventsLockedForReading = false;
 
@@ -33,19 +31,15 @@ public abstract class GuiTab {
         textFields = new HashMap<>();
         choiceBoxes = new HashMap<>();
         comboBoxes = new HashMap<>();
+        selection = TreeController.getInstance().getSelection();
         categorizeFieldsFromParentNode(rootPane);
         initAffixComboBoxes();
     }
 
-    public void receiveSelection(TreeItem<Selectable> treeItem) {
-        this.selectedItem = treeItem;
-        fillDataFields();
-    }
-
     protected Optional<CharacterOperations> getCharaOp() {
-        if (characterSelected) return Optional.ofNullable(selectedItem.getValue().getCharaOp());
+        if (selection.isCharacterOp()) return selection.getCharacterOp();
         if (lastSelectedChr != null) return Optional.of(lastSelectedChr);
-        if (selectedItem != null) return Optional.ofNullable(Item.getItemOwner(selectedItem.getValue().getItemObj()));
+        if (selection.isItem()) return Optional.ofNullable(Item.getItemOwner(selection.getItem().get()));
         else return Optional.empty();
     }
 
@@ -98,12 +92,28 @@ public abstract class GuiTab {
         }
     }
 
-    public void refreshTreeView() {
+    protected void refreshTreeView() {
         TreeController.getInstance().refreshTree();
     }
 
-    public void reloadTreeView() {
+    protected void reloadTreeView() {
         TreeController.getInstance().renewCharacterList();
+    }
+
+    protected HashMap<String, TextField> getTextFields() {
+        return textFields;
+    }
+
+    protected HashMap<String, ChoiceBox<String>> getChoiceBoxes() {
+        return choiceBoxes;
+    }
+
+    protected HashMap<String, ComboBox<AffixDisplayer>> getComboBoxes() {
+        return comboBoxes;
+    }
+
+    protected SelectionWrapper getSelection() {
+        return selection;
     }
 
     static final class AffixDisplayer {

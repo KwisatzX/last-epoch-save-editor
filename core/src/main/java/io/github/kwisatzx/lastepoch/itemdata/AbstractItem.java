@@ -1,7 +1,5 @@
 package io.github.kwisatzx.lastepoch.itemdata;
 
-import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;

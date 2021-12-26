@@ -2,7 +2,7 @@ package io.github.kwisatzx.lastepoch.gui.controllers;
 
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.GlobalDataOperations;
-import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
+import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapper;
 import io.github.kwisatzx.lastepoch.itemdata.AbstractItem;
 import io.github.kwisatzx.lastepoch.itemdata.AffixTier;
 import io.github.kwisatzx.lastepoch.itemdata.Item;
@@ -11,8 +11,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.TreeItem;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class StashTabController extends GuiItemTab {
     private static StashTabController INSTANCE;
@@ -20,11 +24,18 @@ public class StashTabController extends GuiItemTab {
     @FXML
     private AnchorPane stashAnchorPane;
 
+    private SelectionWrapper selection;
+    private HashMap<String, TextField> textFields;
+    private HashMap<String, ChoiceBox<String>> choiceBoxes;
+
     @FXML
     private void initialize() {
         INSTANCE = this;
         stashOp = FileHandler.getStashFile();
         itemTabInit(stashAnchorPane);
+        selection = getSelection();
+        textFields = getTextFields();
+        choiceBoxes = getChoiceBoxes();
         installEventHandlers(stashAnchorPane);
         fillGlobalStashDataFields();
     }
@@ -49,7 +60,7 @@ public class StashTabController extends GuiItemTab {
     }
 
     private void fillItemStashDataFields() {
-        getSelectedItem().ifPresent(item -> {
+        selection.ifItemPresent(item -> {
             String tabName = stashOp.getStashTabNameFromId(item.getItemStashInfo().id);
             choiceBoxes.get("stashTabNamesChoiceBox").getSelectionModel().select(tabName);
             choiceBoxes.get("stashXChoiceBox").getSelectionModel().select(item.getItemStashInfo().x);
@@ -93,7 +104,7 @@ public class StashTabController extends GuiItemTab {
                 event -> stashOp.setProperty("gold", textFields.get("goldField").getText()));
 
         choiceBoxes.get("stashTabNamesChoiceBox").setOnAction(event -> {
-            getSelectedItem().ifPresent(item -> {
+            selection.ifItemPresent(item -> {
                 item.getItemStashInfo().id =
                         stashOp.getStashIdFromName(choiceBoxes.get("stashTabNamesChoiceBox").getValue());
                 reloadTreeView();
@@ -101,23 +112,22 @@ public class StashTabController extends GuiItemTab {
         });
 
         choiceBoxes.get("stashXChoiceBox").setOnAction(event -> {
-            getSelectedItem().ifPresent(item -> item.getItemStashInfo().x =
+            selection.ifItemPresent(item -> item.getItemStashInfo().x =
                     Integer.parseInt(choiceBoxes.get("stashXChoiceBox").getValue()));
         });
 
         choiceBoxes.get("stashYChoiceBox").setOnAction(event -> {
-            getSelectedItem().ifPresent(item -> item.getItemStashInfo().y =
+            selection.ifItemPresent(item -> item.getItemStashInfo().y =
                     Integer.parseInt(choiceBoxes.get("stashYChoiceBox").getValue()));
         });
     }
 
     private void copyItemToEditor() {
-        getSelectedItem().ifPresent(original -> {
+        selection.ifItemPresent(original -> {
             Item copy = getItemCopy(original);
-            selectedItem = new TreeItem<>(copy);
+            selection.setSelection(copy);
             TreeController.getInstance().addCustomItem(copy);
-            EditorTabController.getInstance().receiveSelection(selectedItem);
-            RootController.getInstance().getTabPane().getSelectionModel().select(2);
+            RootController.getInstance().switchToTab(RootController.GuiTabs.EDITOR_TAB);
             super.reloadTreeView();
         });
     }
@@ -197,19 +207,13 @@ public class StashTabController extends GuiItemTab {
     }
 
     private int addStashTab() {
-        int categoryId = 0;
-        if (getSelectedItem().isEmpty()) {
-            Selectable selectable = selectedItem.getValue();
-            if (selectable instanceof GlobalDataOperations.StashTabCategory category) {
-                categoryId = category.getCategoryID();
-            }
-            if (selectable instanceof GlobalDataOperations.StashTab stashTab) {
-                categoryId = stashTab.getCategoryID();
-            }
-        } else categoryId = Item.getItemStash(getSelectedItem().get()).getCategoryID();
+        AtomicInteger categoryId = new AtomicInteger();
+        selection.getStashTab().ifPresentOrElse(
+                stashTab -> categoryId.set(stashTab.getCategoryID()),
+                () -> categoryId.set(Item.getItemStash(selection.getItem().get()).getCategoryID()));
 
         int tabId = stashOp.getStashTabCount();
-        int finalCategoryId = categoryId;
+        int finalCategoryId = categoryId.get();
         int displayOrder = (int) stashOp.getStashTabs().stream()
                 .filter(stashTab -> stashTab.getCategoryID() == finalCategoryId)
                 .count();

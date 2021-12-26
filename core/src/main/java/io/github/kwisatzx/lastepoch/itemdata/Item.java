@@ -3,7 +3,6 @@ package io.github.kwisatzx.lastepoch.itemdata;
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.GlobalDataOperations;
-import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;

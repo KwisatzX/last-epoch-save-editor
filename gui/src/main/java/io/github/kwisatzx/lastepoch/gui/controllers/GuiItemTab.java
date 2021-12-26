@@ -1,6 +1,7 @@
 package io.github.kwisatzx.lastepoch.gui.controllers;
 
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
+import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapper;
 import io.github.kwisatzx.lastepoch.itemdata.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,22 +10,24 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.IntStream;
 
 public abstract class GuiItemTab extends GuiTab {
+    private SelectionWrapper selection;
+    private HashMap<String, TextField> textFields;
+    private HashMap<String, ChoiceBox<String>> choiceBoxes;
+    private HashMap<String, ComboBox<AffixDisplayer>> comboBoxes;
 
     protected void itemTabInit(Pane rootPane) {
         tabInit(rootPane);
+        selection = getSelection();
+        textFields = getTextFields();
+        choiceBoxes = getChoiceBoxes();
+        comboBoxes = getComboBoxes();
         installCommonEventHandlers(rootPane);
         initChoiceBoxes();
-    }
-
-    protected Optional<Item> getSelectedItem() {
-        if (selectedItem != null && selectedItem.getValue() != null)
-            return Optional.ofNullable(selectedItem.getValue().getItemObj());
-        else return Optional.empty();
     }
 
     private ChrClass getChoiceBoxClass() {
@@ -50,7 +53,7 @@ public abstract class GuiItemTab extends GuiTab {
 
     private void setItem() {
         if (eventsLockedForReading) return;
-        getSelectedItem().ifPresent(item -> {
+        selection.ifItemPresent(item -> {
             ensureNumbersInFields();
             item.setItemType(getItemTypeFromChoiceBox());
             item.setItemTier(getChoiceBoxItemTierId());
@@ -84,7 +87,7 @@ public abstract class GuiItemTab extends GuiTab {
 
     @Override
     protected void fillDataFields() {
-        if (getSelectedItem().isPresent() && getSelectedItem().get().getItemType().getDataId() != 34) { //blessings
+        if (selection.isItem() && selection.getItem().get().getItemType().getDataId() != 34) { //blessings
             choiceBoxes.get("itemTypeChoiceBox").setDisable(false); //QoL
             fillCommonDataFields();
         }
@@ -92,7 +95,7 @@ public abstract class GuiItemTab extends GuiTab {
 
     private void fillCommonDataFields() {
         eventsLockedForReading = true;
-        Item item = selectedItem.getValue().getItemObj();
+        Item item = selection.getItem().get();
         choiceBoxes.get("itemTypeChoiceBox").getSelectionModel()
                 .select(item.getItemType().getName());
         choiceBoxes.get("itemTierChoiceBox").getSelectionModel()
@@ -147,7 +150,7 @@ public abstract class GuiItemTab extends GuiTab {
     private void initChoiceBoxes() {
         EventHandler<ActionEvent> choiceBoxSelectEvent = event -> {
             if (eventsLockedForReading && !((Node) event.getSource()).getId().equals("classChoiceBox")) {
-                getSelectedItem().ifPresent(item -> {
+                selection.ifItemPresent(item -> {
                     if (item.equals(Item.UNKNOWN_ITEM)) return;
                     int selectedItemAffiliation = item.getItemType().getItemAffiliation()[item.getItemTier()];
                     choiceBoxes.get("classChoiceBox").getSelectionModel()
@@ -155,14 +158,15 @@ public abstract class GuiItemTab extends GuiTab {
                 });
             }
             int affiliation = getAffiliationFromClassChoiceBox();
-            ItemAttribute selection = getItemTypeFromChoiceBox();
+            ItemAttribute selectedItemType = getItemTypeFromChoiceBox();
 
             List<String> itemTiers = new ArrayList<>();
-            for (int i = 0; i < selection.getNumberOfTiers(); i++) {
-                int aff = selection.getItemAffiliation()[i];
+            for (int i = 0; i < selectedItemType.getNumberOfTiers(); i++) {
+                int aff = selectedItemType.getItemAffiliation()[i];
                 if ((affiliation & aff) == aff || aff == Affiliation.ALL) {
-                    itemTiers.add(selection.getTierNames()[i] + " [" + selection.getTierValues()[i] + "] (" +
-                                          Affiliation.asString(aff) + ")");
+                    itemTiers.add(
+                            selectedItemType.getTierNames()[i] + " [" + selectedItemType.getTierValues()[i] + "] (" +
+                                    Affiliation.asString(aff) + ")");
                 }
             }
 
@@ -170,7 +174,7 @@ public abstract class GuiItemTab extends GuiTab {
             //the correct one. Refactor: separate the methods and apply eventsLockedForReading block
             ChoiceBox<String> itemTierBox = choiceBoxes.get("itemTierChoiceBox");
             itemTierBox.getItems().setAll(itemTiers);
-            getSelectedItem().ifPresentOrElse(item -> {
+            selection.getItem().ifPresentOrElse(item -> {
                 int itemTier = item.getItemTier();
                 String itemName = item.getItemType().getTierNames()[itemTier] + " ["
                         + item.getItemType().getTierValues()[itemTier] + "] ("
@@ -308,7 +312,7 @@ public abstract class GuiItemTab extends GuiTab {
             int id = Integer.parseInt(box.getId().charAt(5) + "");
             choiceBoxes.get("affix" + id + "TierChoiceBox").setOnAction(event -> {
                 if (eventsLockedForReading) return;
-                getSelectedItem().ifPresent(item -> {
+                selection.ifItemPresent(item -> {
                     if (item.getAffixList().size() >= id) {
                         item.getAffixList().get(id - 1).tier =
                                 AffixTier.valueOf(choiceBoxes.get("affix" + id + "TierChoiceBox").getValue());
@@ -318,7 +322,7 @@ public abstract class GuiItemTab extends GuiTab {
 
             textFields.get("affix" + id + "ValueField").setOnKeyTyped(event -> {
                 if (eventsLockedForReading) return;
-                getSelectedItem().ifPresent(item -> {
+                selection.ifItemPresent(item -> {
                     if (item.getAffixList().size() >= id) {
                         item.getAffixList().get(id - 1).value =
                                 Item.percentOf255ToValue(textFields.get("affix" + id + "ValueField").getText());
@@ -331,7 +335,7 @@ public abstract class GuiItemTab extends GuiTab {
     protected void affixComboBoxChangeEvent(ComboBox<AffixDisplayer> box) {
         if (eventsLockedForReading) return;
         int id = Integer.parseInt(box.getId().charAt(5) + "");
-        getSelectedItem().ifPresent(item -> {
+        selection.ifItemPresent(item -> {
             Affix affix;
             if ((affix = AffixDisplayer.getAffixFromDisplayName(box.getEditor().getText())) == null) {
                 item.setAffix(null, id);

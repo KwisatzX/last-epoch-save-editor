@@ -14,14 +14,12 @@ public class RootModel {
     public boolean saveCharacters() {
         boolean success = true;
         for (CharacterOperations chara : FileHandler.getCharacterFileList()) {
-            if (chara.isModified()) {
-                if (!chara.saveToFile()) success = false;
-            }
+            if (!chara.saveToFile()) success = false;
         }
         return success;
     }
 
     public void saveStash() {
-        if (FileHandler.getStashFile().isModified()) FileHandler.getStashFile().saveToFile();
+        FileHandler.getStashFile().saveToFile();
     }
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.kwisatzx.lastepoch.itemdata.Item;
+import io.github.kwisatzx.lastepoch.itemdata.Selectable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +21,6 @@ public class GlobalDataOperations extends FileStringOperations {
     private final List<StashTabCategory> stashTabCategories;
     private final List<StashTab> stashTabs;
     private final List<Item> stashItems;
-    private boolean modified = false;
 
     public GlobalDataOperations(String saveDirectory) throws IOException {
         super(saveDirectory, "Epoch_Local_Global_Data_Beta");
@@ -103,14 +103,6 @@ public class GlobalDataOperations extends FileStringOperations {
             if (stashTab.getDisplayName().equals(name)) return stashTab;
         }
         return null;
-    }
-
-    public boolean isModified() {
-        return modified;
-    }
-
-    public void setModified(boolean modified) {
-        this.modified = modified;
     }
 
     public void setStashItemsInFileString() {
@@ -244,7 +236,7 @@ public class GlobalDataOperations extends FileStringOperations {
         }
     }
 
-    public static class StashTab extends StashTabCategory implements Selectable {
+    public static class StashTab extends StashTabCategory {
         private int tabID;
 
         private StashTab() {

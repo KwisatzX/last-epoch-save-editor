@@ -3,6 +3,7 @@ package io.github.kwisatzx.lastepoch.gui.controllers;
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.GlobalDataOperations;
+import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapper;
 import io.github.kwisatzx.lastepoch.itemdata.AbstractItem;
 import io.github.kwisatzx.lastepoch.itemdata.AffixTier;
 import io.github.kwisatzx.lastepoch.itemdata.Item;
@@ -11,14 +12,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TreeItem;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -32,10 +31,19 @@ public class EditorTabController extends GuiItemTab {
     private AnchorPane editorAnchorPane;
     private Map<String, CharacterOperations> characters;
 
+    private SelectionWrapper selection;
+    private HashMap<String, TextField> textFields;
+    private HashMap<String, ChoiceBox<String>> choiceBoxes;
+    private HashMap<String, ComboBox<AffixDisplayer>> comboBoxes;
+
     @FXML
     private void initialize() {
         INSTANCE = this;
         itemTabInit(editorAnchorPane);
+        selection = getSelection();
+        textFields = getTextFields();
+        choiceBoxes = getChoiceBoxes();
+        comboBoxes = getComboBoxes();
         installEventHandlers(editorAnchorPane);
         initCharactersChoiceBox();
         initInvXYChoiceBoxes();
@@ -93,8 +101,8 @@ public class EditorTabController extends GuiItemTab {
     }
 
     private void addItemToStash() {
-        if (getSelectedItem().isEmpty()) return;
-        Item item = getItemCopy(getSelectedItem().get());
+        if (!selection.isItem()) return;
+        Item item = getItemCopy(selection.getItem().get());
         GlobalDataOperations stashOp = FileHandler.getStashFile();
         AbstractItem.ItemStashInfo stashInfo = item.getItemStashInfo();
 
@@ -111,8 +119,8 @@ public class EditorTabController extends GuiItemTab {
     }
 
     private void addItemToCharacter() {
-        if (getSelectedItem().isEmpty()) return;
-        AbstractItem item = getItemCopy(getSelectedItem().get());
+        if (!selection.isItem()) return;
+        AbstractItem item = getItemCopy(selection.getItem().get());
         CharacterOperations charaOp = characters.get(choiceBoxes.get("charactersChoiceBox").getValue());
         if (item == null || charaOp == null) return;
         item.getItemStashInfo().charaEquipment = true;
@@ -155,16 +163,16 @@ public class EditorTabController extends GuiItemTab {
 
     private void createNewItem() {
         Item item = new AbstractItem(ItemAttributeList.getById(0), 0, 0, new ArrayList<>());
-        selectedItem = new TreeItem<>(item);
+        selection.setSelection(item);
         fillDataFields();
         TreeController.getInstance().addCustomItem(item);
         reloadTreeView();
     }
 
     private void copyItem() {
-        getSelectedItem().ifPresent(original -> {
+        selection.ifItemPresent(original -> {
             Item copy = getItemCopy(original);
-            selectedItem = new TreeItem<>(copy);
+            selection.setSelection(copy);
             fillDataFields();
             TreeController.getInstance().addCustomItem(copy);
             reloadTreeView();
@@ -172,7 +180,7 @@ public class EditorTabController extends GuiItemTab {
     }
 
     private void deleteItem() {
-        getSelectedItem().ifPresent(item -> {
+        selection.ifItemPresent(item -> {
             if (!item.getItemStashInfo().charaEquipment) return;
             Item.getItemOwner(item).getCharacter().getEquipment().remove(item);
             setEquipment();
@@ -181,7 +189,7 @@ public class EditorTabController extends GuiItemTab {
     }
 
     private void maxItemAffixValues() {
-        getSelectedItem().ifPresent(item -> {
+        selection.ifItemPresent(item -> {
             for (AbstractItem.AffixData affixData : item.getAffixList()) {
                 affixData.value = 255;
             }
@@ -191,7 +199,7 @@ public class EditorTabController extends GuiItemTab {
     }
 
     private void maxItemAffixTiers() {
-        getSelectedItem().ifPresent(item -> {
+        selection.ifItemPresent(item -> {
             for (AbstractItem.AffixData affixData : item.getAffixList()) {
                 affixData.tier = AffixTier.maxTier(affixData.type);
             }

@@ -1,8 +1,8 @@
 package io.github.kwisatzx.lastepoch.gui.views;
 
-import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
+import io.github.kwisatzx.lastepoch.gui.controllers.RootController;
+import io.github.kwisatzx.lastepoch.itemdata.Selectable;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
@@ -15,12 +15,10 @@ public class MyTreeView {
     private TreeItem<Selectable> characterListRoot;
     private TreeItem<Selectable> stashListRoot;
     private final TreeItem<Selectable> customItems;
-    private final TabPane tabPane;
 
-    public MyTreeView(TreeView<Selectable> treeView, TabPane tabPane) {
+    public MyTreeView(TreeView<Selectable> treeView) {
         this.treeView = treeView;
         treeView.setShowRoot(false);
-        this.tabPane = tabPane;
         this.customItems = new TreeItem<>(new Selectable() {
             @Override
             public String toString() {
@@ -29,8 +27,12 @@ public class MyTreeView {
         });
     }
 
+    public TreeItem<Selectable> getSelectedTreeItem() {
+        return treeView.getSelectionModel().getSelectedItem();
+    }
+
     public void setRootByTab() {
-        String tabId = tabPane.getSelectionModel().getSelectedItem().getId();
+        String tabId = RootController.getInstance().getSelectedTab().getId();
         switch (tabId) {
             case "tabCharacters", "tabEditor" -> treeView.setRoot(characterListRoot);
             case "tabStash" -> treeView.setRoot(stashListRoot);

@@ -3,6 +3,7 @@ package io.github.kwisatzx.lastepoch.fileoperations;
 import io.github.kwisatzx.lastepoch.itemdata.AbstractItem;
 import io.github.kwisatzx.lastepoch.itemdata.ChrClass;
 import io.github.kwisatzx.lastepoch.itemdata.Item;
+import io.github.kwisatzx.lastepoch.itemdata.Selectable;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,7 +13,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class CharacterOperations extends FileStringOperations {
+public class CharacterOperations extends FileStringOperations
+        implements Selectable {
     private final Character character;
 
     public CharacterOperations(Path completeFilePath) throws IOException {

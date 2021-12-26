@@ -1,76 +1,57 @@
 package io.github.kwisatzx.lastepoch.gui.controllers;
 
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
-import io.github.kwisatzx.lastepoch.fileoperations.Selectable;
 import io.github.kwisatzx.lastepoch.gui.models.TreeModel;
 import io.github.kwisatzx.lastepoch.gui.views.MyTreeView;
+import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapper;
+import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapperImpl;
 import io.github.kwisatzx.lastepoch.itemdata.Item;
-import javafx.scene.control.TabPane;
+import io.github.kwisatzx.lastepoch.itemdata.Selectable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
 public class TreeController {
     private static TreeController instance;
+    private final SelectionWrapper selection;
     private final TreeModel treeModel;
     private final MyTreeView myTreeView;
+    private final RootController rootController;
 
-    public TreeController(TreeView<Selectable> treeView, TabPane tabPane) {
+    public TreeController(TreeView<Selectable> treeView) {
         instance = this;
+        selection = new SelectionWrapperImpl();
         treeModel = new TreeModel();
-        myTreeView = new MyTreeView(treeView, tabPane);
+        rootController = RootController.getInstance();
+        myTreeView = new MyTreeView(treeView);
         myTreeView.setStashListRoot(treeModel.createStashListRoot());
         myTreeView.setCharacterListRoot(treeModel.createCharacterListRoot());
         myTreeView.setRootByTab();
-        setUpEvents(treeView, tabPane);
+        setUpEvents(treeView);
     }
 
-    private void setUpEvents(TreeView<Selectable> treeView, TabPane tabPane) {
-        treeView.setOnMouseClicked(event -> {
-            TreeItem<Selectable> selection = treeView.getSelectionModel().getSelectedItem();
-            String guiTabName = tabPane.getSelectionModel().getSelectedItem().getId();
-
-            if (selection == null) return;
-            if (selection.toString().equals("Custom Items") ||
-                    (selection.getValue().getItemObj() != null &&
-                            treeModel.getCustomItems().contains(selection.getValue().getItemObj()))) {
-                if (!guiTabName.equals("tabEditor")) tabPane.getSelectionModel().select(2);
-                EditorTabController.getInstance().receiveSelection(selection);
-                return;
-            } //TODO Refactor Selectable/whatever into doing it's own receiveSelection and tab switching, and setModified
-            //or rather remove setModified and just compare fileStrings during saving
-
-            treeModel.setModifiedStatus(selection);
-
-            if (selection.getValue().getCharaOp() != null ||
-                    (selection.getValue().getItemObj() != null &&
-                            selection.getValue().getItemObj().getItemType().getDataId() == 34)) {
-                if (guiTabName.equals("tabEditor")) tabPane.getSelectionModel().selectFirst();
-                CharactersTabController.getInstance().receiveSelection(selection);
-            } else {
-                switch (guiTabName) {
-                    case "tabCharacters" -> CharactersTabController.getInstance().receiveSelection(selection);
-                    case "tabStash" -> StashTabController.getInstance().receiveSelection(selection);
-                    case "tabEditor" -> EditorTabController.getInstance().receiveSelection(selection);
-                    //TODO Uniques tab
-                }
-            }
+    private void setUpEvents(TreeView<Selectable> treeView) {
+        treeView.setOnMouseClicked(selectionChangedEvent -> {
+            if (selection.isEmpty()) return;
+            if (customItemListOrCustomItemSelected()) rootController.switchToTab(RootController.GuiTabs.EDITOR_TAB);
+            else if (charaOpOrBlessingSelected()) rootController.switchToTab(RootController.GuiTabs.CHARACTER_TAB);
+            else rootController.switchToSelectedTab();
         });
+    }
 
-        for (javafx.scene.control.Tab tab : tabPane.getTabs()) {
-            tab.setOnSelectionChanged(changeEvent -> myTreeView.setRootByTab());
-        }
+    private boolean customItemListOrCustomItemSelected() {
+        return myTreeView.getSelectedTreeItem().toString().equals("Custom Items") ||
+                (selection.isItem() && treeModel.getCustomItems().contains(selection.getItem().get()));
+    }
 
-        tabPane.getTabs().get(2).setOnSelectionChanged(event -> {
-            if (!treeView.getSelectionModel().isEmpty()) {
-                EditorTabController.getInstance().receiveSelection(treeView.getSelectionModel().getSelectedItem());
-            }
-        });
+    private boolean charaOpOrBlessingSelected() {
+        return selection.isCharacterOp() ||
+                (selection.isItem() && selection.getItem().get().getItemType().getDataId() == 34);
     }
 
     public void addNewCharacter(CharacterOperations charaOp) {
         TreeItem<Selectable> charaItem = treeModel.createNewCharacterTreeItem(charaOp);
         myTreeView.addNewCharacterToTree(charaItem);
-        CharactersTabController.getInstance().receiveSelection(charaItem);
+        rootController.switchToTab(RootController.GuiTabs.CHARACTER_TAB);
     }
 
     public void addCustomItem(Item item) {
@@ -92,5 +73,17 @@ public class TreeController {
 
     public void refreshTree() {
         myTreeView.refresh();
+    }
+
+    public SelectionWrapper getSelection() {
+        return selection;
+    }
+
+    private void setNewSelection() {
+        selection.setSelection(myTreeView.getSelectedTreeItem().getValue());
+    }
+
+    public void setRootByTab() {
+        myTreeView.setRootByTab();
     }
 }
