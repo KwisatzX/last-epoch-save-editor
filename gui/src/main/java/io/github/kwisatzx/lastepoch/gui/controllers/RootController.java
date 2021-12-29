@@ -50,6 +50,7 @@ public class RootController {
         new CharactersTabController(charactersTabAnchorPane);
         if (FileHandler.getCharacterFileList().isEmpty()) {
             leftBottomLabel.setText("Error: Failed to load or locate character files. Load data manually.");
+            //TODO: add manual loading
         }
         stashTabAnchorPane.getChildren().addAll(Launcher.loadFXML("crafting_pane_stash"));
         editorTabAnchorPane.getChildren().addAll(Launcher.loadFXML("crafting_pane_editor"));
@@ -75,10 +76,6 @@ public class RootController {
 
     public void setBottomLeftText(String text) {
         rootView.setBottomLeftText(text);
-    }
-
-    public TabPane getTabPane() {
-        return tabPane;
     }
 
     public void loadSaveData(ActionEvent actionEvent) {

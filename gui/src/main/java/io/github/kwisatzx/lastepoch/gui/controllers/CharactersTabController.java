@@ -8,6 +8,8 @@ import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapper;
 import io.github.kwisatzx.lastepoch.itemdata.*;
+import io.github.kwisatzx.lastepoch.itemdata.item.AbstractItem;
+import io.github.kwisatzx.lastepoch.itemdata.item.Item;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;

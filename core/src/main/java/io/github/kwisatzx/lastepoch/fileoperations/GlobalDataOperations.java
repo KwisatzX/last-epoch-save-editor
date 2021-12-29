@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.kwisatzx.lastepoch.itemdata.Item;
 import io.github.kwisatzx.lastepoch.itemdata.Selectable;
+import io.github.kwisatzx.lastepoch.itemdata.item.Item;
 
 import java.io.IOException;
 import java.util.ArrayList;

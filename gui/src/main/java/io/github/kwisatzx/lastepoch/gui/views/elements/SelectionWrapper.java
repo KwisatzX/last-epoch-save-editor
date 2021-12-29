@@ -2,8 +2,8 @@ package io.github.kwisatzx.lastepoch.gui.views.elements;
 
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.GlobalDataOperations;
-import io.github.kwisatzx.lastepoch.itemdata.Item;
 import io.github.kwisatzx.lastepoch.itemdata.Selectable;
+import io.github.kwisatzx.lastepoch.itemdata.item.Item;
 
 import java.util.Optional;
 import java.util.function.Consumer;

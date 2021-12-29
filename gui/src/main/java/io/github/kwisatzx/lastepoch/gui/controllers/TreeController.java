@@ -5,8 +5,8 @@ import io.github.kwisatzx.lastepoch.gui.models.TreeModel;
 import io.github.kwisatzx.lastepoch.gui.views.MyTreeView;
 import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapper;
 import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapperImpl;
-import io.github.kwisatzx.lastepoch.itemdata.Item;
 import io.github.kwisatzx.lastepoch.itemdata.Selectable;
+import io.github.kwisatzx.lastepoch.itemdata.item.Item;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
@@ -31,6 +31,7 @@ public class TreeController {
 
     private void setUpEvents(TreeView<Selectable> treeView) {
         treeView.setOnMouseClicked(selectionChangedEvent -> {
+            setNewSelection();
             if (selection.isEmpty()) return;
             if (customItemListOrCustomItemSelected()) rootController.switchToTab(RootController.GuiTabs.EDITOR_TAB);
             else if (charaOpOrBlessingSelected()) rootController.switchToTab(RootController.GuiTabs.CHARACTER_TAB);

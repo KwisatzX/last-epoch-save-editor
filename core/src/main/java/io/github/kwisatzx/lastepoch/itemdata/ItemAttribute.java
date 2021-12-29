@@ -25,7 +25,7 @@ public class ItemAttribute extends Attribute {
         this.itemAffiliation = itemAffiliation;
     }
 
-    ItemAttribute(int dataId, String name, int numberOfTiers, String[] tierValues, String[] tierNames) {
+    public ItemAttribute(int dataId, String name, int numberOfTiers, String[] tierValues, String[] tierNames) {
         this(dataId, name, numberOfTiers, tierValues, tierNames, new int[]{0}, new int[]{Affiliation.ALL});
     }
 

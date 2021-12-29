@@ -1,9 +1,9 @@
 package io.github.kwisatzx.lastepoch.fileoperations;
 
-import io.github.kwisatzx.lastepoch.itemdata.AbstractItem;
 import io.github.kwisatzx.lastepoch.itemdata.ChrClass;
-import io.github.kwisatzx.lastepoch.itemdata.Item;
 import io.github.kwisatzx.lastepoch.itemdata.Selectable;
+import io.github.kwisatzx.lastepoch.itemdata.item.AbstractItem;
+import io.github.kwisatzx.lastepoch.itemdata.item.Item;
 
 import java.io.IOException;
 import java.nio.file.Path;

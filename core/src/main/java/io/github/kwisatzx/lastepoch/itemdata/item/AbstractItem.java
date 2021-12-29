@@ -1,4 +1,7 @@
-package io.github.kwisatzx.lastepoch.itemdata;
+package io.github.kwisatzx.lastepoch.itemdata.item;
+
+import io.github.kwisatzx.lastepoch.itemdata.ItemAttribute;
+import io.github.kwisatzx.lastepoch.itemdata.Selectable;
 
 import java.util.Arrays;
 import java.util.List;

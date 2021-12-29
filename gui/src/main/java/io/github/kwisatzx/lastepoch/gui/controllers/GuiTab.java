@@ -1,10 +1,11 @@
 package io.github.kwisatzx.lastepoch.gui.controllers;
 
+import ch.qos.logback.classic.Logger;
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapper;
 import io.github.kwisatzx.lastepoch.itemdata.Affix;
 import io.github.kwisatzx.lastepoch.itemdata.AffixList;
-import io.github.kwisatzx.lastepoch.itemdata.Item;
+import io.github.kwisatzx.lastepoch.itemdata.item.Item;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
@@ -14,6 +15,7 @@ import javafx.scene.control.skin.ComboBoxListViewSkin;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +36,10 @@ public abstract class GuiTab {
         selection = TreeController.getInstance().getSelection();
         categorizeFieldsFromParentNode(rootPane);
         initAffixComboBoxes();
+    }
+
+    protected Logger getLogger(Class<?> callingClass) {
+        return (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(callingClass);
     }
 
     protected Optional<CharacterOperations> getCharaOp() {

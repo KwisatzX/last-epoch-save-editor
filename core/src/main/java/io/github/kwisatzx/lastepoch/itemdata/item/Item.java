@@ -1,8 +1,9 @@
-package io.github.kwisatzx.lastepoch.itemdata;
+package io.github.kwisatzx.lastepoch.itemdata.item;
 
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.GlobalDataOperations;
+import io.github.kwisatzx.lastepoch.itemdata.*;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
