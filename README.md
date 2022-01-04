@@ -1,5 +1,6 @@
 # Last Epoch Save Editor
 Version 0.9.1<br />
+Currently not up-to-date with the newest game version. Work in progress.
 Desktop GUI for editing Last Epoch SP save data.
 
 <h3>Main features</h3>
