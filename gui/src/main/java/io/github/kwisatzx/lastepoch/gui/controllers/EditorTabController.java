@@ -3,6 +3,7 @@ package io.github.kwisatzx.lastepoch.gui.controllers;
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
 import io.github.kwisatzx.lastepoch.fileoperations.GlobalDataOperations;
+import io.github.kwisatzx.lastepoch.gui.views.elements.AffixDisplayer;
 import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapper;
 import io.github.kwisatzx.lastepoch.itemdata.AffixTier;
 import io.github.kwisatzx.lastepoch.itemdata.ItemAttributeList;
@@ -23,7 +24,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class EditorTabController extends GuiItemTab {
+public class EditorTabController extends GuiItemTabController {
     private static EditorTabController INSTANCE;
     @FXML
     private RadioButton replaceSlotRadio;

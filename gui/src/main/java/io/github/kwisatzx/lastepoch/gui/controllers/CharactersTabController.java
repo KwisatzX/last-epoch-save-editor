@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
+import io.github.kwisatzx.lastepoch.gui.views.elements.AffixDisplayer;
 import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapper;
 import io.github.kwisatzx.lastepoch.itemdata.*;
 import io.github.kwisatzx.lastepoch.itemdata.item.AbstractItem;
@@ -23,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
-public class CharactersTabController extends GuiTab {
+public class CharactersTabController extends GuiTabController {
     private static CharactersTabController INSTANCE;
     private final HashMap<String, CheckBox> checkBoxes;
     private ComboBox<String> blessingsComboBox;
@@ -388,7 +389,7 @@ public class CharactersTabController extends GuiTab {
                         ItemAttributeList.getById(34).getTierValues()[item.getItemTier()]);
             }
         }
-        lastSelectedChr = charaOp;
+        setLastSelectedCharaOp(charaOp);
 
         textFields.get("nameField").setText(charaOp.getCharacter().getName());
         textFields.get("levelField").setText(charaOp.getCharacter().getLevel() + "");
@@ -403,7 +404,7 @@ public class CharactersTabController extends GuiTab {
         checkBoxes.get("masochistBox").setSelected(charaOp.getCharacter().isMasochist());
         checkBoxes.get("soloBox").setSelected(charaOp.getCharacter().isSolo());
 
-        eventsLockedForReading = true;
+        lockEvents();
         for (int i = 1; i <= 5; i++) {
             choiceBoxes.get("masteryChoice" + i).getSelectionModel().select("Nothing (ALL)");
         }
@@ -420,7 +421,7 @@ public class CharactersTabController extends GuiTab {
             choiceBoxes.get("toolbarChoice" + abilityBarChoiceBoxSuffixes.get(i)).getSelectionModel()
                     .select(ChrSkills.getDisplayNameFromIdString(abilityBar[i]));
         }
-        eventsLockedForReading = false;
+        unlockEvents();
     }
 
     private void setChrClass() {
@@ -432,7 +433,7 @@ public class CharactersTabController extends GuiTab {
     }
 
     private void setSkillTrees() {
-        if (getCharaOp().isEmpty() || eventsLockedForReading) return;
+        if (getCharaOp().isEmpty() || isEventsLocked()) return;
         CharacterOperations charaOp = getCharaOp().get();
         List<CharacterOperations.Character.SkillTree> masteredSkills = charaOp.getCharacter().getMasteredSkills();
 
@@ -461,7 +462,7 @@ public class CharactersTabController extends GuiTab {
     }
 
     private void setAbilityBar() {
-        if (getCharaOp().isEmpty() || eventsLockedForReading) return;
+        if (getCharaOp().isEmpty() || isEventsLocked()) return;
         CharacterOperations charaOp = getCharaOp().get();
 
         List<String> abilityBarChoiceBoxSuffixes = List.of("Q", "W", "E", "R", "RMB");
@@ -622,7 +623,8 @@ public class CharactersTabController extends GuiTab {
 
         AbstractItem.AffixData affixData = new AbstractItem.AffixData(
                 AffixTier.valueOf(choiceBoxes.get("affixTierChoiceBox").getValue()),
-                AffixDisplayer.getAffixFromDisplayName(comboBoxes.get("affixComboBox").getEditor().getText()),
+                AffixDisplayer.getAffixFromDisplayName(
+                        comboBoxes.get("affixComboBox").getEditor().getText()),
                 255);
 
         List<Integer> equipmentContainerIds = new ArrayList<>(Arrays.asList(2, 3, 6, 7, 8, 9, 10, 11, 12));

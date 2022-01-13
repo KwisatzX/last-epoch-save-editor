@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class StashTabController extends GuiItemTab {
+public class StashTabController extends GuiItemTabController {
     private static StashTabController INSTANCE;
     private GlobalDataOperations stashOp;
     @FXML

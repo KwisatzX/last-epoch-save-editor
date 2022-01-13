@@ -134,13 +134,13 @@ public class RootController {
     }
 
     public enum GuiTabs {
-        CHARACTER_TAB(),
+        CHARACTER_TAB,
         STASH_TAB,
         EDITOR_TAB,
         UNIQUES_TAB;
 
         private Tab tab;
-        private GuiTab controller;
+        private GuiTabController controller;
 
         public Tab getTab() {
             return tab;
@@ -150,11 +150,11 @@ public class RootController {
             this.tab = tab;
         }
 
-        public GuiTab getController() {
+        public GuiTabController getController() {
             return controller;
         }
 
-        public void setController(GuiTab controller) {
+        public void setController(GuiTabController controller) {
             this.controller = controller;
         }
     }
