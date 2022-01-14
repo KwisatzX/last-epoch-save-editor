@@ -93,21 +93,11 @@ public abstract class GuiItemTabView extends GuiTabView {
     }
 
     @Override
-    protected void fillDataFields() {
+    public void fillDataFields() {
         if (selection.isItem() && selection.getItem().get().getItemType().getDataId() != 34) { //blessings
             choiceBoxes.get("itemTypeChoiceBox").setDisable(false); //QoL
             fillCommonDataFields();
         }
-    }
-
-    private void initChoiceBoxes() {
-        initClassChoiceBox();
-        initItemTypeChoiceBox();
-        initItemTierChoiceBox();
-        initPreviewValuesChoiceBox();
-        initAffixTierChoiceBoxes();
-        initStashXYChoiceBoxes();
-        initStashTabNamesChoiceBox();
     }
 
     private void fillCommonDataFields() {
@@ -129,6 +119,16 @@ public abstract class GuiItemTabView extends GuiTabView {
         intToTextField("affixField", item.getAffixNumber());
         loadAffixesFromItem(item);
         controller.unlockEvents();
+    }
+
+    private void initChoiceBoxes() {
+        initClassChoiceBox();
+        initItemTypeChoiceBox();
+        initItemTierChoiceBox();
+        initPreviewValuesChoiceBox();
+        initAffixTierChoiceBoxes();
+        initStashXYChoiceBoxes();
+        initStashTabNamesChoiceBox();
     }
 
     private void loadAffixesFromItem(Item item) {

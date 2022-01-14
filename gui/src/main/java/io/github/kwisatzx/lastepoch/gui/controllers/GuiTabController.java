@@ -9,11 +9,11 @@ import org.slf4j.LoggerFactory;
 import java.util.Optional;
 
 public abstract class GuiTabController {
-    private final SelectionWrapper selection;
-    private final GuiTabModel model;
+    private SelectionWrapper selection;
+    private GuiTabModel model;
     private boolean eventsLocked = false;
 
-    public GuiTabController(GuiTabModel model) {
+    public void initialize(GuiTabModel model) {
         selection = TreeController.getInstance().getSelection();
         this.model = model;
     }
@@ -22,16 +22,16 @@ public abstract class GuiTabController {
         return (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(callingClass);
     }
 
-    protected Optional<CharacterOperations> getCharaOp() {
+    public Optional<CharacterOperations> getCharaOp() {
         return model.getCharaOp();
     }
 
-    protected void setLastSelectedCharaOp(CharacterOperations lastSelectedCharaOp) {
+    public void setLastSelectedCharaOp(CharacterOperations lastSelectedCharaOp) {
         model.setLastSelectedCharaOp(lastSelectedCharaOp);
     }
 
-    public void setEquipment() {
-        model.setEquipment();
+    public void setCharaEquipment() {
+        model.setCharaEquipment();
     }
 
     abstract protected void fillDataFields();
@@ -42,6 +42,14 @@ public abstract class GuiTabController {
 
     public void reloadTreeView() {
         TreeController.getInstance().renewCharacterList();
+    }
+
+    public void setBottomRightText(String text) {
+        RootController.getInstance().setBottomRightText(text);
+    }
+
+    public void setBottomLeftText(String text) {
+        RootController.getInstance().setBottomLeftText(text);
     }
 
     public void lockEvents() {

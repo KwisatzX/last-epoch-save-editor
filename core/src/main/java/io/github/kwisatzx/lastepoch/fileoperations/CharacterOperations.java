@@ -2,7 +2,6 @@ package io.github.kwisatzx.lastepoch.fileoperations;
 
 import io.github.kwisatzx.lastepoch.itemdata.ChrClass;
 import io.github.kwisatzx.lastepoch.itemdata.Selectable;
-import io.github.kwisatzx.lastepoch.itemdata.item.AbstractItem;
 import io.github.kwisatzx.lastepoch.itemdata.item.Item;
 
 import java.io.IOException;
@@ -190,7 +189,7 @@ public class CharacterOperations extends FileStringOperations
             equipment.add(item);
         }
 
-        public void replaceEquipmentItem(AbstractItem item) {
+        public void replaceEquipmentItem(Item item) {
             List<Item> equipment = getEquipment();
             boolean slotTaken = false;
             for (Item eqItem : equipment) {
@@ -210,7 +209,7 @@ public class CharacterOperations extends FileStringOperations
             }
         }
 
-        private void fillSecondRingSlotIfEmpty(AbstractItem item, List<Item> equipment, Item eqItem) {
+        private void fillSecondRingSlotIfEmpty(Item item, List<Item> equipment, Item eqItem) {
             boolean secondRingSlotTaken = false;
             for (Item eqItem2 : equipment) {
                 if (eqItem2.getItemStashInfo().id == 10) {

@@ -175,6 +175,9 @@ public interface Item extends Selectable {
         public int id;
         public boolean charaEquipment;
 
+        public ItemStashInfo() {
+        }
+
         public ItemStashInfo(int x, int y, int id, boolean charaEquipment) {
             this.x = x;
             this.y = y;

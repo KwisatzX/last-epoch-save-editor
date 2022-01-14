@@ -24,7 +24,7 @@ public class GuiTabModel {
         else return Optional.empty();
     }
 
-    public void setEquipment() {
+    public void setCharaEquipment() {
         getCharaOp().ifPresent(CharacterOperations::setEquipmentInFileString);
     }
 

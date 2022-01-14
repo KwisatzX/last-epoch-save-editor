@@ -15,9 +15,9 @@ import javafx.scene.layout.Pane;
 import java.util.HashMap;
 
 public abstract class GuiTabView {
-    private HashMap<String, TextField> textFields;
-    private HashMap<String, ChoiceBox<String>> choiceBoxes;
-    private HashMap<String, ComboBox<AffixDisplayer>> comboBoxes;
+    private final HashMap<String, TextField> textFields;
+    private final HashMap<String, ChoiceBox<String>> choiceBoxes;
+    private final HashMap<String, ComboBox<AffixDisplayer>> comboBoxes;
 
     public GuiTabView(Pane rootPane) {
         textFields = new HashMap<>();
@@ -46,7 +46,7 @@ public abstract class GuiTabView {
         }
     }
 
-    abstract protected void fillDataFields();
+    public abstract void fillDataFields();
 
     private void initAffixComboBoxes() {
         EventHandler<KeyEvent> preventClosingOnSpace = event -> {

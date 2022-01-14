@@ -16,17 +16,22 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 public abstract class GuiItemTabController extends GuiTabController {
-    private final SelectionWrapper selection;
-    private final GuiItemTabView view;
-    private final GuiItemTabModel model;
+    private SelectionWrapper selection;
+    private GuiItemTabView view;
+    private GuiItemTabModel model;
 
-    public GuiItemTabController(GuiItemTabView view, GuiItemTabModel model, Pane rootPane) {
-        super(model);
+    public void initialize(GuiItemTabView view, GuiItemTabModel model, Pane rootPane) {
+        super.initialize(model);
         this.view = view;
         this.model = model;
         selection = getSelection();
         installCommonEventHandlers(rootPane);
     }
+
+//    @Override
+//    protected void fillDataFields() {
+//        view.fillDataFields();
+//    }
 
     public void setItem() {
         model.setItem();
@@ -36,6 +41,13 @@ public abstract class GuiItemTabController extends GuiTabController {
         return view.getUiItemSettings();
     }
 
+    public void renewStashItems() {
+        TreeController.getInstance().renewStashItems();
+    }
+
+    public void addCustomItem(Item item) {
+        TreeController.getInstance().addCustomItem(item);
+    }
 
     private void initCommonTextFieldChangeEvents() {
         EventHandler<KeyEvent> keyTypedEvent = event -> {
@@ -75,7 +87,7 @@ public abstract class GuiItemTabController extends GuiTabController {
         initCommonTextFieldChangeEvents();
     }
 
-    protected void initAffixChangeEvents() {
+    private void initAffixChangeEvents() {
         for (ComboBox<AffixDisplayer> box : view.getComboBoxes().values()) {
             box.setOnAction(event -> affixComboBoxChangeEvent(box));
 
@@ -103,7 +115,7 @@ public abstract class GuiItemTabController extends GuiTabController {
         }
     }
 
-    protected void affixComboBoxChangeEvent(ComboBox<AffixDisplayer> box) {
+    public void affixComboBoxChangeEvent(ComboBox<AffixDisplayer> box) {
         if (isEventsLocked()) return;
         int id = Integer.parseInt(box.getId().charAt(5) + "");
         selection.ifItemPresent(item -> {
@@ -122,7 +134,7 @@ public abstract class GuiItemTabController extends GuiTabController {
             view.getTextFields().get("affixField").setText(item.getAffixNumber() + "");
             view.getTextFields().get("affixVisualField").setText(item.getAffixNumber() + "");
 
-            setEquipment();
+            setCharaEquipment();
             refreshTreeView();
             correctAffixBoxDisplay(box, id, item);
         });
@@ -175,7 +187,7 @@ public abstract class GuiItemTabController extends GuiTabController {
         alert.showAndWait();
     }
 
-    protected void maxImplicits() {
+    public void maxImplicits() {
         view.getTextFields().get("implicit1Field").setText("100");
         view.getTextFields().get("implicit2Field").setText("100");
         view.getTextFields().get("implicit3Field").setText("100");

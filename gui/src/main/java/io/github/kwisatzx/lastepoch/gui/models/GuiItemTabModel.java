@@ -28,7 +28,7 @@ public abstract class GuiItemTabModel extends GuiTabModel {
             item.setImplicitValue3(itemSettings.getImplicitValue3());
             item.setAffixNumberVisual(itemSettings.getAffixNumberVisual());
             item.setInstability(itemSettings.getInstability());
-            controller.setEquipment();
+            controller.setCharaEquipment();
             controller.reloadTreeView();
         });
     }

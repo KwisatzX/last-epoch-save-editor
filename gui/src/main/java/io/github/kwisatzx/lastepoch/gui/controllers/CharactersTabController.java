@@ -200,13 +200,13 @@ public class CharactersTabController extends GuiTabController {
                             charaOp.getCharacter().getEquipment().removeIf(eqItem -> eqItem.equals(item) &&
                                     eqItem.getItemStashInfo().id == item.getItemStashInfo().id);
                         });
-                        setEquipment();
+                        setCharaEquipment();
                         reloadTreeView();
                     }
                     ItemAttributeList.getById(34).getTierIdFromValue(blessingsComboBox.getValue()).ifPresent(
                             blessingId -> {
                                 item.setItemTier(blessingId);
-                                setEquipment();
+                                setCharaEquipment();
                                 refreshTreeView();
                             });
                 }
@@ -591,7 +591,7 @@ public class CharactersTabController extends GuiTabController {
         }
 
         RootController.getInstance().setBottomRightText("Equipment items replaced.");
-        setEquipment();
+        setCharaEquipment();
         reloadTreeView();
     }
 
@@ -639,7 +639,7 @@ public class CharactersTabController extends GuiTabController {
                 item.setAffix(affixData, Integer.parseInt(choiceBoxes.get("affixSlotChoiceBox").getValue()));
             }
         }
-        setEquipment();
+        setCharaEquipment();
         RootController.getInstance().setBottomRightText("Affix added to all equipment.");
         reloadTreeView();
     }
@@ -650,7 +650,7 @@ public class CharactersTabController extends GuiTabController {
                 item.setInstability(0);
             }
 
-            setEquipment();
+            setCharaEquipment();
             RootController.getInstance().setBottomRightText("All equipment instability (and fractures) removed.");
         });
     }
@@ -664,7 +664,7 @@ public class CharactersTabController extends GuiTabController {
                 item.setImplicitValue3(255);
             }
 
-            setEquipment();
+            setCharaEquipment();
             RootController.getInstance().setBottomRightText("All equipment implicits maximized.");
         });
     }
@@ -677,7 +677,7 @@ public class CharactersTabController extends GuiTabController {
                 }
             }
 
-            setEquipment();
+            setCharaEquipment();
             RootController.getInstance().setBottomRightText("All equipment affix ranges maximized.");
         });
     }
@@ -690,7 +690,7 @@ public class CharactersTabController extends GuiTabController {
                 }
             }
 
-            setEquipment();
+            setCharaEquipment();
             RootController.getInstance().setBottomRightText("All equipment affix tiers maximized.");
         });
     }
@@ -708,7 +708,7 @@ public class CharactersTabController extends GuiTabController {
             blessing.getItemStashInfo().id = containerId;
             blessing.getItemStashInfo().charaEquipment = true;
             charaOp.getCharacter().replaceEquipmentItem(blessing);
-            setEquipment();
+            setCharaEquipment();
             reloadTreeView();
         });
     }
