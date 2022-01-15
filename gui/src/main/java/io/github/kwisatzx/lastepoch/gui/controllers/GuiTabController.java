@@ -22,6 +22,10 @@ public abstract class GuiTabController {
         return (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(callingClass);
     }
 
+    public void switchToTab(RootController.GuiTabs tab) {
+        RootController.getInstance().switchToTab(tab);
+    }
+
     public Optional<CharacterOperations> getCharaOp() {
         return model.getCharaOp();
     }

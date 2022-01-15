@@ -28,11 +28,6 @@ public abstract class GuiItemTabController extends GuiTabController {
         installCommonEventHandlers(rootPane);
     }
 
-//    @Override
-//    protected void fillDataFields() {
-//        view.fillDataFields();
-//    }
-
     public void setItem() {
         model.setItem();
     }
@@ -49,7 +44,7 @@ public abstract class GuiItemTabController extends GuiTabController {
         TreeController.getInstance().addCustomItem(item);
     }
 
-    private void initCommonTextFieldChangeEvents() {
+    private void installCommonTextFieldChangeEvents() {
         EventHandler<KeyEvent> keyTypedEvent = event -> {
             view.ensureCorrectNumbersInFields();
             model.setItem();
@@ -83,11 +78,11 @@ public abstract class GuiItemTabController extends GuiTabController {
         };
         parentNode.addEventHandler(ActionEvent.ANY, buttonHandler);
 
-        initAffixChangeEvents();
-        initCommonTextFieldChangeEvents();
+        installAffixChangeEvents();
+        installCommonTextFieldChangeEvents();
     }
 
-    private void initAffixChangeEvents() {
+    private void installAffixChangeEvents() {
         for (ComboBox<AffixDisplayer> box : view.getComboBoxes().values()) {
             box.setOnAction(event -> affixComboBoxChangeEvent(box));
 

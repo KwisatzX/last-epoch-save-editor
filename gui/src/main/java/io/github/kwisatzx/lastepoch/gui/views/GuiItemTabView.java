@@ -132,7 +132,6 @@ public abstract class GuiItemTabView extends GuiTabView {
     }
 
     private void loadAffixesFromItem(Item item) {
-        if (!controller.isEventsLocked()) controller.lockEvents();
         List<AbstractItem.AffixData> affixList = item.getAffixList();
         for (int i = 1; i <= 4; i++) {
             ComboBox<AffixDisplayer> affixBox = comboBoxes.get("affix" + i + "ComboBox");
@@ -167,6 +166,7 @@ public abstract class GuiItemTabView extends GuiTabView {
         }
     }
 
+    //TODO: Move all events to Controller?
     private void initClassChoiceBox() {
         ChoiceBox<String> choiceBox = choiceBoxes.get("classChoiceBox");
         choiceBox.getItems().addAll(Affiliation.getStringList());
