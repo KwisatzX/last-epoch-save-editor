@@ -742,45 +742,4 @@ public class CharactersTabController extends GuiTabController {
         setStabilityOrCorruption("corruption");
     }
 
-    private static class ChrSkills {
-        private static TreeMap<String, Map.Entry<String, String>> skills;
-
-        static {
-            readFromFile();
-        }
-
-        static Map.Entry<String, String> get(String name) {
-            return skills.get(name);
-        }
-
-        static List<String> getNameAndMasteryList() {
-            return skills.keySet().stream()
-                    .map(key -> key + " (" + skills.get(key).getValue() + ")")
-                    .toList();
-        }
-
-        static Map<String, Map.Entry<String, String>> getMap() {
-            return skills;
-        }
-
-        static String getDisplayNameFromIdString(String id) {
-            for (Map.Entry<String, Map.Entry<String, String>> entry : skills.entrySet()) {
-                if (entry.getValue().getKey().equals(id))
-                    return entry.getKey() + " (" + entry.getValue().getValue() + ")";
-            }
-            return "";
-        }
-
-        private static void readFromFile() {
-//            Path file = Paths.get("item data/Skills.json");
-            InputStream fileStream = CharactersTabController.class.getResourceAsStream("/item data/Skills.json");
-            if (fileStream != null) {
-                ObjectMapper objectMapper = new ObjectMapper()
-                        .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-                try {
-                    skills = objectMapper.readValue(fileStream, new TypeReference<>() {});
-                } catch (IOException e) {e.printStackTrace();}
-            } else System.err.println("JSON list not found for character skills!"); //TODO: Logger
-        }
-    }
 }
