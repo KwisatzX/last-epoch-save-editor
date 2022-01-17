@@ -1,6 +1,9 @@
 package io.github.kwisatzx.lastepoch.itemdata;
 
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
+import java.util.stream.Stream;
 
 import static io.github.kwisatzx.lastepoch.itemdata.ChrClass.ClassMastery.*;
 
@@ -19,13 +22,16 @@ public enum ChrClass {
     private final int id;
     private final List<ClassMastery> masteries;
 
-    public int getId() {return id;}
+    public int getId() {
+        return id;
+    }
 
     public static ChrClass fromId(int id) {
         for (ChrClass chrClass : values()) {
             if (chrClass.id == id) return chrClass;
         }
-        return null; //TODO exception probably
+        LoggerFactory.getLogger(ChrClass.class).error("Could not find Class for given id: " + id);
+        throw new IllegalArgumentException("Could not find Class for given id: " + id);
     }
 
     public ChrClass.ClassMastery getMasteryFromId(int id) {
@@ -39,8 +45,8 @@ public enum ChrClass {
         return masteries.stream().map(Enum::name).toList();
     }
 
-    public static List<String> getStringList() {
-        return List.of(values()).stream().map(Enum::name).toList();
+    public static List<String> getChrClassesStringList() {
+        return Stream.of(values()).map(Enum::name).toList();
     }
 
     public static ChrClass fromString(String name) {
@@ -81,22 +87,14 @@ public enum ChrClass {
         MARKSMAN(2),
         FALCONER(3);
 
-        ClassMastery(int id) {this.id = id;}
+        ClassMastery(int id) {
+            this.id = id;
+        }
 
         private final int id;
 
-        public int getId() {return id;}
-
-        public static ClassMastery fromString(String name) {
-            for (ClassMastery mastery : values()) {
-                if (mastery.name().equals(name)) return mastery;
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return name();
+        public int getId() {
+            return id;
         }
     }
 }
