@@ -45,15 +45,15 @@ public enum ChrClass {
         return masteries.stream().map(Enum::name).toList();
     }
 
-    public static List<String> getChrClassesStringList() {
-        return Stream.of(values()).map(Enum::name).toList();
+    public static List<ClassMastery> getMasteryGroupFromMastery(ClassMastery mastery) {
+        for (ChrClass chrClass : values()) {
+            if (chrClass.masteries.contains(mastery)) return chrClass.masteries;
+        }
+        throw new IllegalArgumentException("Mastery not found in character classes: " + mastery);
     }
 
-    public static ChrClass fromString(String name) {
-        for (ChrClass chrClass : values()) {
-            if (chrClass.name().equals(name)) return chrClass;
-        }
-        return null;
+    public static List<String> getChrClassesStringList() {
+        return Stream.of(values()).map(Enum::name).toList();
     }
 
     @Override
