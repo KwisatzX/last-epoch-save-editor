@@ -1,5 +1,6 @@
 package io.github.kwisatzx.lastepoch.itemdata;
 
+import java.util.Arrays;
 import java.util.List;
 
 public enum AffixTier {
@@ -11,22 +12,21 @@ public enum AffixTier {
     TIER6(80),
     TIER7(96);
 
-    AffixTier(int value) {this.value = value;}
+    AffixTier(int value) {
+        this.value = value;
+    }
 
     private final int value;
 
-    public int getValue() {return value;}
+    public int getValue() {
+        return value;
+    }
 
     public static AffixTier maxTier(Affix affix) {
         return (affix.getNumberOfTiers() > 1) ? TIER7 : TIER1;
     }
 
-    public static List<AffixTier> getList() {
-        return List.of(values());
-    }
-
-    @Override
-    public String toString() {
-        return name();
+    public static List<String> getStringList() {
+        return Arrays.stream(values()).map(AffixTier::name).toList();
     }
 }
