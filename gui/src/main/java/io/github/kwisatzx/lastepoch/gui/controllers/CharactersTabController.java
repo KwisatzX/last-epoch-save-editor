@@ -472,7 +472,7 @@ public class CharactersTabController extends GuiTabController {
             String treeId = ChrSkills.get(displayName.split(" \\(")[0]).getKey();
             abilityBar[i] = treeId;
         }
-        charaOp.setAbilityBarInFileString();
+        charaOp.setAbilityBarInFileString(abilityBar); //TODO Temp fix, replace with list or smth
     }
 
     private void copyCharacter() {
