@@ -23,7 +23,7 @@ public abstract class GuiTabView {
         textFields = new HashMap<>();
         choiceBoxes = new HashMap<>();
         comboBoxes = new HashMap<>();
-        categorizeFieldsFromParentNode(rootPane);
+        groupFieldsFromParentNode(rootPane);
         initAffixComboBoxes();
     }
 
@@ -31,7 +31,7 @@ public abstract class GuiTabView {
         textFields.get(textFieldName).setText(String.valueOf(num));
     }
 
-    private void categorizeFieldsFromParentNode(Pane parentNode) {
+    private void groupFieldsFromParentNode(Pane parentNode) {
         for (Node node : parentNode.getChildren()) {
             if (node.getId() != null) {
                 if (node instanceof TextField) {

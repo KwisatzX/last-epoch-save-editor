@@ -1,11 +1,10 @@
 package io.github.kwisatzx.lastepoch.gui.controllers;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
+import io.github.kwisatzx.lastepoch.gui.models.CharactersTabModel;
+import io.github.kwisatzx.lastepoch.gui.models.datatransfer.CharacterDTO;
+import io.github.kwisatzx.lastepoch.gui.views.CharactersTabView;
 import io.github.kwisatzx.lastepoch.gui.views.elements.AffixDisplayer;
 import io.github.kwisatzx.lastepoch.gui.views.elements.SelectionWrapper;
 import io.github.kwisatzx.lastepoch.itemdata.*;
@@ -14,93 +13,78 @@ import io.github.kwisatzx.lastepoch.itemdata.item.Item;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.skin.ComboBoxListViewSkin;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 public class CharactersTabController extends GuiTabController {
-    private static CharactersTabController INSTANCE;
-    private final HashMap<String, CheckBox> checkBoxes;
-    private ComboBox<String> blessingsComboBox;
-    private ToggleButton includeWeapons;
-    private ToggleButton includeInventory;
-
+    private static CharactersTabController instance;
     private final SelectionWrapper selection;
-    private final HashMap<String, TextField> textFields;
-    private final HashMap<String, ChoiceBox<String>> choiceBoxes;
-    private final HashMap<String, ComboBox<AffixDisplayer>> comboBoxes;
+    private final CharactersTabModel model;
+    private final CharactersTabView view;
 
     public CharactersTabController(Pane charactersTabPane) {
-        INSTANCE = this;
-        checkBoxes = new HashMap<>();
-        tabInit(charactersTabPane);
-        selection = super.getSelection();
-        textFields = super.getTextFields();
-        choiceBoxes = super.getChoiceBoxes();
-        comboBoxes = super.getComboBoxes();
-        assignChildrenFromParentNode(charactersTabPane);
+        instance = this;
+        model = new CharactersTabModel(this);
+        view = new CharactersTabView(this, charactersTabPane);
+        initialize(model);
+        selection = getSelection();
+
         installEventHandlers(charactersTabPane);
-        initBlessingsComboBox();
-        initChoiceBoxes();
+        installBlessingsComboBoxEvents();
+        installChoiceBoxEvents();
     }
-
-    //TODO: Extract init into CharactersTabModel
-    //TODO 2. replace manual I/O from fileString with json mapping and copied object structure
-
-    //--- UTILITY ---//
-    //---------------//
 
     public static CharactersTabController getInstance() {
-        return INSTANCE;
+        return instance;
     }
 
-    private ChrClass.ClassMastery getChoiceBoxMastery() {
-        return ChrClass.ClassMastery.fromString(choiceBoxes.get("choiceBoxMastery").getValue());
+    //TODO: remove middle-man and have View get data from Model?
+    public CharacterDTO getCharacterData() {
+        return model.getCharacterData();
     }
 
-    private ChrClass getChoiceBoxClass() {
-        return ChrClass.fromString(choiceBoxes.get("choiceBoxClass").getValue());
+    public int getAffiliationForClassName(String chrClassName) {
+        return model.getAffiliationForClassName(chrClassName);
     }
 
-    private int getAffiliationFromChoiceBoxClass() {
-        return Affiliation.asInt(choiceBoxes.get("choiceBoxClass").getValue());
+    public OptionalInt getBlessingIdFromName(String name) {
+        return model.getBlessingIdFromName(name);
     }
 
-    private List<String> filterBlessingsList(List<String> toFilter) {
-        return toFilter.stream()
-                .filter(str -> {
-                    if (checkBoxes.get("hideWeakBlessingsCheckBox").isSelected()) {
-                        if (ItemAttributeList.getById(34).getTierIdFromValue(str).getAsInt() % 2 == 0) return false;
-                    }
-                    if (checkBoxes.get("hideDropRateBlessingsCheckBox").isSelected()) {
-                        return !str.contains("DROP RATE");
-                    }
-                    return true;
-                }).toList();
+    public List<String> getClassMasteryStringListFromClass(String chrClassName) {
+        return model.getClassMasteryStringListFromClass(chrClassName);
     }
 
-    //--- INITIALIZATION ---//
-    //----------------------//
+    public List<String> getChrClassesStringList() {
+        return model.getChrClassesStringList();
+    }
 
-    private void assignChildrenFromParentNode(Pane parentNode) {
-        for (Node node : parentNode.getChildren()) {
-            if (node.getId() != null) {
-                if (node instanceof CheckBox checkBox) {
-                    checkBoxes.put(checkBox.getId(), checkBox);
-                } else if (node.getId().equals("blessingComboBox"))
-                    blessingsComboBox = (ComboBox<String>) node;
-                else if (node instanceof ToggleButton button) {
-                    if (button.getId().equals("includeWeaponsToggleButton")) includeWeapons = button;
-                    else includeInventory = button;
-                }
-            }
-        }
+    public List<String> getAffixTierStringList() {
+        return model.getAffixTierStringList();
+    }
+
+    public List<String> getSkillListForMasteryName(String classMasteryName) {
+        return model.getSkillListForMasteryName(classMasteryName);
+    }
+
+    public List<String> getAllSkillsNameAndMasteryList() {
+        return model.getAllSkillsNameAndMasteryList();
+    }
+
+    public String getSkillDisplayNameFromId(String treeId) {
+        return model.getSkillDisplayNameFromId(treeId);
+    }
+
+    public String getValueForBlessingTier(int blessingTier) {
+        return model.getValueForBlessingTier(blessingTier);
     }
 
     private void installEventHandlers(Node parentNode) {
@@ -108,20 +92,20 @@ public class CharactersTabController extends GuiTabController {
             if (event.getTarget() != null && event.getTarget() instanceof Button button) {
                 switch (button.getId()) {
                     case "copyCharacterButton" -> copyCharacter();
-                    case "completeQuestsButton" -> completeQuests();
-                    case "unlockWaypointsButton" -> unlockWaypoints();
-                    case "unlockTimelinesButton" -> unlockTimelines();
-                    case "maxMasteryLevelsButton" -> maxMasteryLevels();
-                    case "maxPointsAllMasteriesButton" -> maxMasteryNodes();
-                    case "maxPointsAllPassivesButton" -> maxPassiveNodes();
-                    case "copySkillsToToolbar" -> copySkillsToToolbar();
+                    case "completeQuestsButton" -> model.completeQuests();
+                    case "unlockWaypointsButton" -> model.unlockWaypoints();
+                    case "unlockTimelinesButton" -> model.unlockTimelines();
+                    case "maxMasteryLevelsButton" -> model.maxMasteryLevels();
+                    case "maxPointsAllMasteriesButton" -> model.maxMasteryNodes();
+                    case "maxPointsAllPassivesButton" -> model.maxPassiveNodes();
+                    case "copySkillsToToolbar" -> view.copySkillsToToolbar();
                     case "editSelectedItemButton" -> moveToItemEditor();
                     case "replaceAllSlotsButton" -> replaceEqWithNewItems();
                     case "addAffixButton" -> addAffixToAllEq();
-                    case "removeAllFracturesButton" -> removeAllEqFractures();
-                    case "maximizeImplicitsButton" -> maximizeEqImplicits();
-                    case "maximizeAffixesButton" -> maximizeEqAffixRanges();
-                    case "maximizeAffixTiersButton" -> maximizeEqAffixTiers();
+                    case "removeAllFracturesButton" -> model.removeAllEqFractures();
+                    case "maximizeImplicitsButton" -> model.maximizeEqImplicits();
+                    case "maximizeAffixesButton" -> model.maximizeEqAffixRanges();
+                    case "maximizeAffixTiersButton" -> model.maximizeEqAffixTiers();
                     case "addNewBlessingButton" -> addNewBlessingToEq();
                     case "setAllStabilityButton" -> setAllStability();
                     case "setAllCorruptionButton" -> setAllCorruption();
@@ -131,49 +115,39 @@ public class CharactersTabController extends GuiTabController {
 
         final EventHandler<ActionEvent> checkBoxHandler = event -> {
             if (event.getTarget() != null && event.getTarget() instanceof CheckBox checkBox) {
-                selection.ifCharacterPresent(charaOp -> {
-                    switch (checkBox.getId()) {
-                        case "hardcoreBox" -> {
-                            if (charaOp.getCharacter().isHardcore()) charaOp.setProperty("hardcore", "false");
-                            else charaOp.setProperty("hardcore", "true");
-                        }
-                        case "masochistBox" -> {
-                            if (charaOp.getCharacter().isMasochist()) charaOp.setProperty("masochist", "false");
-                            else charaOp.setProperty("masochist", "true");
-                        }
-                        case "soloBox" -> {
-                            if (charaOp.getCharacter().isSolo()) charaOp.setProperty("soloChallenge", "false");
-                            else charaOp.setProperty("soloChallenge", "true");
-                        }
-                    }
-                });
                 switch (checkBox.getId()) {
-                    case "restrictMasteryBox" -> initSkillChoiceBoxes();
-                    case "hideWeakBlessingsCheckBox", "hideDropRateBlessingsCheckBox" -> fillBlessingsComboBox();
+                    case "hardcoreBox" -> model.toggleCharacterHardcore();
+                    case "masochistBox" -> model.toggleCharacterMasochist();
+                    case "soloBox" -> model.toggleCharacterSolo();
+                    case "restrictMasteryBox" -> view.fillSkillChoiceBoxes();
+                    case "hideWeakBlessingsCheckBox", "hideDropRateBlessingsCheckBox" -> view.fillBlessingsComboBox(
+                            model.getBlessingsList());
                 }
             }
         };
 
-        textFields.get("nameField").setOnKeyTyped(event -> {
+        view.getTextFields().get("nameField").setOnKeyTyped(event -> {
             getCharaOp().ifPresent(charaOp -> charaOp.setProperty(
-                    "characterName", "\"" + textFields.get("nameField").getText() + "\""));
+                    "characterName", "\"" + view.getTextFields().get("nameField").getText() + "\""));
             refreshTreeView();
             EditorTabController.getInstance().initCharactersChoiceBox();
         });
 
-        textFields.get("levelField").setOnKeyTyped(event -> getCharaOp().ifPresent(
-                charaOp -> charaOp.setProperty("level", textFields.get("levelField").getText())));
+        view.getTextFields().get("levelField").setOnKeyTyped(event -> getCharaOp().ifPresent(
+                charaOp -> charaOp.setProperty("level", view.getTextFields().get("levelField").getText())));
 
         parentNode.addEventHandler(ActionEvent.ANY, buttonHandler);
         parentNode.addEventHandler(ActionEvent.ANY, checkBoxHandler);
     }
 
-    private void initBlessingsComboBox() {
-        EventHandler<KeyEvent> preventClosingOnSpace = event -> {
+    private void installBlessingsComboBoxEvents() {
+        ComboBox<String> blessingsComboBox = view.getBlessingsComboBox();
+
+        final EventHandler<KeyEvent> preventClosingOnSpace = event -> {
             if (event.getCode() == KeyCode.SPACE) event.consume();
         };
 
-        blessingsComboBox.getEditor().setOnKeyReleased(keyEvent -> {
+        final EventHandler<KeyEvent> searchForBlessingsMatchingText = keyEvent -> {
             KeyCode kc = keyEvent.getCode();
             if (kc.isLetterKey() || kc.isDigitKey() || kc == KeyCode.BACK_SPACE) {
                 List<String> filteredBlessings = new ArrayList<>();
@@ -184,244 +158,89 @@ public class CharactersTabController extends GuiTabController {
                         filteredBlessings.add(tierValues[i]);
                 }
                 keyEvent.consume();
-                blessingsComboBox.getItems().setAll(filterBlessingsList(filteredBlessings));
+                view.fillBlessingsComboBox(filteredBlessings);
             }
-        });
+        };
+
+        final EventHandler<ActionEvent> onBlessingSelectionChanged = event -> {
+            if (selection.isItem() && selection.getItem().get().getItemType().getDataId() == 34) {
+                removeBlessingIfNameFieldEmpty();
+                changeBlessingIdOnValidNameChange();
+            }
+        };
+
+        blessingsComboBox.getEditor().setOnKeyReleased(searchForBlessingsMatchingText);
 
         ComboBoxListViewSkin<String> eventSkin = new ComboBoxListViewSkin<>(blessingsComboBox);
         eventSkin.getPopupContent().addEventFilter(KeyEvent.ANY, preventClosingOnSpace);
-        blessingsComboBox.setSkin(eventSkin);
+        blessingsComboBox.setSkin(eventSkin); //TODO move up?
 
-        blessingsComboBox.setOnAction(event -> {
-            selection.ifItemPresent(item -> {
-                if (item.getItemType().getDataId() == 34) {
-                    if (blessingsComboBox.getValue() == null || blessingsComboBox.getValue().equals("")) {
-                        getCharaOp().ifPresent(charaOp -> {
-                            charaOp.getCharacter().getEquipment().removeIf(eqItem -> eqItem.equals(item) &&
-                                    eqItem.getItemStashInfo().id == item.getItemStashInfo().id);
-                        });
-                        setCharaEquipment();
-                        reloadTreeView();
-                    }
-                    ItemAttributeList.getById(34).getTierIdFromValue(blessingsComboBox.getValue()).ifPresent(
-                            blessingId -> {
-                                item.setItemTier(blessingId);
-                                setCharaEquipment();
-                                refreshTreeView();
-                            });
-                }
+        blessingsComboBox.setOnAction(onBlessingSelectionChanged);
+
+        view.fillBlessingsComboBox(model.getBlessingsList());
+    }
+
+    private void removeBlessingIfNameFieldEmpty() {
+        ComboBox<String> blessingsComboBox = view.getBlessingsComboBox();
+        Item item = selection.getItem().get();
+
+        if (blessingsComboBox.getValue() == null || blessingsComboBox.getValue().equals("")) {
+            getCharaOp().ifPresent(charaOp -> {
+                charaOp.getCharacter().getEquipment().removeIf(eqItem -> eqItem.equals(item) &&
+                        eqItem.getItemStashInfo().id == item.getItemStashInfo().id);
             });
+            setCharaEquipment();
+            reloadTreeView();
+        }
+    }
+
+    private void changeBlessingIdOnValidNameChange() {
+        getBlessingIdFromName(view.getBlessingsComboBox().getValue()).ifPresent(blessingId -> {
+            selection.getItem().get().setItemTier(blessingId);
+            setCharaEquipment();
+            refreshTreeView();
         });
-        fillBlessingsComboBox();
     }
 
-    private void fillBlessingsComboBox() {
-        blessingsComboBox.getItems().setAll(filterBlessingsList(
-                Arrays.stream(ItemAttributeList.getById(34).getTierValues()).toList()));
-    }
-
-    private void initChoiceBoxes() {
-        initClassChoiceBox();
-        initTierAndSlotChoiceBoxes();
-        initWhiteEqChoiceBoxes();
-        initSkillChoiceBoxes();
-    }
-
-    private void initClassChoiceBox() {
-        choiceBoxes.get("choiceBoxClass").getItems().addAll(ChrClass.getStringList());
-        choiceBoxes.get("choiceBoxClass").getSelectionModel().selectFirst();
-        choiceBoxes.get("choiceBoxClass").setOnAction(event -> {
-            changeWhiteClassEquipment();
-            initMasteryChoiceBox();
-            setChrClass();
-        });
-
-        initWhiteEqChoiceBoxes();
-        initMasteryChoiceBox();
-    }
-
-    private void initMasteryChoiceBox() {
-        ChoiceBox<String> masteryBox = choiceBoxes.get("choiceBoxMastery");
-
-        masteryBox.getItems().setAll(
-                ChrClass.fromString(choiceBoxes.get("choiceBoxClass").getValue()).getMasteryStringList());
-
-        selection.getCharacterOp().ifPresentOrElse(charaOp -> {
-            if (charaOp.getCharacter().getChrClass() == getChoiceBoxClass()) {
-                masteryBox.getSelectionModel()
-                        .select(charaOp.getCharacter().getMastery().name());
-            } else masteryBox.getSelectionModel().selectFirst();
-        }, () -> masteryBox.getSelectionModel().selectFirst());
-
-        masteryBox.setOnAction(event -> {
-            if (checkBoxes.get("restrictMasteryBox").isSelected()) initSkillChoiceBoxes();
+    private void installChoiceBoxEvents() {
+        view.getChoiceBoxes().get("choiceBoxMastery").setOnAction(event -> {
+            if (view.getCheckBoxes().get("restrictMasteryBox").isSelected()) view.fillSkillChoiceBoxes();
             setChrMastery();
         });
 
-
-        if (checkBoxes.get("restrictMasteryBox").isSelected()) initSkillChoiceBoxes();
-    }
-
-    private void initTierAndSlotChoiceBoxes() {
-        choiceBoxes.get("affixTierChoiceBox").getItems().addAll(AffixTier.getList().stream()
-                                                                        .map(AffixTier::name)
-                                                                        .toList());
-        choiceBoxes.get("affixTierChoiceBox").getSelectionModel().select("TIER7");
-
-        choiceBoxes.get("affixSlotChoiceBox").getItems().addAll("1", "2", "3", "4");
-        choiceBoxes.get("affixSlotChoiceBox").getSelectionModel().selectFirst();
-
-        choiceBoxes.get("blessingSlotChoiceBox").getItems().addAll("1", "2", "3", "4", "5",
-                                                                   "6", "7", "8", "9", "10");
-        choiceBoxes.get("blessingSlotChoiceBox").getSelectionModel().selectFirst();
-    }
-
-    private void initWhiteEqChoiceBoxes() {
-        int affiliation = getAffiliationFromChoiceBoxClass();
-        fillEqChoiceBox("helmetChoiceBox", "Helmets", affiliation);
-        fillEqChoiceBox("chestplateChoiceBox", "Body Armours", affiliation);
-        fillEqChoiceBox("beltChoiceBox", "Belts", affiliation);
-        fillEqChoiceBox("glovesChoiceBox", "Gloves", affiliation);
-        fillEqChoiceBox("bootsChoiceBox", "Boots", affiliation);
-        fillEqChoiceBox("relicChoiceBox", "Relics", affiliation);
-        fillEqChoiceBox("amuletChoiceBox", "Amulets", affiliation);
-        fillEqChoiceBox("leftRingChoiceBox", "Rings", affiliation);
-        fillEqChoiceBox("rightRingChoiceBox", "Rings", affiliation);
-    }
-
-    private void changeWhiteClassEquipment() {
-        int affiliation = getAffiliationFromChoiceBoxClass();
-        fillEqChoiceBox("helmetChoiceBox", "Helmets", affiliation);
-        fillEqChoiceBox("chestplateChoiceBox", "Body Armours", affiliation);
-        fillEqChoiceBox("relicChoiceBox", "Relics", affiliation);
-    }
-
-    private void fillEqChoiceBox(String boxId, String itemTypeName, int affiliation) {
-        ItemAttribute selection = ItemAttributeList.getByName(itemTypeName);
-
-        List<String> itemTiers = new ArrayList<>();
-        for (int i = 0; i < selection.getNumberOfTiers(); i++) {
-            int aff = selection.getItemAffiliation()[i];
-            if ((affiliation & aff) == aff || aff == Affiliation.ALL) {
-                itemTiers.add(selection.getTierNames()[i] + " [" + selection.getTierValues()[i] + "] (" +
-                                      Affiliation.asString(aff) + ")");
-            }
-        }
-
-        ChoiceBox<String> eqBox = choiceBoxes.get(boxId);
-        eqBox.getItems().setAll(itemTiers);
-        eqBox.getSelectionModel().selectLast();
-    }
-
-    private void initSkillChoiceBoxes() {
-        fillSkillChoiceBoxes(checkBoxes.get("restrictMasteryBox").isSelected());
-    }
-
-    private void fillSkillChoiceBoxes(boolean filterToMastery) {
-        List<String> filteredSkills = null;
-
-        if (filterToMastery) {
-            filteredSkills = new ArrayList<>();
-            String chrMastery = getChoiceBoxMastery().name();
-            for (Map.Entry<String, Map.Entry<String, String>> entry : ChrSkills.getMap().entrySet()) {
-                String mastery = entry.getValue().getValue();
-                if (mastery.equals(chrMastery))
-                    filteredSkills.add(entry.getKey() + " (" + mastery + ")");
-            }
-            filteredSkills.add("Nothing (ALL)");
-        }
+        view.getChoiceBoxes().get("choiceBoxClass").setOnAction(event -> {
+            view.changeWhiteClassEquipment();
+            view.fillMasteryChoiceBox();
+            if (view.getCheckBoxes().get("restrictMasteryBox").isSelected()) view.fillSkillChoiceBoxes();
+            setChrClass();
+        });
 
         for (int i = 1; i <= 5; i++) {
-            ChoiceBox<String> box = choiceBoxes.get("masteryChoice" + i);
-            String selection = box.getValue();
-            if (filterToMastery) {
-                box.getItems().setAll(filteredSkills);
-                if (!selection.equals("Nothing (ALL)")) box.getItems().add(selection);
-            } else {
-                box.getItems().setAll(ChrSkills.getNameAndMasteryList());
-                box.getSelectionModel().select(selection);
-            }
-
-            if (box.getValue() == null || box.getValue().equals("")) {
-                box.getSelectionModel().select("Nothing (ALL)");
-            }
-
-            box.setOnAction(event -> setSkillTrees());
+            view.getChoiceBoxes().get("masteryChoice" + i).setOnAction(event -> setSkillTrees());
         }
 
         List<String> toolbarSkillChoiceBoxSuffixes = List.of("Q", "W", "E", "R", "RMB");
         for (String suffix : toolbarSkillChoiceBoxSuffixes) {
-            ChoiceBox<String> box = choiceBoxes.get("toolbarChoice" + suffix);
-            String selection = box.getValue();
-            if (filterToMastery) {
-                filteredSkills.add("Basic Attack (ALL)");
-                box.getItems().setAll(filteredSkills);
-                if (!selection.equals("Nothing (ALL)")) box.getItems().add(selection);
-            } else {
-                box.getItems().setAll(ChrSkills.getNameAndMasteryList());
-                box.getSelectionModel().select(selection);
-            }
-
-            if (box.getSelectionModel().isEmpty()) {
-                box.getSelectionModel().select("Nothing (ALL)");
-            }
-
-            box.setOnAction(event -> setAbilityBar());
+            view.getChoiceBoxes().get("toolbarChoice" + suffix).setOnAction(event -> setAbilityBar());
         }
     }
 
-    //--- INPUT/OUTPUT ---//
-    //--------------------//
-    //TODO: refactor to contain all event handlers here or in a separate class
-
+    @Override
     protected void fillDataFields() {
-        CharacterOperations charaOp;
-        Item item;
-        //TODO prevent exception with custom item list
-
-        if (selection.isCharacterOp()) charaOp = selection.getCharacterOp().get();
+        if (selection.isCharacterOp()) setLastSelectedCharaOp(selection.getCharacterOp().get());
         else {
-            item = selection.getItem().get();
-            charaOp = Item.getItemOwner(item);
-
-            if (item.getItemType().getDataId() == 34) {
-                blessingsComboBox.getSelectionModel().select(
-                        ItemAttributeList.getById(34).getTierValues()[item.getItemTier()]);
-            }
+            Item item = selection.getItem().get();
+            setLastSelectedCharaOp(Item.getItemOwner(item));
         }
-        setLastSelectedCharaOp(charaOp);
+        view.fillDataFields();
+    }
 
-        textFields.get("nameField").setText(charaOp.getCharacter().getName());
-        textFields.get("levelField").setText(charaOp.getCharacter().getLevel() + "");
+    private ChrClass getChoiceBoxClass() {
+        return ChrClass.valueOf(view.getChoiceBoxes().get("choiceBoxClass").getValue());
+    }
 
-        choiceBoxes.get("choiceBoxClass").getSelectionModel()
-                .select(charaOp.getCharacter().getChrClass().name());
-
-        choiceBoxes.get("choiceBoxMastery").getSelectionModel()
-                .select(charaOp.getCharacter().getMastery().name());
-
-        checkBoxes.get("hardcoreBox").setSelected(charaOp.getCharacter().isHardcore());
-        checkBoxes.get("masochistBox").setSelected(charaOp.getCharacter().isMasochist());
-        checkBoxes.get("soloBox").setSelected(charaOp.getCharacter().isSolo());
-
-        lockEvents();
-        for (int i = 1; i <= 5; i++) {
-            choiceBoxes.get("masteryChoice" + i).getSelectionModel().select("Nothing (ALL)");
-        }
-
-        List<CharacterOperations.Character.SkillTree> masteredSkills = charaOp.getCharacter().getMasteredSkills();
-        for (int i = 1; i <= masteredSkills.size(); i++) {
-            choiceBoxes.get("masteryChoice" + i).getSelectionModel()
-                    .select(ChrSkills.getDisplayNameFromIdString(masteredSkills.get(i - 1).treeId));
-        }
-
-        List<String> abilityBarChoiceBoxSuffixes = List.of("Q", "W", "E", "R", "RMB");
-        String[] abilityBar = charaOp.getCharacter().getAbilityBar();
-        for (int i = 0; i < 5; i++) {
-            choiceBoxes.get("toolbarChoice" + abilityBarChoiceBoxSuffixes.get(i)).getSelectionModel()
-                    .select(ChrSkills.getDisplayNameFromIdString(abilityBar[i]));
-        }
-        unlockEvents();
+    private ChrClass.ClassMastery getChoiceBoxMastery() {
+        return ChrClass.ClassMastery.valueOf(view.getChoiceBoxes().get("choiceBoxMastery").getValue());
     }
 
     private void setChrClass() {
@@ -432,16 +251,17 @@ public class CharactersTabController extends GuiTabController {
         getCharaOp().ifPresent(charaOp -> charaOp.setProperty("chosenMastery", getChoiceBoxMastery().getId() + ""));
     }
 
-    private void setSkillTrees() {
+    private void setSkillTrees() { //TODO THIS IS A DISASTER! FIX!!!
         if (getCharaOp().isEmpty() || isEventsLocked()) return;
         CharacterOperations charaOp = getCharaOp().get();
         List<CharacterOperations.Character.SkillTree> masteredSkills = charaOp.getCharacter().getMasteredSkills();
 
         for (int i = 0; i < 5; i++) {
-            String displayName = choiceBoxes.get("masteryChoice" + (i + 1)).getValue();
-            String treeId = ChrSkills.get(displayName.split(" \\(")[0]).getKey();
+            String displayName = view.getChoiceBoxes().get("masteryChoice" + (i + 1)).getValue();
+            String treeId = ChrSkills.getIdAndMasteryFromSkillName(displayName.split(" \\(")[0]).getKey();
             if (treeId.equals("na28") || treeId.equals("ba1")) continue;
 
+            //skill slots are 0 - 4
             if (i >= masteredSkills.size()) {
                 int slotNumber = 4;
                 for (int j = 0; j < 5; j++) {
@@ -468,8 +288,9 @@ public class CharactersTabController extends GuiTabController {
         List<String> abilityBarChoiceBoxSuffixes = List.of("Q", "W", "E", "R", "RMB");
         String[] abilityBar = charaOp.getCharacter().getAbilityBar();
         for (int i = 0; i < 5; i++) {
-            String displayName = choiceBoxes.get("toolbarChoice" + abilityBarChoiceBoxSuffixes.get(i)).getValue();
-            String treeId = ChrSkills.get(displayName.split(" \\(")[0]).getKey();
+            String displayName = view.getChoiceBoxes().get(
+                    "toolbarChoice" + abilityBarChoiceBoxSuffixes.get(i)).getValue();
+            String treeId = ChrSkills.getIdAndMasteryFromSkillName(displayName.split(" \\(")[0]).getKey();
             abilityBar[i] = treeId;
         }
         charaOp.setAbilityBarInFileString(abilityBar); //TODO Temp fix, replace with list or smth
@@ -480,89 +301,34 @@ public class CharactersTabController extends GuiTabController {
 
         CharacterOperations newCharaOp = getCharaOp().get().copyCharacter();
         if (newCharaOp == null) {
-            RootController.getInstance().setBottomRightText("Error: Failed to copy character. See log file.");
+            setBottomRightText("Error: Failed to copy character. See log file.");
             return;
         }
 
-        int newSlot;
+        String oldCharacterName = newCharaOp.getProperty("characterName", String.class);
+        newCharaOp.setProperty("characterName", "\"" + oldCharacterName + "Copy\"");
+        newCharaOp.setProperty("slot", getFirstAvailableCharacterSlot() + "");
+        newCharaOp.saveToFile();
+
+        TreeController.getInstance().addNewCharacter(newCharaOp);
+        EditorTabController.getInstance().initCharactersChoiceBox();
+        setBottomRightText("Character copied and saved to file.");
+    }
+
+    private int getFirstAvailableCharacterSlot() {
         List<Integer> slots = FileHandler.getCharacterFileList().stream()
                 .mapToInt(charaOp -> charaOp.getProperty("slot", int.class))
                 .boxed()
                 .toList();
         for (int i = 1; ; i++) {
             if (!slots.contains(i)) {
-                newSlot = i;
-                break;
+                return i;
             }
-        }
-        newCharaOp.setProperty("slot", newSlot + "");
-
-        String oldCharacterName = newCharaOp.getProperty("characterName", String.class);
-        String newCharacterName = "\"" + oldCharacterName + "Copy\"";
-        newCharaOp.setProperty("characterName", newCharacterName);
-        newCharaOp.saveToFile();
-
-        TreeController.getInstance().addNewCharacter(newCharaOp);
-        EditorTabController.getInstance().initCharactersChoiceBox();
-        RootController.getInstance().setBottomRightText("Character copied and saved to file.");
-    }
-
-    private void unlockTimelines() {
-        getCharaOp().ifPresent(charaOp -> {
-            if (charaOp.setTimelinesUnlocked()) RootController.getInstance().setBottomRightText("Timelines unlocked.");
-            else RootController.getInstance().setBottomRightText("Error: Failed to open array data file. See log.");
-        });
-    }
-
-    private void unlockWaypoints() {
-        getCharaOp().ifPresent(charaOp -> {
-            if (charaOp.setWaypointsUnlocked()) RootController.getInstance().setBottomRightText("Waypoints unlocked.");
-            else RootController.getInstance().setBottomRightText("Error: Failed to open array data file. See log.");
-        });
-    }
-
-    private void completeQuests() {
-        getCharaOp().ifPresent(charaOp -> {
-            if (charaOp.setQuestsCompleted()) RootController.getInstance().setBottomRightText("Quests completed.");
-            else RootController.getInstance().setBottomRightText("Error: Failed to open array data file. See log.");
-        });
-    }
-
-    private void maxMasteryLevels() {
-        getCharaOp().ifPresent(charaOp -> {
-            charaOp.getCharacter().maxMasteryLevels();
-            RootController.getInstance().setBottomRightText("All selected masteries leveled to 20.");
-        });
-    }
-
-    //TODO Dialog with more options
-    private void maxMasteryNodes() {
-        getCharaOp().ifPresent(charaOp -> {
-            charaOp.getCharacter().maxMasteryNodes();
-            RootController.getInstance().setBottomRightText(
-                    "Picked nodes on all mastery trees have been given max points.");
-        });
-    }
-
-    //TODO Dialog with more options
-    private void maxPassiveNodes() {
-        getCharaOp().ifPresent(charaOp -> {
-            charaOp.getCharacter().maxPassiveNodes();
-            RootController.getInstance().setBottomRightText(
-                    "Picked nodes on the passive trees have been given max points.");
-        });
-    }
-
-    private void copySkillsToToolbar() {
-        List<String> abilityBarChoiceBoxSuffixes = List.of("Q", "W", "E", "R", "RMB");
-        for (int i = 1; i <= 5; i++) {
-            choiceBoxes.get("toolbarChoice" + abilityBarChoiceBoxSuffixes.get(i - 1)).getSelectionModel()
-                    .select(choiceBoxes.get("masteryChoice" + i).getValue());
         }
     }
 
     private void moveToItemEditor() {
-        if (selection.isItem()) RootController.getInstance().switchToTab(RootController.GuiTabs.EDITOR_TAB);
+        if (selection.isItem()) switchToTab(RootController.GuiTabs.EDITOR_TAB);
     }
 
     private void replaceEqWithNewItems() {
@@ -590,7 +356,7 @@ public class CharactersTabController extends GuiTabController {
             if (!itemReplaced) equipment.add(item);
         }
 
-        RootController.getInstance().setBottomRightText("Equipment items replaced.");
+        setBottomRightText("Equipment items replaced.");
         setCharaEquipment();
         reloadTreeView();
     }
@@ -611,7 +377,7 @@ public class CharactersTabController extends GuiTabController {
     }
 
     private int getTierFromChoiceBoxValue(String choiceBoxId, int attributeListId) {
-        String[] item = choiceBoxes.get(choiceBoxId).getValue().split(" \\[");
+        String[] item = view.getChoiceBoxes().get(choiceBoxId).getValue().split(" \\[");
         String itemTierName = item[0].trim();
         return ItemAttributeList.getById(attributeListId).getTierIdFromName(itemTierName);
     }
@@ -622,98 +388,47 @@ public class CharactersTabController extends GuiTabController {
         List<Item> eq = charaOp.getCharacter().getEquipment();
 
         AbstractItem.AffixData affixData = new AbstractItem.AffixData(
-                AffixTier.valueOf(choiceBoxes.get("affixTierChoiceBox").getValue()),
-                AffixDisplayer.getAffixFromDisplayName(
-                        comboBoxes.get("affixComboBox").getEditor().getText()),
+                AffixTier.valueOf(view.getChoiceBoxes().get("affixTierChoiceBox").getValue()),
+                AffixDisplayer.getAffixFromDisplayName(view.getComboBoxes().get("affixComboBox").getEditor().getText()),
                 255);
 
         List<Integer> equipmentContainerIds = new ArrayList<>(Arrays.asList(2, 3, 6, 7, 8, 9, 10, 11, 12));
-        if (includeInventory.isSelected()) equipmentContainerIds.add(1);
-        if (includeWeapons.isSelected()) {
+        if (view.includeInventorySelected()) equipmentContainerIds.add(1);
+        if (view.includeWeaponsSelected()) {
             equipmentContainerIds.add(4);
             equipmentContainerIds.add(5);
         }
 
         for (Item item : eq) {
             if (equipmentContainerIds.contains(item.getItemStashInfo().id)) {
-                item.setAffix(affixData, Integer.parseInt(choiceBoxes.get("affixSlotChoiceBox").getValue()));
+                item.setAffix(affixData, Integer.parseInt(view.getChoiceBoxes().get("affixSlotChoiceBox").getValue()));
             }
         }
         setCharaEquipment();
-        RootController.getInstance().setBottomRightText("Affix added to all equipment.");
+        setBottomRightText("Affix added to all equipment.");
         reloadTreeView();
-    }
-
-    private void removeAllEqFractures() {
-        getCharaOp().ifPresent(charaOp -> {
-            for (Item item : charaOp.getCharacter().getEquipment()) {
-                item.setInstability(0);
-            }
-
-            setCharaEquipment();
-            RootController.getInstance().setBottomRightText("All equipment instability (and fractures) removed.");
-        });
-    }
-
-    //TODO move all implementations to charaOp class
-    private void maximizeEqImplicits() {
-        getCharaOp().ifPresent(charaOp -> {
-            for (Item item : charaOp.getCharacter().getEquipment()) {
-                item.setImplicitValue1(255);
-                item.setImplicitValue2(255);
-                item.setImplicitValue3(255);
-            }
-
-            setCharaEquipment();
-            RootController.getInstance().setBottomRightText("All equipment implicits maximized.");
-        });
-    }
-
-    private void maximizeEqAffixRanges() {
-        getCharaOp().ifPresent(charaOp -> {
-            for (Item item : charaOp.getCharacter().getEquipment()) {
-                for (AbstractItem.AffixData affixData : item.getAffixList()) {
-                    affixData.value = 255;
-                }
-            }
-
-            setCharaEquipment();
-            RootController.getInstance().setBottomRightText("All equipment affix ranges maximized.");
-        });
-    }
-
-    private void maximizeEqAffixTiers() {
-        getCharaOp().ifPresent(charaOp -> {
-            for (Item item : charaOp.getCharacter().getEquipment()) {
-                for (AbstractItem.AffixData affixData : item.getAffixList()) {
-                    affixData.tier = AffixTier.TIER7;
-                }
-            }
-
-            setCharaEquipment();
-            RootController.getInstance().setBottomRightText("All equipment affix tiers maximized.");
-        });
     }
 
     private void addNewBlessingToEq() {
         getCharaOp().ifPresent(charaOp -> {
-            OptionalInt blessingId = ItemAttributeList.getById(34).getTierIdFromValue(blessingsComboBox.getValue());
+            OptionalInt blessingId = ItemAttributeList.getById(34).getTierIdFromValue(
+                    view.getBlessingsComboBox().getValue());
             if (blessingId.isEmpty()) return;
             int itemTier = blessingId.getAsInt();
-            int containerId = Integer.parseInt(choiceBoxes.get("blessingSlotChoiceBox").getValue());
+            int containerId = Integer.parseInt(view.getChoiceBoxes().get("blessingSlotChoiceBox").getValue());
             if (containerId <= 7) containerId += 32;
             else containerId += 35;
 
             AbstractItem blessing = new AbstractItem(ItemAttributeList.getById(34), itemTier, 0, new ArrayList<>());
             blessing.getItemStashInfo().id = containerId;
             blessing.getItemStashInfo().charaEquipment = true;
-            charaOp.getCharacter().replaceEquipmentItem(blessing);
+            charaOp.getCharacter().addOrReplaceEquipmentItem(blessing);
             setCharaEquipment();
             reloadTreeView();
         });
     }
 
-    private void setStabilityOrCorruption(String name) {
+    private void setStabilityOrCorruption(String name) { //TODO rewrite
         if (getCharaOp().isEmpty()) return;
 
         TextInputDialog dialog = new TextInputDialog();

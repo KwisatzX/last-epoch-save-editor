@@ -55,7 +55,7 @@ public abstract class GuiItemTabView extends GuiTabView {
     }
 
     private ChrClass getChoiceBoxClass() {
-        return ChrClass.fromString(choiceBoxes.get("classChoiceBox").getValue());
+        return ChrClass.valueOf(choiceBoxes.get("classChoiceBox").getValue());
     }
 
     public Item getUiItemSettings() {
@@ -141,9 +141,7 @@ public abstract class GuiItemTabView extends GuiTabView {
                 affixBox.getSelectionModel().clearSelection();
                 affixBox.getEditor().clear();
 
-                affixTierBox.getItems().setAll(AffixTier.getList().stream()
-                                                       .map(AffixTier::name)
-                                                       .toList());
+                affixTierBox.getItems().setAll(AffixTier.getStringList());
                 affixTierBox.getSelectionModel().select("TIER7");
 
                 intToTextField("affix" + i + "ValueField", Item.valueToPercentOf255(255));
@@ -153,14 +151,10 @@ public abstract class GuiItemTabView extends GuiTabView {
             affixBox.getSelectionModel().select(new AffixDisplayer(affixList.get(i - 1).type));
             intToTextField("affix" + i + "ValueField", Item.valueToPercentOf255(affixList.get(i - 1).value));
 
-            if (affixList.get(i - 1).type.getNumberOfTiers() == 1) {
-                affixTierBox.getItems().setAll("TIER1");
-            } else {
-                if (!affixTierBox.getItems().contains("TIER2")) {
-                    affixTierBox.getItems().setAll(AffixTier.getList().stream()
-                                                           .map(AffixTier::name)
-                                                           .toList());
-                }
+            if (affixList.get(i - 1).type.getNumberOfTiers() == 1) affixTierBox.getItems().setAll("TIER1");
+            else {
+                if (!affixTierBox.getItems().contains("TIER2"))
+                    affixTierBox.getItems().setAll(AffixTier.getStringList());
             }
             affixTierBox.getSelectionModel().select(affixList.get(i - 1).tier.toString());
         }
@@ -217,12 +211,9 @@ public abstract class GuiItemTabView extends GuiTabView {
 
     private void initAffixTierChoiceBoxes() {
         choiceBoxes.values().stream()
-                .filter(box -> box.getId().contains("TierChoiceBox") &&
-                        !box.getId().equals("itemTierChoiceBox"))
+                .filter(box -> box.getId().contains("TierChoiceBox") && !box.getId().equals("itemTierChoiceBox"))
                 .forEach(box -> {
-                    box.getItems().addAll(AffixTier.getList().stream()
-                                                  .map(AffixTier::name)
-                                                  .toList());
+                    box.getItems().addAll(AffixTier.getStringList());
                     box.getSelectionModel().select("TIER7");
                 });
     }

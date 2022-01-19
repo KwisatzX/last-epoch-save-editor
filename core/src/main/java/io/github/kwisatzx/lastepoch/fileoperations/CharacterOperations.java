@@ -40,7 +40,7 @@ public class CharacterOperations extends FileStringOperations
     public void setAbilityBarInFileString(String[] abilityBar) {
         String[] abilityBarWithQuotes = new String[5];
         for (int i = 0; i < 5; i++) {
-            abilityBarWithQuotes[i] = "\"" + abilityBar[i] + "\"";
+            abilityBarWithQuotes[i] = "\"" + abilityBar[i] + "\""; //later: get char abilityBar (when it's a list)
         }
 
         setArray("abilityBar", Arrays.toString(abilityBarWithQuotes).replaceAll(" ", ""));
@@ -189,7 +189,7 @@ public class CharacterOperations extends FileStringOperations
             equipment.add(item);
         }
 
-        public void replaceEquipmentItem(Item item) {
+        public void addOrReplaceEquipmentItem(Item item) {
             List<Item> equipment = getEquipment();
             boolean slotTaken = false;
             for (Item eqItem : equipment) {
@@ -220,7 +220,7 @@ public class CharacterOperations extends FileStringOperations
             if (secondRingSlotTaken) {
                 if (item.equals(eqItem)) {
                     item.getItemStashInfo().id = 10;
-                    replaceEquipmentItem(item);
+                    addOrReplaceEquipmentItem(item);
                 } else {
                     equipment.set(equipment.indexOf(eqItem), item);
                 }
@@ -320,6 +320,7 @@ public class CharacterOperations extends FileStringOperations
                 this.nodePoints = nodePoints;
             }
 
+            //TODO JSON
             String getFileString() {
                 return "{\"treeID\":\"" + treeId + "\",\"slotNumber\":" + slotNumber + ",\"xp\":" + xp + "," +
                         "\"version\":0,\"nodeIDs\":" + Arrays.toString(nodeIds).replaceAll(" ", "") +

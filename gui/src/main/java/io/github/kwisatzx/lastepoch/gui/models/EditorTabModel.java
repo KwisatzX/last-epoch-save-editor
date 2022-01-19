@@ -66,7 +66,7 @@ public class EditorTabModel extends GuiItemTabModel {
 
         if (replaceSlotRadioIsSelected) {
             item.getItemStashInfo().id = Item.ContainerIds.getContainerIdFromItemType(item.getItemType());
-            charaOp.getCharacter().replaceEquipmentItem(item);
+            charaOp.getCharacter().addOrReplaceEquipmentItem(item);
         } else {
             item.getItemStashInfo().x = Integer.parseInt(uiSettings.get("x"));
             item.getItemStashInfo().y = Integer.parseInt(uiSettings.get("y"));

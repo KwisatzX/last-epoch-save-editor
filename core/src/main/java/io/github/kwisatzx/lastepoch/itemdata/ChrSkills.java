@@ -51,7 +51,7 @@ public class ChrSkills {
                 .toList();
     }
 
-    public static List<String> getFilteredSkillList(ChrClass.ClassMastery chrMastery) {
+    public static List<String> getSkillListForMastery(ChrClass.ClassMastery chrMastery) {
         List<String> filteredSkills = new ArrayList<>();
         ChrClass.ClassMastery baseClassMastery = ChrClass.getMasteryGroupFromMastery(chrMastery).get(0);
 
@@ -70,7 +70,7 @@ public class ChrSkills {
         logger.error("Cannot find skill for given id: " + id);
         throw new IllegalArgumentException("Cannot find skill for given id: " + id);
     }
-    
+
     private static void readFromFile() {
         InputStream fileStream = ChrSkills.class.getResourceAsStream("/item data/Skills.json");
         if (fileStream != null) {
