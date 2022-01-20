@@ -28,7 +28,7 @@ public class CharactersTabModel extends GuiTabModel {
         if (charaOpOpt.isPresent()) {
             CharacterOperations.Character character = charaOpOpt.get().getCharacter();
             List<String> masteredSkillNames = character.getMasteredSkills().stream()
-                    .map(skillTree -> ChrSkills.getSkillDisplayNameFromId(skillTree.treeId))
+                    .map(skillTree -> ChrSkills.getSkillDisplayNameFromId(skillTree.getTreeID()))
                     .toList();
             List<String> toolbarSkillNames = Arrays.stream(character.getAbilityBar())
                     .map(ChrSkills::getSkillDisplayNameFromId)

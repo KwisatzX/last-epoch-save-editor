@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Disabled("Code used for initially creating the json files, left over in case it's needed again")
-class JsonCreator {
+class JsonCreatorTool {
     private Object jsonObj; //replace with the appropriate type
 
     @Test

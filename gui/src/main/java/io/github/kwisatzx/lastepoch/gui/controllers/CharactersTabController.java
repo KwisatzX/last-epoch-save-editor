@@ -2,6 +2,7 @@ package io.github.kwisatzx.lastepoch.gui.controllers;
 
 import io.github.kwisatzx.lastepoch.fileoperations.CharacterOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.FileHandler;
+import io.github.kwisatzx.lastepoch.fileoperations.models.SkillTreeJson;
 import io.github.kwisatzx.lastepoch.gui.models.CharactersTabModel;
 import io.github.kwisatzx.lastepoch.gui.models.datatransfer.CharacterDTO;
 import io.github.kwisatzx.lastepoch.gui.views.CharactersTabView;
@@ -254,7 +255,7 @@ public class CharactersTabController extends GuiTabController {
     private void setSkillTrees() { //TODO THIS IS A DISASTER! FIX!!!
         if (getCharaOp().isEmpty() || isEventsLocked()) return;
         CharacterOperations charaOp = getCharaOp().get();
-        List<CharacterOperations.Character.SkillTree> masteredSkills = charaOp.getCharacter().getMasteredSkills();
+        List<SkillTreeJson> masteredSkills = charaOp.getCharacter().getMasteredSkills();
 
         for (int i = 0; i < 5; i++) {
             String displayName = view.getChoiceBoxes().get("masteryChoice" + (i + 1)).getValue();
@@ -265,17 +266,17 @@ public class CharactersTabController extends GuiTabController {
             if (i >= masteredSkills.size()) {
                 int slotNumber = 4;
                 for (int j = 0; j < 5; j++) {
-                    for (CharacterOperations.Character.SkillTree skillTree : masteredSkills) {
-                        if (j == skillTree.slotNumber) {
+                    for (SkillTreeJson skillTree : masteredSkills) {
+                        if (j == skillTree.getSlotNumber()) {
                             break;
                         } else {
                             slotNumber = Math.min(slotNumber, j);
                         }
                     }
                 }
-                masteredSkills.add(new CharacterOperations.Character.SkillTree(
-                        treeId, slotNumber, CharacterOperations.Character.SkillTree.MAX_XP, new int[]{}, new int[]{}));
-            } else masteredSkills.get(i).treeId = treeId;
+                masteredSkills.add(new SkillTreeJson(
+                        treeId, slotNumber, SkillTreeJson.MAX_XP, new int[]{}, new int[]{}));
+            } else masteredSkills.get(i).setTreeID(treeId);
         }
 
         charaOp.setSkillTreesInFileString();

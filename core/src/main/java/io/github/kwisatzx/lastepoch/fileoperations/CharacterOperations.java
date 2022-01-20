@@ -1,5 +1,6 @@
 package io.github.kwisatzx.lastepoch.fileoperations;
 
+import io.github.kwisatzx.lastepoch.fileoperations.models.SkillTreeJson;
 import io.github.kwisatzx.lastepoch.itemdata.ChrClass;
 import io.github.kwisatzx.lastepoch.itemdata.Selectable;
 import io.github.kwisatzx.lastepoch.itemdata.item.Item;
@@ -49,7 +50,7 @@ public class CharacterOperations extends FileStringOperations
     public void setSkillTreesInFileString() {
         String[] masteredSkillsArray = new String[character.getMasteredSkills().size()];
         for (int i = 0; i < masteredSkillsArray.length; i++) {
-            masteredSkillsArray[i] = character.getMasteredSkills().get(i).getFileString();
+            masteredSkillsArray[i] = character.getMasteredSkills().get(i).toJson();
         }
         setObjectArray("savedSkillTrees", Arrays.toString(masteredSkillsArray).replaceAll(" ", ""));
     }
@@ -159,7 +160,7 @@ public class CharacterOperations extends FileStringOperations
 
     public class Character {
         private final List<Item> equipment;
-        private final List<SkillTree> masteredSkills;
+        private final List<SkillTreeJson> masteredSkills;
         private final String[] abilityBar;
 
         public Character() {
@@ -174,9 +175,9 @@ public class CharacterOperations extends FileStringOperations
             String[] masteredSkillsStr = getObjectArray("savedSkillTrees").split(Pattern.quote("},{"));
             if (!masteredSkillsStr[0].trim().equals("")) {
                 masteredSkills = Arrays.stream(masteredSkillsStr)
-                        .map(SkillTree::fileStringToSkillTree)
+                        .map(SkillTreeJson::toObject)
                         .collect(Collectors.toCollection(ArrayList::new));
-            } else masteredSkills = new ArrayList<>();
+            } else masteredSkills = new ArrayList<>(); //TODO also convert to JSON mapping
 
             abilityBar = new String[5];
             String[] abilityBarWithQuotes = getArray("abilityBar").split(Pattern.quote(","));
@@ -232,7 +233,7 @@ public class CharacterOperations extends FileStringOperations
         }
 
         public void maxMasteryLevels() {
-            masteredSkills.forEach(skillTree -> skillTree.xp = SkillTree.MAX_XP);
+            masteredSkills.forEach(skillTree -> skillTree.setXp(SkillTreeJson.MAX_XP));
         }
 
         public void maxMasteryNodes() {
@@ -299,67 +300,10 @@ public class CharacterOperations extends FileStringOperations
             return equipment;
         }
 
-        public List<SkillTree> getMasteredSkills() {
+        public List<SkillTreeJson> getMasteredSkills() {
             return masteredSkills;
         }
 
-        public static class SkillTree {
-            public static final int MAX_XP = 5700000;
-            public String treeId;
-            public int slotNumber;
-            public int xp;
-            public int[] nodeIds;
-            public int[] nodePoints;
-
-            public SkillTree(String treeId, int slotNumber, int xp,
-                             int[] nodeIds, int[] nodePoints) {
-                this.treeId = treeId;
-                this.slotNumber = slotNumber;
-                this.xp = xp;
-                this.nodeIds = nodeIds;
-                this.nodePoints = nodePoints;
-            }
-
-            //TODO JSON
-            String getFileString() {
-                return "{\"treeID\":\"" + treeId + "\",\"slotNumber\":" + slotNumber + ",\"xp\":" + xp + "," +
-                        "\"version\":0,\"nodeIDs\":" + Arrays.toString(nodeIds).replaceAll(" ", "") +
-                        ",\"nodePoints\":" + Arrays.toString(nodePoints).replaceAll(" ", "") +
-                        ",\"unspentPoints\":25,\"nodesTaken\":[],\"abilityXP\":0.0}";
-            }
-
-            public static SkillTree fileStringToSkillTree(String str) {
-                String treeId = getSubstringBetween(str, "\"treeID\":\"", "\",\"slot");
-                String slotNumber = getSubstringBetween(str, "\"slotNumber\":", ",\"xp\"");
-                String xp = getSubstringBetween(str, "\"xp\":", ",\"ver");
-
-                int[] nodeIds;
-                String[] nodeIdsStr = getSubstringBetween(str, "\"nodeIDs\":[", "]").split(",");
-                if (nodeIdsStr[0].equals("")) nodeIds = new int[0];
-                else {
-                    nodeIds = new int[nodeIdsStr.length];
-                    for (int i = 0; i < nodeIdsStr.length; i++) {
-                        try {
-                            nodeIds[i] = Integer.parseInt(nodeIdsStr[i]);
-                        } catch (NumberFormatException e) {e.printStackTrace();} //TODO Logger
-                    }
-                }
-
-                int[] nodePoints;
-                String[] nodePointsStr = getSubstringBetween(str, "\"nodePoints\":[", "]").split(",");
-                if (nodePointsStr[0].equals("")) nodePoints = new int[0];
-                else {
-                    nodePoints = new int[nodePointsStr.length];
-                    for (int i = 0; i < nodePointsStr.length; i++) {
-                        try {
-                            nodePoints[i] = Integer.parseInt(nodePointsStr[i]);
-                        } catch (NumberFormatException e) {e.printStackTrace();} //TODO Logger
-                    }
-                }
-
-                return new SkillTree(treeId, Integer.parseInt(slotNumber), Integer.parseInt(xp),
-                                     nodeIds, nodePoints);
-            }
-        }
     }
+
 }
