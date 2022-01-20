@@ -30,8 +30,8 @@ public class EditorTabController extends GuiItemTabController {
     @FXML
     private void initialize() {
         instance = this;
-        view = new EditorTabView(this, editorAnchorPane);
         model = new EditorTabModel(this);
+        view = new EditorTabView(this, editorAnchorPane);
         super.initialize(view, model, editorAnchorPane);
         installEventHandlers(editorAnchorPane);
     }

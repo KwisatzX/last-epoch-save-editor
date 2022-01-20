@@ -13,8 +13,11 @@ public abstract class GuiTabController {
     private GuiTabModel model;
     private boolean eventsLocked = false;
 
-    public void initialize(GuiTabModel model) {
+    public GuiTabController() {
         selection = TreeController.getInstance().getSelection();
+    }
+
+    public void initialize(GuiTabModel model) {
         this.model = model;
     }
 
