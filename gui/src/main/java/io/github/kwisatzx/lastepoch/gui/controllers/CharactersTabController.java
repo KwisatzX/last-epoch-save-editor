@@ -252,33 +252,38 @@ public class CharactersTabController extends GuiTabController {
         getCharaOp().ifPresent(charaOp -> charaOp.setProperty("chosenMastery", getChoiceBoxMastery().getId() + ""));
     }
 
-    private void setSkillTrees() { //TODO THIS IS A DISASTER! FIX!!!
+    private void setSkillTrees() {
         if (getCharaOp().isEmpty() || isEventsLocked()) return;
         CharacterOperations charaOp = getCharaOp().get();
         List<SkillTreeJson> masteredSkills = charaOp.getCharacter().getMasteredSkills();
+        List<String> masteredSkillIds = masteredSkills.stream().map(SkillTreeJson::getTreeID).toList();
+        List<SkillTreeJson> newMasteredSkills = new ArrayList<>();
+        List<String> choiceBoxSkillIds = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
-            String displayName = view.getChoiceBoxes().get("masteryChoice" + (i + 1)).getValue();
+        for (int i = 1; i <= 5; i++) {
+            String displayName = view.getChoiceBoxes().get("masteryChoice" + i).getValue();
             String treeId = ChrSkills.getIdAndMasteryFromSkillName(displayName.split(" \\(")[0]).getKey();
             if (treeId.equals("na28") || treeId.equals("ba1")) continue;
-
-            //skill slots are 0 - 4
-            if (i >= masteredSkills.size()) {
-                int slotNumber = 4;
-                for (int j = 0; j < 5; j++) {
-                    for (SkillTreeJson skillTree : masteredSkills) {
-                        if (j == skillTree.getSlotNumber()) {
-                            break;
-                        } else {
-                            slotNumber = Math.min(slotNumber, j);
-                        }
-                    }
-                }
-                masteredSkills.add(new SkillTreeJson(
-                        treeId, slotNumber, SkillTreeJson.MAX_XP, new int[]{}, new int[]{}));
-            } else masteredSkills.get(i).setTreeID(treeId);
+            choiceBoxSkillIds.add(treeId);
         }
 
+        for (int i = 0; i < choiceBoxSkillIds.size(); i++) {
+            String currentId = choiceBoxSkillIds.get(i);
+            if (masteredSkillIds.contains(currentId)) {
+                for (SkillTreeJson masteredSkill : masteredSkills) {
+                    if (masteredSkill.getTreeID().equals(currentId)) {
+                        masteredSkill.setSlotNumber(i);
+                        newMasteredSkills.add(masteredSkill);
+                        break;
+                    }
+                }
+            } else {
+                newMasteredSkills.add(new SkillTreeJson(currentId, i, SkillTreeJson.MAX_XP, new int[]{}, new int[]{}));
+            }
+        }
+
+        masteredSkills.clear();
+        masteredSkills.addAll(newMasteredSkills);
         charaOp.setSkillTreesInFileString();
     }
 
