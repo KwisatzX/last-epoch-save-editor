@@ -39,10 +39,10 @@ public class CharacterOperations extends FileStringOperations
         setObjectArray("savedItems", Arrays.toString(savedItems).replaceAll(" ", ""));
     }
 
-    public void setAbilityBarInFileString(String[] abilityBar) {
+    public void setAbilityBarInFileString() {
         String[] abilityBarWithQuotes = new String[5];
         for (int i = 0; i < 5; i++) {
-            abilityBarWithQuotes[i] = "\"" + abilityBar[i] + "\""; //later: get char abilityBar (when it's a list)
+            abilityBarWithQuotes[i] = "\"" + character.getAbilityBar()[i] + "\"";
         }
 
         setArray("abilityBar", Arrays.toString(abilityBarWithQuotes).replaceAll(" ", ""));

@@ -299,7 +299,7 @@ public class CharactersTabController extends GuiTabController {
             String treeId = ChrSkills.getIdAndMasteryFromSkillName(displayName.split(" \\(")[0]).getKey();
             abilityBar[i] = treeId;
         }
-        charaOp.setAbilityBarInFileString(abilityBar); //TODO Temp fix, replace with list or smth
+        charaOp.setAbilityBarInFileString();
     }
 
     private void copyCharacter() {
