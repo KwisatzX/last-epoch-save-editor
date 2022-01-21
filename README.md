@@ -21,3 +21,5 @@ Desktop GUI for editing Last Epoch SP save data.
 <br />
 <img src="https://i.imgur.com/oJIcuTY.png" width="70%" height="70%"></img>
 <img src="https://i.imgur.com/EVA85ka.png" width="70%" height="70%"></img>
+
+This program is not affiliated with Eleventh Hour Games.
