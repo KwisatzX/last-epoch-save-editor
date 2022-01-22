@@ -36,12 +36,18 @@ public class ChrSkills {
         return ChrClass.ClassMastery.valueOf(fullEntry.getValue().getValue());
     }
 
+    public static String getSkillMasteryName(Map.Entry<String, Map.Entry<String, String>> fullEntry) {
+        String masteryName = fullEntry.getValue().getValue();
+        if (masteryName.equals("ALL")) return "ALL";
+        else return getSkillMastery(fullEntry).toString();
+    }
+
     public static String getSkillName(Map.Entry<String, Map.Entry<String, String>> fullEntry) {
         return fullEntry.getKey();
     }
 
     public static String getSkillDisplayName(Map.Entry<String, Map.Entry<String, String>> fullEntry) {
-        return getSkillName(fullEntry) + " (" + getSkillMastery(fullEntry) + ")";
+        return getSkillName(fullEntry) + " (" + getSkillMasteryName(fullEntry) + ")";
     }
 
     public static List<String> getNameAndMasteryList() {
