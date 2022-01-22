@@ -10,11 +10,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Launcher extends Application {
+    public final String VERSION = "0.9.2";
 
     @Override
     public void start(Stage stage) throws Exception {
         Scene scene = new Scene(loadFXML("main_window"));
         stage.setScene(scene);
+        stage.setTitle("Last Epoch Single Player Data Editor by KwisatzX v" + VERSION);
         stage.show();
     }
 
