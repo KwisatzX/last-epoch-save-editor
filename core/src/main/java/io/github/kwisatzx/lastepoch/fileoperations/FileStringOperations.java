@@ -1,19 +1,26 @@
 package io.github.kwisatzx.lastepoch.fileoperations;
 
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MappingJsonFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class FileStringOperations extends FileOperations {
+    protected final Logger logger;
     protected final MappingJsonFactory jsonFactory;
-    Pattern getQuantity;
+    protected final Pattern getQuantity;
 
     protected FileStringOperations(String saveDirectory, String filePath) throws IOException {
         super(saveDirectory, filePath);
+        logger = LoggerFactory.getLogger(getClass());
         jsonFactory = new MappingJsonFactory();
         getQuantity = Pattern.compile("\"quantity\":(\\d+)\\W");
     }
@@ -38,7 +45,7 @@ public abstract class FileStringOperations extends FileOperations {
 
     private boolean isAlreadyExpanded() {
         if (fileString.toString().contains("\t")) {
-            System.out.println("File " + file.getFileName() + " already expanded, skipping..."); //TODO Logger
+            logger.info("File " + file.getFileName() + " already expanded, skipping...");
             return true;
         }
         return false;
@@ -66,13 +73,19 @@ public abstract class FileStringOperations extends FileOperations {
     public <T> T getProperty(String name, Class<T> valueType) {
         int index = fileString.indexOf("\"" + name + "\":") + name.length() + 3;
         String valueStr = fileString.substring(index, fileString.indexOf(",", index));
-        T value = null;
         try {
-            value = jsonFactory.createParser(valueStr).readValueAs(valueType);
+            return jsonFactory.createParser(valueStr).readValueAs(valueType);
         } catch (IOException e) {
-            e.printStackTrace(); //TODO: Logger
+            logger.error(FileStringOperations.getStackTraceString(e));
+            return returnEmptyValue(valueType);
         }
-        return value;
+    }
+
+    private <T> T returnEmptyValue(Class<T> valueType) {
+        if (valueType.equals(String.class)) return (T) "";
+        if (valueType.equals(int.class)) return (T) Integer.valueOf(-1);
+        if (valueType.equals(boolean.class)) return (T) Boolean.FALSE;
+        return null;
     }
 
     protected Optional<String> loadJsonArrayTxtFile(String fileName) {
@@ -94,6 +107,20 @@ public abstract class FileStringOperations extends FileOperations {
             int end = fileString.indexOf(endingStr, index);
             fileString.replace(index, end, value);
         }
+    }
+
+    public <T> T getObjectArray(String name, Class<T> arrayClass) {
+        Pattern getObjectArray = Pattern.compile(".+\"" + name + "\":(\\[\\{.*?}]).+");
+        Matcher matcher = getObjectArray.matcher(fileString);
+        if (matcher.find()) {
+            try {
+                return ObjectMapperCache.getObjectMapper().readValue(matcher.group(1), arrayClass);
+            } catch (JsonProcessingException e) {
+                logger.error(FileStringOperations.getStackTraceString(e));
+            }
+        }
+        logger.error("Could not find array " + name + " in file!");
+        return null;
     }
 
     //savedItems, savedSkillTrees, savedQuests, sceneProgresses, monolithRuns,
