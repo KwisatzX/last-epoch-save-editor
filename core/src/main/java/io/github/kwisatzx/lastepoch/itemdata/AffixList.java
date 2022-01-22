@@ -1,6 +1,6 @@
 package io.github.kwisatzx.lastepoch.itemdata;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.kwisatzx.lastepoch.fileoperations.ObjectMapperCache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class AffixList extends DataList<Affix> {
 
     static {
         INSTANCE = new AffixList();
-        INSTANCE.readFromFile(new ObjectMapper().getTypeFactory()
+        INSTANCE.readFromFile(ObjectMapperCache.getObjectMapper().getTypeFactory()
                                       .constructCollectionType(ArrayList.class, Affix.class));
     }
 

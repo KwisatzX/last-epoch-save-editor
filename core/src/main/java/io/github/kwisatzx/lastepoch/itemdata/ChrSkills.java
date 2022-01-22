@@ -1,9 +1,7 @@
 package io.github.kwisatzx.lastepoch.itemdata;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.kwisatzx.lastepoch.fileoperations.ObjectMapperCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,11 +72,11 @@ public class ChrSkills {
     private static void readFromFile() {
         InputStream fileStream = ChrSkills.class.getResourceAsStream("/item data/Skills.json");
         if (fileStream != null) {
-            ObjectMapper objectMapper = new ObjectMapper()
-                    .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
             try {
-                skills = objectMapper.readValue(fileStream, new TypeReference<>() {});
-            } catch (IOException e) {e.printStackTrace();}
+                skills = ObjectMapperCache.getObjectMapper().readValue(fileStream, new TypeReference<>() {});
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+            }
         } else {
             logger.error("Fatal error: JSON list not found for character skills!");
             throw new RuntimeException("JSON list not found for character skills!");

@@ -1,10 +1,8 @@
 package io.github.kwisatzx.lastepoch.itemdata;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.kwisatzx.lastepoch.fileoperations.ObjectMapperCache;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,13 +50,11 @@ abstract class DataList<E extends Attribute> {
         InputStream fileStream = this.getClass()
                 .getResourceAsStream("/item data/" + this.getClass().getSimpleName() + ".json");
         if (fileStream != null) {
-            ObjectMapper objectMapper = new ObjectMapper()
-                    .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-                    .configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false)
-                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             try {
-                list = objectMapper.readValue(fileStream, listType);
-            } catch (IOException e) {e.printStackTrace();}
+                list = ObjectMapperCache.getObjectMapper().readValue(fileStream, listType);
+            } catch (IOException e) {
+                LoggerFactory.getLogger(this.getClass()).error(e.getMessage());
+            }
         } else System.err.println("JSON list not found for " + this.getClass().getSimpleName() + "!"); //TODO: Logger
     }
 }

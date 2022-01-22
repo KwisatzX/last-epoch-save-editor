@@ -1,9 +1,6 @@
 package io.github.kwisatzx.lastepoch.fileoperations;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.kwisatzx.lastepoch.itemdata.Selectable;
 import io.github.kwisatzx.lastepoch.itemdata.item.Item;
@@ -24,9 +21,7 @@ public class GlobalDataOperations extends FileStringOperations {
 
     public GlobalDataOperations(String saveDirectory) throws IOException {
         super(saveDirectory, "Epoch_Local_Global_Data_Beta");
-        objectMapper = new ObjectMapper()
-                .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper = ObjectMapperCache.getObjectMapper();
         stashTabCategories = serializeStashTabCategories();
         stashTabs = serializeStashTabs();
         stashItems = serializeStashItems();
