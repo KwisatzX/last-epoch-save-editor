@@ -1,5 +1,7 @@
 package io.github.kwisatzx.lastepoch.fileoperations.models;
 
+import io.github.kwisatzx.lastepoch.fileoperations.ObjectMapperCache;
+
 import java.util.Arrays;
 
 //add Lombok

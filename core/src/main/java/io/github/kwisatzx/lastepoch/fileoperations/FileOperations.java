@@ -1,6 +1,5 @@
 package io.github.kwisatzx.lastepoch.fileoperations;
 
-import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
@@ -30,10 +29,6 @@ public abstract class FileOperations {
         }
     }
 
-    protected Logger getLogger(Class<?> callingClass) {
-        return (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(callingClass);
-    }
-
     public static String getStackTraceString(Exception e) {
         StringWriter stackTraceWriter = new StringWriter();
         e.printStackTrace(new PrintWriter(stackTraceWriter));
@@ -47,7 +42,7 @@ public abstract class FileOperations {
             writer.close();
             return true;
         } catch (IOException e) {
-            getLogger(this.getClass()).error(getStackTraceString(e));
+            LoggerFactory.getLogger(getClass()).error(getStackTraceString(e));
             return false;
         }
     }

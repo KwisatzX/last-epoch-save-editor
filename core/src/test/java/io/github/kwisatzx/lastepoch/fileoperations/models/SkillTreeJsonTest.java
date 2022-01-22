@@ -1,6 +1,7 @@
 package io.github.kwisatzx.lastepoch.fileoperations.models;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.github.kwisatzx.lastepoch.fileoperations.ObjectMapperCache;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;

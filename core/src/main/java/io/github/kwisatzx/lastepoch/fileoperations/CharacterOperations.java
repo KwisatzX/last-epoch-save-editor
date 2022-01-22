@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -172,13 +171,7 @@ public class CharacterOperations extends FileStringOperations
                         .collect(Collectors.toCollection(ArrayList::new));
             } else equipment = new ArrayList<>();
 
-            String[] masteredSkillsStr = getObjectArray("savedSkillTrees").split(Pattern.quote("},{"));
-            if (!masteredSkillsStr[0].trim().equals("")) {
-                masteredSkills = Arrays.stream(masteredSkillsStr)
-                        .map(SkillTreeJson::toObject)
-                        .sorted(Comparator.comparing(SkillTreeJson::getSlotNumber))
-                        .collect(Collectors.toCollection(ArrayList::new));
-            } else masteredSkills = new ArrayList<>(); //TODO also convert to JSON mapping
+            masteredSkills = new ArrayList<>(List.of(getObjectArray("savedSkillTrees", SkillTreeJson[].class)));
 
             abilityBar = new String[5];
             String[] abilityBarWithQuotes = getArray("abilityBar").split(Pattern.quote(","));

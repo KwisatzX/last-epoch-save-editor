@@ -1,6 +1,7 @@
 package io.github.kwisatzx.lastepoch.itemdata;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.github.kwisatzx.lastepoch.fileoperations.FileStringOperations;
 import io.github.kwisatzx.lastepoch.fileoperations.ObjectMapperCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,7 +76,7 @@ public class ChrSkills {
             try {
                 skills = ObjectMapperCache.getObjectMapper().readValue(fileStream, new TypeReference<>() {});
             } catch (IOException e) {
-                logger.error(e.getMessage());
+                logger.error(FileStringOperations.getStackTraceString(e));
             }
         } else {
             logger.error("Fatal error: JSON list not found for character skills!");
